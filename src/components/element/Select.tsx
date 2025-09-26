@@ -20,6 +20,9 @@ export default function Select({
   return (
     <div className="select" style={style}>
       <div className="select-header" onClick={() => setOpen(!open)}>
+        <label className={value ? "active-select-header" : ""}>
+          {placeholder}
+        </label>
         <span>
           {value ? <span>{value.label}</span> : placeholder}{" "}
           <Image src={arrowBottom} alt="arrowBottom" width={8} height={12} />

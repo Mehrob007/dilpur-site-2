@@ -1,3 +1,30 @@
+@charset "UTF-8";
+/* Chrome, Safari, Edge */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(240, 240, 240, 0); /* трек */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #505050; /* ползунок */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin; /* "auto" | "thin" | "none" */
+  scrollbar-color: #505050 rgba(240, 240, 240, 0); /* цвет ползунка и трека */
+}
+
 .max-width {
   max-width: 1840px;
   width: calc(100% - 80px) !important;
@@ -99,7 +126,7 @@
   color: #ffffff;
   width: auto;
   height: 42px;
-  padding-top: 5px;
+  padding-top: 2px !important;
   border-radius: 1000px;
   border: none;
   cursor: pointer;
@@ -213,12 +240,13 @@
   height: 50px;
 }
 .select .select-header {
-  width: 258px;
+  width: 300px;
   min-height: 48px;
   border: 1px solid #8f8f8f;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
+  padding-left: 18px;
   cursor: pointer;
   position: relative;
   z-index: 2;
@@ -228,24 +256,43 @@
   transition: all 0.2s ease-in-out;
 }
 .select .select-header span {
+  width: calc(100% - 15px);
   font-family: Gilroy;
   font-weight: 500;
   font-style: Medium;
   font-size: 17px;
   line-height: 100%;
   letter-spacing: 0%;
-  text-align: center;
+  text-align: start;
   color: #8f8f8f;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 5px;
 }
 .select .select-header span span {
   color: #181818;
 }
+.select .select-header > label {
+  display: none;
+}
+.select .select-header > .active-select-header {
+  display: block;
+  position: absolute;
+  top: -8px;
+  left: 13px;
+  padding: 0 5px;
+  background-color: white;
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 15px;
+  color: #8f8f8f;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
 .select .select-content {
-  width: 260px;
+  width: 320px;
   padding: 20px 0 10px 0;
   display: flex;
   flex-direction: column;
@@ -329,7 +376,7 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
-  height: 70px;
+  height: 80px;
   width: 100%;
 }
 .header .header-main .header-content > div {
@@ -367,7 +414,8 @@
 }
 .header .header-nav {
   display: flex;
-  height: 72px;
+  height: 82px;
+  padding-bottom: 25px;
   justify-content: center;
   align-items: center;
   background-color: #181818;
@@ -525,6 +573,9 @@
   top: 104%;
   right: 0;
   background-color: #fff;
+  max-height: calc(100vh - 200px);
+  overflow: auto;
+  box-shadow: 0px 14px 30px 0px rgba(0, 0, 0, 0.1019607843), 0px 55px 55px 0px rgba(0, 0, 0, 0.0901960784), 0px 124px 74px 0px rgba(0, 0, 0, 0.0509803922), 0px 220px 88px 0px rgba(0, 0, 0, 0.0117647059), 0px 344px 96px 0px rgba(0, 0, 0, 0);
 }
 .basket > button {
   font-family: Gilroy;
@@ -686,6 +737,26 @@
   text-align: end;
 }
 
+.navigate-slide {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+.navigate-slide > span {
+  width: 6px;
+  height: 6px;
+  background-color: #ffffff;
+  transition: all 0.5s ease-in-out;
+  border-radius: 1000px;
+}
+.navigate-slide > .active-nav-slide {
+  width: 40px;
+}
+
 .product-items {
   display: flex;
   flex-direction: column;
@@ -708,7 +779,7 @@
 }
 .product-items .product-items-content {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 60px 40px;
 }
 
@@ -721,6 +792,7 @@
   position: relative;
 }
 .product-item .product-item-img .image {
+  height: 40vw;
   position: relative;
 }
 .product-item .product-item-img .image:hover .bay-button > div {
@@ -1104,6 +1176,7 @@
 }
 .details-product div .off-color {
   opacity: 0.6;
+  border: 1.5px solid transparent;
 }
 
 .button-add-product {
@@ -1235,7 +1308,7 @@
 .gift-card .gift-card-bottom button {
   width: 210px;
   height: 42px;
-  padding-top: 5px;
+  padding-top: 2px;
   border-radius: 50px;
   border: none;
   font-family: Gilroy;
@@ -1318,6 +1391,7 @@
   display: flex;
   gap: 100px;
   width: 100%;
+  justify-content: start;
 }
 .footer .footer-top .footer-contacts {
   display: flex;
@@ -1399,6 +1473,7 @@
   width: 100%;
   display: flex;
   align-items: end;
+  justify-content: space-between;
   gap: 44px;
 }
 .footer .footer-bottom .footer-bottom-content {

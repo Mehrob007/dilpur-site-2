@@ -7,6 +7,7 @@ import PropertyOn from "../../../public/icons/PropertyOn.svg";
 import { useStore } from "@/store/globalState";
 import BayButton from "@/components/ui/BayButton";
 import ProductDetails from "@/components/ui/ProductDetails";
+import { useRouter } from "next/navigation";
 
 export default function ProductItem({
   img,
@@ -18,6 +19,7 @@ export default function ProductItem({
   property,
   id,
 }: ProductItemT) {
+  const router = useRouter();
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const { setProperty, deleteProperty } = useStore();
   return (
@@ -29,11 +31,12 @@ export default function ProductItem({
           onMouseLeave={() => setIsHovered(false)}
         >
           <Image
+            onClick={() => router.push("/male/" + id)}
             className="img-product"
             src={!isHovered ? img[0] : img[1]}
             alt="img-product"
           />
-          {id ? <BayButton id={id} /> : ""}
+          <BayButton id={id || 0} />
         </div>
 
         <ProductDetails details={details} />
@@ -69,7 +72,7 @@ export default function ProductItem({
       </div>
       <div className="product-item-info">
         <div className="product-item-text">
-          <h1>{title}</h1>
+          <h1 onClick={() => router.push("/male/" + id)}>{title}</h1>
           <p>{subTitle}</p>
         </div>
         <div className="product-item-price">

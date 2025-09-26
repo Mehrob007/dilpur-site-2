@@ -54,7 +54,7 @@ export default function ProductItems({
             .map((e, i) => (
               <ProductItem
                 key={i}
-                id={i}
+                id={e.id}
                 img={e.img}
                 title={e.title}
                 subTitle={e.subTitle}

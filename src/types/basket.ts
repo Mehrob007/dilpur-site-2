@@ -1,6 +1,7 @@
 import { StaticImageData } from "next/image";
 
 export interface BasketItemT {
+  id: number
   title: string;
   subTitle: string;
   size: string;
@@ -8,5 +9,6 @@ export interface BasketItemT {
   count: number;
   price: number;
   img: StaticImageData[] | string[];
-  discount?: number
+  discount?: number;
+  deleteBasketItem: (id: number) => void;
 }

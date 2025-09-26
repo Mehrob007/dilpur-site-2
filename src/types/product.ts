@@ -13,8 +13,9 @@ export interface ProductItemsT extends TypesProductHeaderT {
 export interface detailsT {
   details?: null | { discount: number } | "new";
 }
+
 export interface ProductItemT extends detailsT {
-  id?: number;
+  id: number;
   img: string[] | StaticImageData[];
   title: string;
   subTitle: string;
@@ -25,6 +26,8 @@ export interface ProductItemT extends detailsT {
   description?: string;
   colors?: string[] | StaticImageData[];
   article?: string;
+  sizeIds?: number[];
+  size?: sizeT;
 }
 export interface sizeT {
   name: string;

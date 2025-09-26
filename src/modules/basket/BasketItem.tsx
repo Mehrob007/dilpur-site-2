@@ -10,6 +10,8 @@ export default function BasketItem({
   count,
   price,
   img,
+  deleteBasketItem,
+  id,
 }: BasketItemT) {
   return (
     <div className="basket-item">
@@ -33,7 +35,13 @@ export default function BasketItem({
         <div>
           <div>
             <span>{price} c</span>
-            <Image src={trash} alt="images" width={24} height={24} />
+            <Image
+              onClick={() => deleteBasketItem(id)}
+              src={trash}
+              alt="images"
+              width={24}
+              height={24}
+            />
           </div>
         </div>
       </div>

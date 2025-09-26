@@ -1,12 +1,14 @@
-"use client"
+"use client";
 import SelectType from "@/components/element/SelectType";
 import { optionSort, optionTypes } from "@/constants/select";
 import { useGlobalState } from "@/store/globalState";
 import { TypesProductHeaderT } from "@/types/product";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function TypesProductHeader({ type }: TypesProductHeaderT) {
-  const { setClearSearch } = useGlobalState()
+  const { setClearSearch } = useGlobalState();
+  const router = useRouter();
   if (type === "filter") {
     return (
       <div className="types-product-header filter">
@@ -31,7 +33,6 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
           options={optionSort}
           placeholder="Сортировать по"
           className="sorts-select"
-
         />
         <p onClick={() => setClearSearch()}>Сбросить фильтры</p>
       </div>
@@ -39,7 +40,9 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
   } else if (type === "showAll") {
     return (
       <div className="types-product-header">
-        <button>Смотреть все</button>
+        <button onClick={() => router.push("/male/catalog")}>
+          Смотреть все
+        </button>
       </div>
     );
   } else {

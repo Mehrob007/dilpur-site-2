@@ -18,6 +18,7 @@ import { defaultSubHeaderT } from "@/types/def";
 export default function Header() {
   const [openNav, setOpenNav] = useState<defaultSubHeaderT>(defaultSubHeader);
   const pathName = usePathname();
+   const [isHovered, setIsHovered] = useState(false);
   const [openBasket, setOpenBasket] = useState<boolean>(false);
 
   useEffect(() => {

@@ -4,15 +4,16 @@ import React from "react";
 import giftCard1 from "../../../public/images/giftCord1.svg";
 import giftCard2 from "../../../public/images/giftCord2.svg";
 import arrow from "../../../public/icons/arrow.svg";
-import { redirect, usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function GiftСard() {
   const pathName = usePathname();
+  const router = useRouter();
 
   return (
     <div
       className="gift-card max-width"
-      onClick={() => redirect(pathName + "/gift-card")}
+      onClick={() => router.push("/male/gift-card")}
     >
       <div className="gift-card-top">
         <h1>ПОДАРОЧНАЯ</h1>

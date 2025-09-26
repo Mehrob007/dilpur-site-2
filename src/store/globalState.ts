@@ -29,6 +29,11 @@ export const useGlobalState = create<globalStateT>((set, get) => ({
     set((state) => ({
       searchArr: [...state.searchArr, obj],
     })),
+  basketItems: [],
+  setBasketItems: (obj) =>
+    set(() => ({
+      basketItems: obj,
+    })),
   setRemuveSearch: (field) =>
     set((state) => ({
       searchArr: state.searchArr.filter((e) => e.value !== field),

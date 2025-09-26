@@ -54,6 +54,14 @@ export default function Banner() {
             </div>
           ))}
         </div>
+        <div className="navigate-slide">
+          {images.map((_, i) => (
+            <span
+              key={i}
+              className={currentIndex === i ? "active-nav-slide" : ""}
+            ></span>
+          ))}
+        </div>
       </div>
     </div>
   );
