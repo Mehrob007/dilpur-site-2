@@ -790,9 +790,10 @@
 }
 .product-item .product-item-img {
   position: relative;
+  flex: 1;
 }
 .product-item .product-item-img .image {
-  height: 40vw;
+  height: 100%;
   position: relative;
 }
 .product-item .product-item-img .image:hover .bay-button > div {
@@ -801,6 +802,8 @@
 .product-item .product-item-img .image .img-product {
   width: 100%;
   height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .product-item .product-item-img .image .img-product1 {
   display: none;
