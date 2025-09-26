@@ -1,4 +1,7 @@
+import { sizeT } from "./product";
+
 export interface SizesProductT {
-  sizes: { name: string }[];
-  onChange: (size: string) => void;
+  sizes: sizeT[];
+  value?: sizeT;
+  onChange: (size: sizeT) => void;
 }

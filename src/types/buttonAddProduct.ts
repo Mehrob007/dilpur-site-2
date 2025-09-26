@@ -1,3 +1,4 @@
 export interface ButtonAddProductT {
-    id: number
+  id: number;
+  onClick: () => void;
 }

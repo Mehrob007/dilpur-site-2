@@ -8,7 +8,7 @@ import { useGlobalState } from "@/store/globalState";
 
 export default function BayButton({ id }: { id: number }) {
   const [stateStage, setStateStage] = useState<number>(1);
-  const { basketItems, setBasketItems } = useGlobalState();
+  const { setBasketItems } = useGlobalState();
 
   const addProdductToBasket = ({ id, size }: { id: number; size: sizeT }) => {
     const basketIds = JSON.parse(localStorage.getItem("basketIds") || "[]");

@@ -5,14 +5,14 @@ import PropertyOn from "../../../public/icons/PropertyOn.svg";
 import { useStore } from "@/store/globalState";
 import { ButtonAddProductT } from "@/types/buttonAddProduct";
 
-export default function ButtonAddProduct({ id }: ButtonAddProductT) {
+export default function ButtonAddProduct({ id, onClick }: ButtonAddProductT) {
   const { propertys, setProperty, deleteProperty } = useStore();
   console.log("propertys", propertys);
 
   return (
     <div className="button-add-product">
       <div>
-        <button>Добавить в корзину</button>
+        <button onClick={onClick}>Добавить в корзину</button>
         <span>
           {propertys?.includes(id) ? (
             <Image

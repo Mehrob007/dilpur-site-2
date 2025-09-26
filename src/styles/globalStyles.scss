@@ -440,7 +440,7 @@ $grey-color-select: #e5e5e5;
   .header-nav {
     display: flex;
     height: 82px;
-    padding-bottom: 25px;
+
     justify-content: center;
     align-items: center;
     background-color: #181818;
@@ -478,6 +478,7 @@ $grey-color-select: #e5e5e5;
   .header-nav-search {
     height: 265px;
     top: -190px;
+    padding-bottom: 25px;
     .header-nav-content {
       width: 100%;
       display: flex;
@@ -1225,6 +1226,12 @@ $grey-color-select: #e5e5e5;
         letter-spacing: 0%;
         color: $bg-color-new;
         height: 12px;
+      }
+    }
+    .details-product-active {
+      background-color: $black-color;
+      span {
+        color: $white-color !important;
       }
     }
     img {

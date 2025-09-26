@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 
 export default function ColorProduct({ colors }: ColorProductT) {
+  
   return (
     <div className="details-product">
       <h1>Другие цвета</h1>

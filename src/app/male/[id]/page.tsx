@@ -8,12 +8,30 @@ import ProductDetails from "@/components/ui/ProductDetails";
 import SizesProduct from "@/components/ui/SizeProduct";
 import { ArrDefData, sizes } from "@/constants/product";
 import ProductItems from "@/modules/product/ProductItems";
+import { useGlobalState } from "@/store/globalState";
+import { sizeT } from "@/types/product";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 
 export default function Product() {
   const { idProduct } = useParams();
+  const [selectSize, setSelectSize] = useState<sizeT>();
+  const { setBasketItems } = useGlobalState();
+
+  const addProdductToBasket = ({ id, size }: { id: number; size: sizeT }) => {
+    const basketIds = JSON.parse(localStorage.getItem("basketIds") || "[]");
+    if (basketIds?.[0]) {
+      localStorage.setItem(
+        "basketIds",
+        JSON.stringify([...basketIds, { id, size }])
+      );
+      setBasketItems([...basketIds, { id, size }]);
+    } else {
+      localStorage.setItem("basketIds", JSON.stringify([{ id, size }]));
+      setBasketItems([{ id, size }]);
+    }
+  };
 
   const {
     id,
@@ -37,8 +55,8 @@ export default function Product() {
                 src={e}
                 key={i}
                 alt={`product-img-${i}`}
-                width={372}
-                height={560}
+                width={668}
+                height={890}
               />
             ))}
         </div>
@@ -60,8 +78,19 @@ export default function Product() {
             )}
           </div>
           {colors && <ColorProduct colors={colors} />}
-          <SizesProduct sizes={sizes} onChange={(e) => console.log(e)} />
-          {id && <ButtonAddProduct id={id} />}
+          <SizesProduct
+            sizes={sizes}
+            value={selectSize}
+            onChange={(size) => setSelectSize(size)}
+          />
+          {id && (
+            <ButtonAddProduct
+              onClick={() =>
+                selectSize && addProdductToBasket({ id: id, size: selectSize })
+              }
+              id={id}
+            />
+          )}
           <Description
             title="Описание"
             description={`Стильный пиджак Lord Maul песочного \n

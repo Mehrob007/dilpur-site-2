@@ -415,7 +415,6 @@
 .header .header-nav {
   display: flex;
   height: 82px;
-  padding-bottom: 25px;
   justify-content: center;
   align-items: center;
   background-color: #181818;
@@ -451,6 +450,7 @@
 .header .header-nav-search {
   height: 265px;
   top: -190px;
+  padding-bottom: 25px;
 }
 .header .header-nav-search .header-nav-content {
   width: 100%;
@@ -1170,6 +1170,12 @@
   letter-spacing: 0%;
   color: #8f8f8f;
   height: 12px;
+}
+.details-product div .details-product-active {
+  background-color: #181818;
+}
+.details-product div .details-product-active span {
+  color: #ffffff !important;
 }
 .details-product div img {
   border: 1.5px solid #8f8f8f;
