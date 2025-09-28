@@ -10,10 +10,10 @@ import { usePathname, useRouter } from "next/navigation";
 
 export default function BasketItems({
   open,
-  setOpen,
+  onClose,
 }: {
   open: boolean;
-  setOpen: (value: boolean) => void;
+  onClose: () => void;
 }) {
   const { basketItems, setBasketItems } = useGlobalState();
   const route = useRouter();
@@ -90,7 +90,7 @@ export default function BasketItems({
             } else {
               route.push("/" + pathName?.split("/")?.[1] + "/catalog");
             }
-            setOpen(false);
+            onClose();
           }}
         >
           {basketItems?.length ? "Перейти к оформлению" : "Перейти к покупкам"}

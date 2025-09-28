@@ -4,23 +4,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import InputSearch from "../element/InputSearch";
-import { defaultSubHeader, popularQueries } from "@/constants/header";
+import { popularQueries } from "@/constants/header";
 import Image from "next/image";
 import searchIcon from "@/../public/icons/searchIcon.svg";
+import { useGlobalState } from "@/store/globalState";
 
-export default function SubHeader({
-  navLinks,
-  openNav,
-  type,
-  setOpenNav,
-}: SubHeaderT) {
+export default function SubHeader({ navLinks, type }: SubHeaderT) {
   const [searchValue, setSearchValue] = useState<string>("");
+  const { setOpenModalKey, checkKeyModal } = useGlobalState();
   const pathName = usePathname();
-  if (type === "filter") {
-    return (
+  return (
+    <>
       <div
         className="header-nav header-nav-search"
-        style={{ top: openNav ? "70px " : "" }}
+        style={{ top: checkKeyModal("filter") ? "70px " : "" }}
       >
         <div className="header-nav-content max-width">
           <div className="header-nav-search-input">
@@ -31,13 +28,7 @@ export default function SubHeader({
             />
             <nav>
               <button>Найти</button>
-              <button
-                onClick={() =>
-                  setOpenNav({ ...defaultSubHeader, type: "filter" })
-                }
-              >
-                Закрыть
-              </button>
+              <button onClick={() => setOpenModalKey("")}>Закрыть</button>
             </nav>
           </div>
           <div className="header-nav-search-res">
@@ -58,11 +49,10 @@ export default function SubHeader({
           </div>
         </div>
       </div>
-    );
-  }
-  if (type === "navigation") {
-    return (
-      <div className="header-nav" style={{ top: openNav ? "70px " : "" }}>
+      <div
+        className="header-nav"
+        style={{ top: checkKeyModal("navigation") ? "70px " : "" }}
+      >
         <div className="header-nav-content">
           {navLinks.map((e, i) => {
             const isActive = pathName.includes(e.href);
@@ -78,6 +68,6 @@ export default function SubHeader({
           })}
         </div>
       </div>
-    );
-  }
+    </>
+  );
 }

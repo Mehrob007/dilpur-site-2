@@ -13,8 +13,7 @@ export interface defaultSubHeaderT {
 
 export interface SubHeaderT {
   navLinks: linkT[];
-  openNav: boolean;
-  type: "filter" | "navigation";
+  type: string;
   setOpenNav: (e: defaultSubHeaderT) => void;
 }
 

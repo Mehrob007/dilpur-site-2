@@ -14,16 +14,24 @@ import { defaultSubHeader, links, navLinks } from "@/constants/header";
 import BasketItems from "@/modules/basket/BasketItems";
 import SubHeader from "./SubHeader";
 import { defaultSubHeaderT } from "@/types/def";
+import { useGlobalState } from "@/store/globalState";
 
 export default function Header() {
+  const { setOpenModalKey, checkKeyModal, openModalKey } = useGlobalState();
   const [openNav, setOpenNav] = useState<defaultSubHeaderT>(defaultSubHeader);
   const pathName = usePathname();
   const [isHovered, setIsHovered] = useState<number>(0);
-  const [openBasket, setOpenBasket] = useState<boolean>(false);
 
   useEffect(() => {
     setOpenNav(defaultSubHeader);
   }, [pathName]);
+  useEffect(() => {
+    if (openNav) {
+      setOpenModalKey("");
+    }
+  }, [openNav.open]);
+
+  console.log("check", openModalKey);
 
   return (
     <div className="header">
@@ -40,17 +48,8 @@ export default function Header() {
           </div>
           <div className="header-content-left">
             <Image
-              onClick={() =>
-                setOpenNav({
-                  type: "navigation",
-                  open: !(openNav.type == "navigation" && openNav.open),
-                })
-              }
-              src={
-                openNav.type == "navigation" && openNav.open
-                  ? closeNav
-                  : burgerIcons
-              }
+              onClick={() => setOpenModalKey("navigation")}
+              src={checkKeyModal("navigation") ? closeNav : burgerIcons}
               alt="burgerIcons"
               width={24}
               height={24}
@@ -74,14 +73,11 @@ export default function Header() {
               onMouseLeave={() => setIsHovered(0)}
               src={search}
               style={{
-                display:
-                  openNav.type === "filter" && openNav.open ? "none" : "flex",
+                display: checkKeyModal("filter") ? "none" : "flex",
                 opacity: Boolean(!isHovered) || isHovered === 1 ? "1" : "0.2",
               }}
               alt="icons-header"
-              onClick={() => {
-                setOpenNav({ type: "filter", open: true });
-              }}
+              onClick={() => setOpenModalKey("filter")}
               width={24}
               height={24}
             />
@@ -104,7 +100,7 @@ export default function Header() {
               onMouseLeave={() => setIsHovered(0)}
               src={basket}
               alt="icons-header"
-              onClick={() => setOpenBasket(!openBasket)}
+              onClick={() => setOpenModalKey("basket")}
               width={24}
               height={24}
             />
@@ -119,14 +115,16 @@ export default function Header() {
               width={24}
               height={24}
             />
-            <BasketItems open={openBasket} setOpen={setOpenBasket} />
+            <BasketItems
+              open={checkKeyModal("basket")}
+              onClose={() => setOpenModalKey("")}
+            />
           </div>
         </div>
       </div>
       <SubHeader
         navLinks={navLinks}
-        openNav={openNav.open}
-        type={openNav.type}
+        type={openModalKey}
         setOpenNav={setOpenNav}
       />
     </div>
