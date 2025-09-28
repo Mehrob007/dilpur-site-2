@@ -602,7 +602,6 @@
   font-weight: 500;
   font-style: Medium;
   font-size: 19px;
-  leading-trim: CAP_HEIGHT;
   line-height: 100%;
   letter-spacing: 0%;
   text-align: center;
@@ -1080,6 +1079,7 @@
      object-fit: cover;
   width: calc(50% - 12px);
   height: auto;
+  border: none;
 }
 .product-page > main .product-page-details {
   position: sticky;
@@ -1153,6 +1153,9 @@
   text-align: center;
   color: #8f8f8f;
   cursor: pointer;
+}
+.filter > p:hover {
+  color: #181818;
 }
 .filter .types-select .select-content {
   left: -75px;
@@ -1732,4 +1735,159 @@
   display: flex;
   flex-direction: column;
   gap: 120px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  min-height: 70px;
+  position: relative;
+}
+.input > span {
+  position: absolute;
+  top: -7px;
+  left: 20px;
+  color: #8f8f8f;
+  background-color: #ffffff;
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+}
+.input > .input-placeholder {
+  top: 11px;
+  left: 17;
+  opacity: 0;
+}
+.input > input {
+  height: 50px;
+  padding: 0 20px;
+  max-width: 100%;
+  width: calc(100% - 42px);
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 17px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  border: 1px solid #aeaeae;
+  outline: none;
+}
+.input > textarea {
+  min-height: 180px;
+  padding: 19px 20px;
+  max-width: 100%;
+  width: calc(100% - 42px);
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 17px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  border: 1px solid #aeaeae;
+  outline: none;
+}
+.input > p {
+  color: #d32a2a;
+}
+
+hr {
+  height: 1px;
+  width: 100%;
+  background-color: #e5e5e5;
+  border: none;
+}
+
+.order-page {
+  padding-top: 80px;
+}
+
+.form-order-main {
+  display: flex;
+  gap: 100px;
+  width: 100%;
+}
+.form-order-main > .left-com {
+  width: calc(100% - 100px - 44%);
+}
+.form-order-main > .right-com {
+  width: 44%;
+}
+.form-order-main > div {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+.form-order-main > div > main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.form-order-main > div > main > h1 {
+  font-family: Gilroy;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 28px;
+  line-height: 80%;
+  height: 20px;
+  letter-spacing: 0%;
+  color: #181818;
+}
+.form-order-main > div > main > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.form-order-main > div > main > div > nav {
+  grid-column: 1/3;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.form-order-main > div > main > div > nav > h1 {
+  font-family: Gilroy;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 28px;
+  line-height: 80%;
+  height: 20px;
+  letter-spacing: 0%;
+  color: #181818;
+  display: flex;
+  justify-content: space-between;
+}
+.form-order-main > div > main > div > nav > button {
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 17px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  height: 60px;
+  border: none;
+  background-color: #181818;
+  color: #ffffff;
+  cursor: pointer;
+}
+.form-order-main > div > main > div > nav > footer {
+  width: 100%;
+}
+.form-order-main > div > main > div > nav > footer > div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+.form-order-main > div > main > div > nav > footer > div > label {
+  display: flex;
+  justify-content: space-between;
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 17px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+.form-order-main > div > main > div > nav > footer > div > .skid {
+  color: #d32a2a;
 }/*# sourceMappingURL=globalStyles.css.map */

@@ -625,7 +625,6 @@ $grey-color-select: #e5e5e5;
       font-weight: 500;
       font-style: Medium;
       font-size: 19px;
-      leading-trim: CAP_HEIGHT;
       line-height: 100%;
       letter-spacing: 0%;
       text-align: center;
@@ -1132,6 +1131,7 @@ $grey-color-select: #e5e5e5;
         object-fit: cover;
         width: calc(50% - 12px);
         height: auto;
+        border: none;
       }
     }
     .product-page-details {
@@ -1209,6 +1209,9 @@ $grey-color-select: #e5e5e5;
     text-align: center;
     color: $bg-color-new;
     cursor: pointer;
+    &:hover {
+      color: $black-color;
+    }
   }
   .types-select {
     .select-content {
@@ -1807,4 +1810,158 @@ $grey-color-select: #e5e5e5;
   display: flex;
   flex-direction: column;
   gap: 120px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  min-height: 70px;
+  position: relative;
+
+  > span {
+    position: absolute;
+    top: -7px;
+    left: 20px;
+    color: $bg-color-new;
+    background-color: $white-color;
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
+  }
+  > .input-placeholder {
+    top: 11px;
+    left: 17;
+    opacity: 0;
+  }
+  > input {
+    height: 50px;
+    padding: 0 20px;
+    max-width: 100%;
+    width: calc(100% - 42px);
+    font-family: Gilroy;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 17px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    border: 1px solid $grey-color;
+    outline: none;
+  }
+  > textarea {
+    min-height: 180px;
+    padding: 19px 20px;
+    max-width: 100%;
+    width: calc(100% - 42px);
+    font-family: Gilroy;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 17px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    border: 1px solid $grey-color;
+    outline: none;
+  }
+  > p {
+    color: $red-color;
+  }
+}
+hr {
+  height: 1px;
+  width: 100%;
+  background-color: $grey-color-select;
+  border: none;
+}
+.order-page {
+  padding-top: 80px;
+}
+.form-order-main {
+  display: flex;
+  gap: 100px;
+  width: 100%;
+  > .left-com {
+    width: calc(100% - 100px - 44%);
+  }
+  > .right-com {
+    width: calc(44%);
+  }
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    > main {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      > h1 {
+        font-family: Gilroy;
+        font-weight: 400;
+        font-style: Regular;
+        font-size: 28px;
+        line-height: 80%;
+        height: 20px;
+        letter-spacing: 0%;
+        color: $black-color;
+      }
+      > div {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+
+        > nav {
+          grid-column: 1 / 3;
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 20px;
+          > h1 {
+            font-family: Gilroy;
+            font-weight: 400;
+            font-style: Regular;
+            font-size: 28px;
+            line-height: 80%;
+            height: 20px;
+            letter-spacing: 0%;
+            color: $black-color;
+            display: flex;
+            justify-content: space-between;
+          }
+          > button {
+            font-family: Gilroy;
+            font-weight: 500;
+            font-style: Medium;
+            font-size: 17px;
+            line-height: 100%;
+            letter-spacing: 0%;
+            text-align: center;
+            height: 60px;
+            border: none;
+            background-color: $black-color;
+            color: $white-color;
+            cursor: pointer;
+          }
+          > footer {
+            width: 100%;
+            > div {
+              display: flex;
+              flex-direction: column;
+              gap: 20px;
+              width: 100%;
+              > label {
+                display: flex;
+                justify-content: space-between;
+                font-family: Gilroy;
+                font-weight: 500;
+                font-style: Medium;
+                font-size: 17px;
+                line-height: 100%;
+                letter-spacing: 0%;
+              }
+              > .skid {
+                color: $red-color;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

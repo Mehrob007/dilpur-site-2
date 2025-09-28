@@ -86,7 +86,7 @@ export default function BasketItems({
           className=""
           onClick={() => {
             if (basketItems?.length) {
-              route.push("/" + pathName?.split("/")?.[1] + "/order");
+              route.push("/order");
             } else {
               route.push("/" + pathName?.split("/")?.[1] + "/catalog");
             }
