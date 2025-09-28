@@ -332,8 +332,7 @@
   vertical-align: middle;
 }
 .select .select-content > div:hover {
-  background-color: #8f8f8f;
-  color: #ffffff;
+  background-color: #e5e5e5;
 }
 .select .select-content-open {
   top: 100%;

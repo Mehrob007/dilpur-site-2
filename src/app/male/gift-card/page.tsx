@@ -42,6 +42,7 @@ export default function Page() {
           <Image src={giftCord2} alt="img-gift-card" width={500} height={300} />
           <div>
             <Select
+              id="shop-gift-card"
               placeholder="Выберите магазин"
               onChange={(e) => setData("key", e)}
               options={options}
@@ -49,6 +50,7 @@ export default function Page() {
               style={{ zIndex: "5" }}
             />
             <Select
+              id="price-gift-card"
               placeholder="Номинал"
               onChange={(e) => setData("key", e)}
               options={optionsNaminal}

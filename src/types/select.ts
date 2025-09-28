@@ -5,6 +5,7 @@ export interface options {
 
 // export interface selectedOptionsTypestring[]
 export interface SelectT {
+  id: string,
   options: options[];
   placeholder: string;
   checkBox?: boolean
