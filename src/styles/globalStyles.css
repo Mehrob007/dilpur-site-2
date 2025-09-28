@@ -398,6 +398,7 @@
 }
 .header .header-main .header-content > div img {
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 .header .header-main .header-content .header-content-right {
   height: 100%;
@@ -509,7 +510,7 @@
 .header .header-nav-search .header-nav-content .header-nav-search-res div {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
 }
 .header .header-nav-search .header-nav-content .header-nav-search-res div span {
   display: flex;
@@ -564,6 +565,42 @@
   z-index: -1;
 }
 
+.basket-dont-items {
+  display: flex;
+  align-items: center;
+  height: 301px;
+  justify-content: center;
+}
+.basket-dont-items > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.basket-dont-items > div > h1 {
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 19px;
+  leading-trim: CAP_HEIGHT;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #181818;
+}
+.basket-dont-items > div > p {
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 15px;
+  leading-trim: CAP_HEIGHT;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  color: #8f8f8f;
+}
+
 .basket {
   position: absolute;
   z-index: 999;
@@ -609,12 +646,34 @@
 .basket .basket-items .basket-item > div {
   padding-top: 14.5px;
 }
-.basket .basket-items .basket-item div {
+.basket .basket-items .basket-item > div {
+  width: 248px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 20px;
 }
-.basket .basket-items .basket-item div h1 {
+.basket .basket-items .basket-item > div .crossed {
+  color: #8f8f8f !important;
+}
+.basket .basket-items .basket-item > div .crossed::after {
+  background-color: #8f8f8f !important;
+}
+.basket .basket-items .basket-item > div nav {
+  display: flex;
+  gap: 17px;
+}
+.basket .basket-items .basket-item > div nav > button {
+  border: none;
+  background-color: transparent;
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 18px;
+  cursor: pointer;
+  letter-spacing: 0%;
+  color: #181818;
+}
+.basket .basket-items .basket-item > div h1 {
   font-family: Gilroy;
   font-weight: 500;
   font-style: Medium;
@@ -624,7 +683,7 @@
   letter-spacing: 0%;
   color: #181818;
 }
-.basket .basket-items .basket-item div p {
+.basket .basket-items .basket-item > div p {
   font-family: Gilroy;
   font-weight: 500;
   font-style: Medium;
@@ -632,21 +691,26 @@
   line-height: 100%;
   letter-spacing: 0%;
   color: #8f8f8f;
+  margin-top: 12px;
 }
-.basket .basket-items .basket-item div h2 {
+.basket .basket-items .basket-item > div h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-family: Gilroy;
   font-weight: 500;
   font-style: Medium;
   font-size: 15px;
-  line-height: 80%;
+  line-height: 100%;
   letter-spacing: 0%;
-  height: 10px;
-  color: #181818;
 }
-.basket .basket-items .basket-item div h2 > span {
+.basket .basket-items .basket-item > div h2 label {
+  margin-top: 3px;
+}
+.basket .basket-items .basket-item > div h2 > span {
   color: #8f8f8f;
 }
-.basket .basket-items .basket-item div > span {
+.basket .basket-items .basket-item > div > span {
   font-family: Gilroy;
   font-weight: 500;
   font-style: Medium;
@@ -656,12 +720,15 @@
   letter-spacing: 0%;
   color: #181818;
 }
-.basket .basket-items .basket-item div > div > div {
+.basket .basket-items .basket-item > div > div > div {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   height: 23px;
+}
+.basket .basket-items .basket-item > div > div > div > img:hover {
+  filter: brightness(30%);
 }
 
 .banner {
@@ -1237,7 +1304,7 @@
 .button-add-product > div span {
   width: 50px;
   height: 50px;
-  background-color: #e5e5e5;
+  background-color: #181818;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1561,6 +1628,30 @@
   height: 12px;
   text-align: center;
   text-transform: uppercase;
+}
+
+.types-product-header-go-back {
+  align-items: center;
+  font-family: Gilroy;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 17px;
+  leading-trim: CAP_HEIGHT;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #181818;
+  display: flex;
+  height: 40px;
+}
+.types-product-header-go-back > label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.types-product-header-go-back > label > img {
+  margin-top: -3px;
 }
 
 .gift-card-page {

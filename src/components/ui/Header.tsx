@@ -18,12 +18,13 @@ import { defaultSubHeaderT } from "@/types/def";
 export default function Header() {
   const [openNav, setOpenNav] = useState<defaultSubHeaderT>(defaultSubHeader);
   const pathName = usePathname();
-   const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState<number>(0);
   const [openBasket, setOpenBasket] = useState<boolean>(false);
 
   useEffect(() => {
     setOpenNav(defaultSubHeader);
   }, [pathName]);
+
   return (
     <div className="header">
       <div className="header-main">
@@ -32,9 +33,7 @@ export default function Header() {
             <Image
               src={logoTitle}
               alt="logoTitle"
-              onClick={() =>
-                redirect(pathName.includes("/male") ? "/male" : "/female")
-              }
+              onClick={() => redirect("/" + pathName?.split("/")?.[1])}
               width={188}
               height={40}
             />
@@ -71,9 +70,13 @@ export default function Header() {
           </div>
           <div className="header-content-right">
             <Image
+              onMouseEnter={() => setIsHovered(1)}
+              onMouseLeave={() => setIsHovered(0)}
               src={search}
               style={{
-                opacity: openNav.type === "filter" && openNav.open ? 0 : 1,
+                display:
+                  openNav.type === "filter" && openNav.open ? "none" : "flex",
+                opacity: Boolean(!isHovered) || isHovered === 1 ? "1" : "0.2",
               }}
               alt="icons-header"
               onClick={() => {
@@ -82,16 +85,41 @@ export default function Header() {
               width={24}
               height={24}
             />
-            <Image src={favorites} alt="icons-header" width={24} height={24} />
             <Image
+              style={{
+                opacity: Boolean(!isHovered) || isHovered === 2 ? "1" : "0.2",
+              }}
+              onMouseEnter={() => setIsHovered(2)}
+              onMouseLeave={() => setIsHovered(0)}
+              src={favorites}
+              alt="icons-header"
+              width={24}
+              height={24}
+            />
+            <Image
+              style={{
+                opacity: Boolean(!isHovered) || isHovered === 3 ? "1" : "0.2",
+              }}
+              onMouseEnter={() => setIsHovered(3)}
+              onMouseLeave={() => setIsHovered(0)}
               src={basket}
               alt="icons-header"
               onClick={() => setOpenBasket(!openBasket)}
               width={24}
               height={24}
             />
-            <Image src={profile} alt="icons-header" width={24} height={24} />
-            <BasketItems open={openBasket} />
+            <Image
+              style={{
+                opacity: Boolean(!isHovered) || isHovered === 4 ? "1" : "0.2",
+              }}
+              onMouseEnter={() => setIsHovered(4)}
+              onMouseLeave={() => setIsHovered(0)}
+              src={profile}
+              alt="icons-header"
+              width={24}
+              height={24}
+            />
+            <BasketItems open={openBasket} setOpen={setOpenBasket} />
           </div>
         </div>
       </div>

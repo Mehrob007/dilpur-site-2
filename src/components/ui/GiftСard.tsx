@@ -13,7 +13,7 @@ export default function GiftСard() {
   return (
     <div
       className="gift-card max-width"
-      onClick={() => router.push("/male/gift-card")}
+      onClick={() => router.push("/" + pathName?.split("/")?.[1] + "/gift-card")}
     >
       <div className="gift-card-top">
         <h1>ПОДАРОЧНАЯ</h1>

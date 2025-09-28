@@ -3,10 +3,13 @@ import SelectType from "@/components/element/SelectType";
 import { optionSort, optionTypes } from "@/constants/select";
 import { useGlobalState } from "@/store/globalState";
 import { TypesProductHeaderT } from "@/types/product";
-import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
+import arrow1Icon from "@/../public/icons/arrow-1.svg";
 
 export default function TypesProductHeader({ type }: TypesProductHeaderT) {
+  const pathName = usePathname();
   const { setClearSearch } = useGlobalState();
   const router = useRouter();
   if (type === "filter") {
@@ -40,9 +43,22 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
   } else if (type === "showAll") {
     return (
       <div className="types-product-header">
-        <button onClick={() => router.push("/male/catalog")}>
+        <button
+          onClick={() =>
+            router.push("/" + pathName?.split("/")[1] + "/catalog")
+          }
+        >
           Смотреть все
         </button>
+      </div>
+    );
+  } else if (type === "goBack") {
+    return (
+      <div className="types-product-header-go-back">
+        <label onClick={() => router.push("/" + pathName?.split("/")[1])}>
+          <Image src={arrow1Icon} alt="arrow1Icon" />
+          ВЕРНУТЬСЯ В МАГАЗИН
+        </label>
       </div>
     );
   } else {

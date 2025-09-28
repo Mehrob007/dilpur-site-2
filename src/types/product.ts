@@ -1,7 +1,7 @@
 import { StaticImageData } from "next/image";
 
 export interface TypesProductHeaderT {
-  type: null | "filter" | "showAll";
+  type: null | "filter" | "showAll" | "goBack";
 }
 
 export interface ProductItemsT extends TypesProductHeaderT {

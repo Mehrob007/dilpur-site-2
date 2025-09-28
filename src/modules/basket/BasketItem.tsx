@@ -12,6 +12,7 @@ export default function BasketItem({
   img,
   deleteBasketItem,
   id,
+  discount,
 }: BasketItemT) {
   return (
     <div className="basket-item">
@@ -23,18 +24,27 @@ export default function BasketItem({
         </div>
         <div>
           <h2>
-            Размер: <span>{size}</span>
-          </h2>
-          <h2>
-            Цвет: <span>{color}</span>
-          </h2>
-          <h2>
-            Кол-во: <span>{count} шт</span>
+            <label>{size}</label> | <label>{color}</label> |{" "}
+            <label>{count} шт.</label>
           </h2>
         </div>
+        <nav>
+          <button>-</button>
+          <h2>{count}</h2>
+          <button>+</button>
+        </nav>
         <div>
           <div>
-            <span>{price} c</span>
+            <div className="product-item-price">
+              {discount ? (
+                <>
+                  <div className="discount">{discount} c.</div>{" "}
+                  <div className="crossed">{price} c.</div>
+                </>
+              ) : (
+                <div className="price">{price} c.</div>
+              )}
+            </div>
             <Image
               onClick={() => deleteBasketItem(id)}
               src={trash}

@@ -113,7 +113,7 @@ export default function Product() {
       <ProductItems
         title={"Похожие товары"}
         limit={3}
-        type={null}
+        type={"goBack"}
         getURl={""}
       />
       <PartnerStores />
