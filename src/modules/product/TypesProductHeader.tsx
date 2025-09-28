@@ -20,18 +20,22 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
           placeholder="Тип"
           style={{}}
           className="types-select"
+          id="type-filter"
         />
         <SelectType
+          id="category-filter"
           options={optionTypes}
           placeholder="Категория"
           className="categorys-select"
         />
         <SelectType
+          id="size-filter"
           options={optionTypes}
           placeholder="Размер"
           className="sizes-select"
         />
         <SelectType
+          id="sort-filter"
           checkBox={false}
           options={optionSort}
           placeholder="Сортировать по"

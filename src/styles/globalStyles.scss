@@ -10,30 +10,51 @@ $white-color-60: #ffffff99;
 $white-color-90: #ffffffe5;
 $grey-color-select: #e5e5e5;
 
-/* Chrome, Safari, Edge */
+/* Chrome, Edge, Safari */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 16px !important; /* ширина скролла */
+  height: 16px !important;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f0f0f000; /* трек */
-  border-radius: 10px;
+  background: #f5f5f5 !important; /* фон дорожки */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #505050; /* ползунок */
-  border-radius: 10px;
+  background-color: #888 !important; /* цвет ползунка */
+  border-radius: 0 !important; /* убираем скругления */
+  border: none !important; /* убираем зазор */
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #333;
+  background: #555 !important; /* при наведении */
+}
+
+/* Стрелки (WebKit) */
+::-webkit-scrollbar-button:single-button {
+  background-color: #f5f5f5 !important;
+  display: block;
+  height: 16px !important;
+  width: 16px !important;
+  border: none !important;
+}
+
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+  border-width: 0 8px 8px 8px !important;
+  border-color: transparent transparent #888 transparent !important;
+}
+
+::-webkit-scrollbar-button:single-button:vertical:increment {
+  border-width: 8px 8px 0 8px !important;
+  border-color: #888 transparent transparent transparent !important;
 }
 
 /* Firefox */
 * {
-  scrollbar-width: thin; /* "auto" | "thin" | "none" */
-  scrollbar-color: #505050 #f0f0f000; /* цвет ползунка и трека */
+  scrollbar-width: thin !important;
+  scrollbar-color: #888 #f5f5f5 !important;
 }
 .max-width {
   max-width: calc(1920px - 80px);
@@ -351,7 +372,7 @@ $grey-color-select: #e5e5e5;
       vertical-align: middle;
       &:hover {
         background-color: $grey-color-select;
-        // color: $white-color; 
+        // color: $white-color;
       }
     }
   }
