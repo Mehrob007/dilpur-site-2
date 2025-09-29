@@ -31,7 +31,7 @@ export default function Header() {
     }
   }, [openNav.open]);
 
-  console.log("check", openModalKey);
+  console.log("path", "/" + pathName?.split("/")?.[1]);
 
   return (
     <div className="header">
