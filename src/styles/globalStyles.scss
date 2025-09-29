@@ -4,6 +4,7 @@ $red-color: #d32a2a;
 $link-color: #505050;
 $off-color: #d9d9d9;
 $bg-color-new: #8f8f8f;
+$bg-color-new-2: #f8f8f8;
 $crossed-color: #505050;
 $grey-color: #aeaeae;
 $white-color-60: #ffffff99;
@@ -690,7 +691,8 @@ $grey-color-select: #e5e5e5;
       gap: 21px;
 
       & > div {
-        padding-top: 14.5px;
+        padding: 14.5px 0;
+        height: 144px;
       }
 
       > div {
@@ -708,6 +710,8 @@ $grey-color-select: #e5e5e5;
         nav {
           display: flex;
           gap: 17px;
+          align-items: center;
+          height: 24px;
           > button {
             border: none;
             background-color: transparent;
@@ -738,7 +742,8 @@ $grey-color-select: #e5e5e5;
           font-weight: 500;
           font-style: Medium;
           font-size: 15px;
-          line-height: 100%;
+          line-height: 80%;
+          height: 10px;
           letter-spacing: 0%;
           color: $bg-color-new;
           margin-top: 12px;
@@ -751,7 +756,8 @@ $grey-color-select: #e5e5e5;
           font-weight: 500;
           font-style: Medium;
           font-size: 15px;
-          line-height: 100%;
+          line-height: 80%;
+          height: 13.8px;
           letter-spacing: 0%;
           & label {
             margin-top: 3px;
@@ -776,7 +782,7 @@ $grey-color-select: #e5e5e5;
           flex-direction: row;
           align-items: center;
           justify-content: space-between;
-          height: 23px;
+          height: 13px;
           > img {
             &:hover {
               filter: brightness(30%);
@@ -785,6 +791,15 @@ $grey-color-select: #e5e5e5;
         }
       }
     }
+  }
+  .product-item-price div {
+    font-family: Gilroy;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 19px;
+    leading-trim: CAP_HEIGHT;
+    line-height: 100%;
+    letter-spacing: 0%;
   }
 }
 .banner {
@@ -1391,7 +1406,7 @@ $grey-color-select: #e5e5e5;
     span {
       width: 50px;
       height: 50px;
-      background-color: $black-color;
+      background-color: $bg-color-new-2;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -1749,7 +1764,8 @@ $grey-color-select: #e5e5e5;
     align-items: center;
     gap: 10px;
     > img {
-      margin-top: -3px;
+      margin-top: -2.09px;
+      // margin-right: -1px;
     }
   }
 }

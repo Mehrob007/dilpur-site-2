@@ -663,7 +663,8 @@
   gap: 21px;
 }
 .basket .basket-items .basket-item > div {
-  padding-top: 14.5px;
+  padding: 14.5px 0;
+  height: 144px;
 }
 .basket .basket-items .basket-item > div {
   width: 248px;
@@ -680,6 +681,8 @@
 .basket .basket-items .basket-item > div nav {
   display: flex;
   gap: 17px;
+  align-items: center;
+  height: 24px;
 }
 .basket .basket-items .basket-item > div nav > button {
   border: none;
@@ -707,7 +710,8 @@
   font-weight: 500;
   font-style: Medium;
   font-size: 15px;
-  line-height: 100%;
+  line-height: 80%;
+  height: 10px;
   letter-spacing: 0%;
   color: #8f8f8f;
   margin-top: 12px;
@@ -720,7 +724,8 @@
   font-weight: 500;
   font-style: Medium;
   font-size: 15px;
-  line-height: 100%;
+  line-height: 80%;
+  height: 13.8px;
   letter-spacing: 0%;
 }
 .basket .basket-items .basket-item > div h2 label {
@@ -744,10 +749,19 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 23px;
+  height: 13px;
 }
 .basket .basket-items .basket-item > div > div > div > img:hover {
   filter: brightness(30%);
+}
+.basket .product-item-price div {
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 19px;
+  leading-trim: CAP_HEIGHT;
+  line-height: 100%;
+  letter-spacing: 0%;
 }
 
 .banner {
@@ -1327,7 +1341,7 @@
 .button-add-product > div span {
   width: 50px;
   height: 50px;
-  background-color: #181818;
+  background-color: #f8f8f8;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1674,7 +1688,7 @@
   gap: 10px;
 }
 .types-product-header-go-back > label > img {
-  margin-top: -3px;
+  margin-top: -2.09px;
 }
 
 .gift-card-page {
