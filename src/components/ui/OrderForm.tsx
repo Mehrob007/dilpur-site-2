@@ -11,10 +11,11 @@ export default function OrderForm() {
   const { basketItems, setBasketItems } = useGlobalState();
   const [price, setPrice] = useState(0);
   const { data, errors, setData } = useFormStore();
+
   useEffect(() => {
-    if (basketItems?.length) {
-      redirect("/");
-    }
+    // if (basketItems?.[0]) {
+    //   redirect("/");
+    // }
   }, []);
 
   console.log("basketItems", basketItems);
@@ -167,7 +168,7 @@ export default function OrderForm() {
         <main>
           <h1>Состав заказа</h1>
           <nav>
-            <BasketItems open={true} onClose={() => {}} />
+            {/* <BasketItems open={true} onClose={() => {}} /> */}
           </nav>
         </main>
       </div>
