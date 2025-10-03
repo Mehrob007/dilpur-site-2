@@ -8,7 +8,12 @@ export default function MainPage() {
   return (
     <div className="main-page">
       <Banner />
-      <ProductItems title={"Одежда"} type={"showAll"} getURl={""} />
+      <ProductItems
+        title={"Одежда"}
+        TypeIds={[1]}
+        type={"showAll"}
+        getURl={""}
+      />
       <ProductItems title={"Обувь"} type={"showAll"} getURl={""} />
       <ProductItems title={"Аксессуары"} type={"showAll"} getURl={""} />
       <GiftСard />
