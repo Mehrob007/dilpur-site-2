@@ -1,5 +1,5 @@
 "use client";
-import { ProductItemsT, ProductItemT } from "@/types/product";
+import { ItemT, ProductItemsT, ProductItemT } from "@/types/product";
 import React, { useEffect, useState } from "react";
 import TypesProductHeader from "./TypesProductHeader";
 import ProductItem from "./ProductItem";
@@ -7,15 +7,17 @@ import ProductItemsError from "./ProductItemsError";
 import { ArrDefData } from "@/constants/product";
 import { useStore } from "@/store/globalState";
 import { useSearchParams } from "next/navigation";
+import { GetProductREQ } from "@/api/product/product";
 
 export default function ProductItems({
   title,
   type = null,
   getURl,
-  limit = 20,
+  Limit = 21,
   pagination = false,
+  TypeIds,
 }: ProductItemsT) {
-  const [data, setData] = useState<ProductItemT[] | null>(null);
+  // const [data, setData] = useState<ProductItemT[] | null>(null);
   const [error, setError] = useState<boolean>(false);
   const { propertys } = useStore();
   const searchParams = useSearchParams();
@@ -28,14 +30,47 @@ export default function ProductItems({
 
   console.log("query", { types, categorys, sizes, sorts });
 
+  const [page, setPage] = useState<number>(0);
+  const [fetching, setFetching] = useState(true);
+  const [data, setData] = useState<ItemT[] | []>([]);
+
+  const scrollHandler = (target: {
+    scrollHeight: number;
+    scrollTop: number;
+    clientHeight: number;
+  }) => {
+    if (!fetching) {
+      if (target.scrollHeight - (target.scrollTop + target.clientHeight) < 1) {
+        setFetching(true);
+        setPage(page + 1);
+      }
+    }
+  };
+
+  const getData = async (Name?: string, reset: boolean = false) => {
+    try {
+      const res = await GetProductREQ({
+        Limit,
+        TypeIds,
+        Name,
+        Page: reset ? 0 : page,
+      });
+      if (reset) {
+        setData(res.data);
+        setPage(0);
+      } else setData([...data, ...res.data]);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setFetching(false);
+    }
+  };
+
   useEffect(() => {
-    setData(
-      ArrDefData.map((e, i) => ({
-        ...e,
-        property: Boolean(propertys.includes(i)),
-      }))
-    );
-  }, [propertys]);
+    getData();
+  }, []);
+
+  console.log("data", data);
 
   return (
     <div className="product-items max-width">
@@ -44,26 +79,29 @@ export default function ProductItems({
 
         <TypesProductHeader type={type} />
       </div>
-      <div className={error ? "" : "product-items-content"}>
+      <div
+        onScroll={(e) => scrollHandler(e.currentTarget)}
+        className={error ? "" : "product-items-content"}
+      >
         {error ? (
           <ProductItemsError />
         ) : (
           Array.isArray(data) &&
-          data
-            .filter((_, i) => i < limit)
-            .map((e, i) => (
-              <ProductItem
-                key={i}
-                id={e.id}
-                img={e.img}
-                title={e.title}
-                subTitle={e.subTitle}
-                price={e.price}
-                discount={e.discount}
-                details={e.details}
-                property={e.property}
-              />
-            ))
+          data.map((e, i) => (
+            <ProductItem
+              key={i}
+              id={e.id as number}
+              img={
+                Array.isArray(e.fileNames) ? (e.fileNames as string[]) : [""]
+              }
+              title={e.name as string}
+              subTitle={e.preName as string}
+              price={e.cost as number}
+              discount={e.preCost as number}
+              // details={e.tags as string[]}
+              // property={e.property}
+            />
+          ))
         )}
       </div>
     </div>
