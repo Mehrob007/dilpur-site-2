@@ -8,6 +8,7 @@ import { useStore } from "@/store/globalState";
 import BayButton from "@/components/ui/BayButton";
 import ProductDetails from "@/components/ui/ProductDetails";
 import { useRouter } from "next/navigation";
+import { getFileURL } from "@/utils/getFileURL";
 
 export default function ProductItem({
   img,
@@ -22,6 +23,18 @@ export default function ProductItem({
   const router = useRouter();
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const { setProperty, deleteProperty } = useStore();
+
+  console.table({
+    img: img,
+    title: title,
+    subTitle: subTitle,
+    price: price,
+    discount: discount,
+    details: details,
+    property: property,
+    id: id,
+  });
+
   return (
     <div className="product-item">
       <div className="product-item-img">
@@ -33,8 +46,10 @@ export default function ProductItem({
           <Image
             onClick={() => router.push("/male/" + id)}
             className="img-product"
-            src={!isHovered ? img[0] : img[1]}
+            src={!isHovered ? getFileURL(img[0]) : getFileURL(img[1])}
             alt="img-product"
+            width={360}
+            height={500}
           />
           <BayButton id={id || 0} />
         </div>
