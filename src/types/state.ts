@@ -1,5 +1,10 @@
 import { sizeT } from "./product";
 
+export interface defItemT {
+  id: number;
+  name: string;
+}
+
 export interface StoreState {
   propertys: number[];
   updatePropertys: (ids: number[]) => void;
@@ -18,6 +23,9 @@ export interface globalStateT {
 
   basketItems: { id: number; size: sizeT }[];
   setBasketItems: (obj: { id: number; size: sizeT }[]) => void;
+
+  type: defItemT[];
+  setType: (type: defItemT[]) => void;
 
   setRemuveSearch: (item: string) => void;
   setClearSearch: () => void;
