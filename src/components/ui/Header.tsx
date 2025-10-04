@@ -28,7 +28,7 @@ export default function Header() {
     try {
       const res = await GetTypeREQ({});
 
-      setType(res.data);
+      setType(res.data.reverse());
     } catch (e) {
       console.error(e);
     }
