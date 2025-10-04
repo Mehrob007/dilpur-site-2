@@ -15,12 +15,24 @@ import BasketItems from "@/modules/basket/BasketItems";
 import SubHeader from "./SubHeader";
 import { defaultSubHeaderT } from "@/types/def";
 import { useGlobalState } from "@/store/globalState";
+import { GetTypeREQ } from "@/api/type/type";
 
 export default function Header() {
-  const { setOpenModalKey, checkKeyModal, openModalKey } = useGlobalState();
+  const { setOpenModalKey, checkKeyModal, openModalKey, type, setType } =
+    useGlobalState();
   const [openNav, setOpenNav] = useState<defaultSubHeaderT>(defaultSubHeader);
   const pathName = usePathname();
   const [isHovered, setIsHovered] = useState<number>(0);
+
+  const getType = async () => {
+    try {
+      const res = await GetTypeREQ({});
+
+      setType(res.data);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   useEffect(() => {
     setOpenNav(defaultSubHeader);
@@ -30,8 +42,11 @@ export default function Header() {
       setOpenModalKey("");
     }
   }, [openNav.open]);
+  useEffect(() => {
+    getType();
+  }, []);
 
-  console.log("path", "/" + pathName?.split("/")?.[1]);
+  console.log("type", type);
 
   return (
     <div className="header">
