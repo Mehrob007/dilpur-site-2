@@ -12,7 +12,6 @@ import { GetProductREQ } from "@/api/product/product";
 export default function ProductItems({
   title,
   type = null,
-  getURl,
   Limit = 21,
   pagination = false,
   TypeIds,
