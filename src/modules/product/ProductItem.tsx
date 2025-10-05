@@ -9,6 +9,7 @@ import BayButton from "@/components/ui/BayButton";
 import ProductDetails from "@/components/ui/ProductDetails";
 import { useRouter } from "next/navigation";
 import { getFileURL } from "@/utils/getFileURL";
+import { GetProductREQ } from "@/api/product/product";
 
 export default function ProductItem({
   img,
@@ -23,6 +24,8 @@ export default function ProductItem({
   const router = useRouter();
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const { setProperty, deleteProperty } = useStore();
+
+  
 
   console.table({
     img: img,
