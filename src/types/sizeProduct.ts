@@ -1,7 +1,7 @@
-import { sizeT } from "./product";
+import { defDataT, sizeT } from "./product";
 
 export interface SizesProductT {
-  sizes: sizeT[];
+  sizes: defDataT[];
   value?: sizeT;
   onChange: (size: sizeT) => void;
 }
