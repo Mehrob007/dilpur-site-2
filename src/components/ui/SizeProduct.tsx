@@ -8,14 +8,11 @@ export default function SizesProduct({
   value,
   onChange,
 }: SizesProductT) {
-
-
   console.log(value);
 
   useEffect(() => {
     onChange(sizes?.[0]);
   }, []);
-
 
   return (
     <div className="details-product">
