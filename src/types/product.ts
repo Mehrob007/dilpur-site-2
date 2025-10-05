@@ -7,7 +7,6 @@ export interface TypesProductHeaderT {
 
 export interface ProductItemsT extends TypesProductHeaderT {
   title: string;
-  getURl: string;
   Limit?: number;
   pagination?: boolean;
   TypeIds?: number[]
