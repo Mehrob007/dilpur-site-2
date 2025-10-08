@@ -17,6 +17,7 @@ export const GetProductREQ = async ({
   TypeIds,
   SizeIds,
   CategoriesIds,
+  SeriesId,
 }: {
   Limit?: number;
   Page?: number;
@@ -25,6 +26,7 @@ export const GetProductREQ = async ({
   TypeIds?: number[];
   SizeIds?: number[];
   CategoriesIds?: number[];
+  SeriesId?: number;
 }) => {
   try {
     const productTypeIds = arrayParams(TypeIds, "productTypeIds");
@@ -37,11 +39,21 @@ export const GetProductREQ = async ({
         Page: Page,
         Id: Id,
         Name: Name,
+        SeriesId: SeriesId,
         ...productTypeIds,
         ...sizeIds,
         ...categoriesIds,
       },
     });
+    return res.data;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const GetProductByIdREQ = async ({ id }: { id?: number }) => {
+  try {
+    const res = await apiClient(`products/template/${id}`);
     return res.data;
   } catch (e) {
     console.error(e);
