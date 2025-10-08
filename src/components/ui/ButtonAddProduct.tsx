@@ -7,7 +7,7 @@ import { ButtonAddProductT } from "@/types/buttonAddProduct";
 
 export default function ButtonAddProduct({ id, onClick }: ButtonAddProductT) {
   const { propertys, setProperty, deleteProperty } = useStore();
-  console.log("propertys", propertys);
+  // console.log("propertys", propertys);
 
   return (
     <div className="button-add-product">
