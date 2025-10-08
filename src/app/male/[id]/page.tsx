@@ -1,5 +1,5 @@
 "use client";
-import { GetProductREQ } from "@/api/product/product";
+import { GetProductByIdREQ } from "@/api/product/product";
 import Description from "@/components/element/Description";
 import HiddenDescription from "@/components/element/HiddenDescription";
 import ButtonAddProduct from "@/components/ui/ButtonAddProduct";
@@ -20,33 +20,56 @@ export default function Product() {
   const [data, setData] = useState<ProductItemT | null>(null);
   const [sizes, setSizes] = useState<defDataT[] | null>(null);
   const [selectSize, setSelectSize] = useState<sizeT>();
-  const { setBasketItems } = useGlobalState();
+  const { setBasketItems, basketItems } = useGlobalState();
 
   const addProdductToBasket = ({ id, size }: { id: number; size: sizeT }) => {
-    const basketIds = JSON.parse(localStorage.getItem("basketIds") || "[]");
-    if (basketIds?.[0]) {
+    const basketIds: {
+      id: number;
+      size: sizeT;
+      count: number;
+    }[] = JSON.parse(localStorage.getItem("basketIds") || "[]");
+    if (basketIds?.find((e) => e.id === id)) {
       localStorage.setItem(
         "basketIds",
-        JSON.stringify([...basketIds, { id, size }])
+        JSON.stringify(
+          basketIds.map((e) => {
+            if (e.id === id) {
+              return { ...e, count: e.count + 1 };
+            } else {
+              return e;
+            }
+          })
+        )
       );
-      setBasketItems([...basketIds, { id, size }]);
+      setBasketItems(
+        basketIds.map((e) => {
+          if (e.id === id) {
+            return { ...e, count: e.count + 1 };
+          } else {
+            return e;
+          }
+        })
+      );
     } else {
-      localStorage.setItem("basketIds", JSON.stringify([{ id, size }]));
-      setBasketItems([{ id, size }]);
+      localStorage.setItem(
+        "basketIds",
+        JSON.stringify([...basketIds, { id, size, count: 1 }])
+      );
+      setBasketItems([...basketIds, { id, size, count: 1 }]);
     }
   };
 
   const getData = async () => {
     if (!id) return;
     try {
-      const res = await GetProductREQ({
-        Id: +id,
+      const res = await GetProductByIdREQ({
+        id: +id,
       });
-      const data = res.data?.[0];
-
+      const data = res?.data;
+      // console.log("idProductData", data);
       setData({
         id: data?.id,
-        img: data?.fileNames,
+        img: data?.images,
         title: data?.brand?.name,
         subTitle: data?.name,
         price: data?.cost,
@@ -55,6 +78,9 @@ export default function Product() {
         details: null,
         property: false,
         colors: [""],
+        colorProduct: data?.color?.name,
+        description: data?.description,
+        structure: data?.structure,
       });
       setSizes(data?.sizes);
     } catch (e) {
@@ -62,11 +88,38 @@ export default function Product() {
     }
   };
 
+  // const getSeriesId = async () => {
+  //   if (!id) return;
+  //   try {
+  //     const res = await GetProductByIdREQ({
+  //       SeriesId: +id,
+  //     });
+  //     const data = res?.data;
+  //     console.log("idProductData", data);
+  //     // setData({
+  //     //   id: data?.id,
+  //     //   img: data?.fileNames,
+  //     //   title: data?.brand?.name,
+  //     //   subTitle: data?.name,
+  //     //   price: data?.cost,
+  //     //   discount: data?.preCost,
+  //     //   article: data?.code,
+  //     //   details: null,
+  //     //   property: false,
+  //     //   colors: [""],
+  //     //   colorProduct: data?.color?.name,
+  //     //   description: data?.description,
+  //     //   structure: data?.structure,
+  //     // });
+  //     setSizes(data?.sizes);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
   useEffect(() => {
     getData();
   }, []);
-
-  console.log("idProduct", id);
 
   if (!data) return null;
 
@@ -79,9 +132,10 @@ export default function Product() {
     discount,
     article,
     details,
-    property,
     colors,
+    colorProduct,
   } = data;
+  console.log("basketItems", basketItems);
   return (
     <div className="product-page">
       <main className="max-width">
@@ -102,7 +156,11 @@ export default function Product() {
           <div className="product-page-header">
             <h1>{title}</h1>
             <h2>{subTitle}</h2>
-            <p>Артикул: {article}</p>
+
+            <div>
+              <p>Артикул: {article}</p> <span>|</span>
+              <h3>Цвет: {colorProduct || ""}</h3>
+            </div>
           </div>
           <div className="product-item-price">
             {discount ? (
@@ -114,7 +172,7 @@ export default function Product() {
               <div className="price">{price} c.</div>
             )}
           </div>
-          {colors && <ColorProduct colors={colors} />}
+          {img[0] && <ColorProduct colors={[img[0]]} />}
           {sizes && (
             <SizesProduct
               sizes={sizes}
@@ -125,23 +183,19 @@ export default function Product() {
           {id && (
             <ButtonAddProduct
               onClick={() =>
-                selectSize && addProdductToBasket({ id: +id, size: selectSize })
+                addProdductToBasket({
+                  id: +id,
+                  size: selectSize as sizeT,
+                })
               }
               id={+id}
             />
           )}
           <Description
             title="Описание"
-            description={`Стильный пиджак Lord Maul песочного \n
-оттенка из натурального льна и хлопка`}
+            description={data?.description as string}
           />
-          <Description
-            title="Состав"
-            description={`Лён — 70%\n
-Хлопок — 30%\n
-Вискоза — 100%\n
-Полиэстер (нити строчки) — 5%`}
-          />
+          <Description title="Состав" description={data?.structure as string} />
           <HiddenDescription
             title="Доставка и возврат"
             description={`В Душанбе доставка занимает от нескольких часов, по \n Таджикистану — от нескольких дней.  Вы можете вернуть \n товар, лично посетив наш магазин, предварительно \n согласовав возврат  с нами по телефону. \n \n
