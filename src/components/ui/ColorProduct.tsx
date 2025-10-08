@@ -1,9 +1,9 @@
 import { ColorProductT } from "@/types/colorProduct";
+import { getFileURL } from "@/utils/getFileURL";
 import Image from "next/image";
 import React from "react";
 
 export default function ColorProduct({ colors }: ColorProductT) {
-  
   return (
     <div className="details-product">
       <h1>Другие цвета</h1>
@@ -11,7 +11,7 @@ export default function ColorProduct({ colors }: ColorProductT) {
         {colors.map((e, i) => (
           <Image
             key={i}
-            src={e}
+            src={getFileURL(e as string)}
             alt={"color-product-img"}
             width={82.5}
             height={127}
