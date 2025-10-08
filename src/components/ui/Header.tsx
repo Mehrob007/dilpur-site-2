@@ -46,7 +46,7 @@ export default function Header() {
     getType();
   }, []);
 
-  console.log("type", type);
+  // console.log("type", type);
 
   return (
     <div className="header">

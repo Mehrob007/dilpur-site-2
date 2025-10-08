@@ -76,7 +76,7 @@
   font-weight: 500;
   font-style: Medium;
   font-size: 15px;
-  line-height: 60%;
+  line-height: 100%;
   letter-spacing: 0%;
   white-space: pre-line;
   color: #8f8f8f;
@@ -419,6 +419,8 @@
 .header .header-main .header-content > div img {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .header .header-main .header-content .header-content-right {
   height: 100%;
@@ -1131,7 +1133,12 @@
   color: #181818;
   height: 12px;
 }
-.product-page > main .product-page-header p {
+.product-page > main .product-page-header div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.product-page > main .product-page-header div p {
   font-family: Gilroy;
   font-weight: 500;
   font-style: Medium;
@@ -1140,6 +1147,20 @@
   letter-spacing: 0%;
   color: #8f8f8f;
   height: 10px;
+}
+.product-page > main .product-page-header div h3 {
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 15px;
+  height: 10px;
+  leading-trim: CAP_HEIGHT;
+  line-height: 80%;
+  letter-spacing: 0%;
+  text-align: center;
+}
+.product-page > main .product-page-header div span {
+  margin-top: 2px;
 }
 .product-page > main .product-item-price div {
   font-family: Gilroy;

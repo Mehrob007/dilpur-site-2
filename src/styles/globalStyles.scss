@@ -85,7 +85,7 @@ $grey-color-select: #e5e5e5;
     font-weight: 500;
     font-style: Medium;
     font-size: 15px;
-    line-height: 60%;
+    line-height: 100%;
     letter-spacing: 0%;
     white-space: pre-line;
     color: $bg-color-new;
@@ -443,6 +443,7 @@ $grey-color-select: #e5e5e5;
         img {
           cursor: pointer;
           transition: all 0.2s ease-in-out;
+          object-fit: cover;
         }
       }
       .header-content-right {
@@ -1184,15 +1185,34 @@ $grey-color-select: #e5e5e5;
         color: $black-color;
         height: 12px;
       }
-      p {
-        font-family: Gilroy;
-        font-weight: 500;
-        font-style: Medium;
-        font-size: 15px;
-        line-height: 80%;
-        letter-spacing: 0%;
-        color: $bg-color-new;
-        height: 10px;
+      div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        p {
+          font-family: Gilroy;
+          font-weight: 500;
+          font-style: Medium;
+          font-size: 15px;
+          line-height: 80%;
+          letter-spacing: 0%;
+          color: $bg-color-new;
+          height: 10px;
+        }
+        h3 {
+          font-family: Gilroy;
+          font-weight: 500;
+          font-style: Medium;
+          font-size: 15px;
+          height: 10px;
+          leading-trim: CAP_HEIGHT;
+          line-height: 80%;
+          letter-spacing: 0%;
+          text-align: center;
+        }
+        span {
+          margin-top: 2px;
+        }
       }
     }
     .product-item-price {

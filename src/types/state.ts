@@ -21,8 +21,8 @@ export interface globalStateT {
   searchArr: searchArrT[];
   setSearchArr: (obj: searchArrT) => void;
 
-  basketItems: { id: number; size: sizeT }[];
-  setBasketItems: (obj: { id: number; size: sizeT }[]) => void;
+  basketItems: { id: number; size: sizeT; count: number }[];
+  setBasketItems: (obj: { id: number; size: sizeT; count: number }[]) => void;
 
   type: defItemT[];
   setType: (type: defItemT[]) => void;

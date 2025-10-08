@@ -18,7 +18,7 @@ export default function OrderForm() {
     // }
   }, []);
 
-  console.log("basketItems", basketItems);
+  // console.log("basketItems", basketItems);
 
   return (
     <div className="form-order-main">

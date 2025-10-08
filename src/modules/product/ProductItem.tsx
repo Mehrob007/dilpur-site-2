@@ -7,7 +7,7 @@ import PropertyOn from "../../../public/icons/PropertyOn.svg";
 import { useStore } from "@/store/globalState";
 import BayButton from "@/components/ui/BayButton";
 import ProductDetails from "@/components/ui/ProductDetails";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { getFileURL } from "@/utils/getFileURL";
 import { GetProductREQ } from "@/api/product/product";
 
@@ -24,19 +24,18 @@ export default function ProductItem({
   const router = useRouter();
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const { setProperty, deleteProperty } = useStore();
+  const pathName = usePathname();
 
-  
-
-  console.table({
-    img: img,
-    title: title,
-    subTitle: subTitle,
-    price: price,
-    discount: discount,
-    details: details,
-    property: property,
-    id: id,
-  });
+  // console.table({
+  //   img: img,
+  //   title: title,
+  //   subTitle: subTitle,
+  //   price: price,
+  //   discount: discount,
+  //   details: details,
+  //   property: property,
+  //   id: id,
+  // });
 
   return (
     <div className="product-item">
@@ -47,7 +46,7 @@ export default function ProductItem({
           onMouseLeave={() => setIsHovered(false)}
         >
           <Image
-            onClick={() => router.push("/male/" + id)}
+            onClick={() => router.push(`/${pathName.split("/")[1]}/` + id)}
             className="img-product"
             src={!isHovered ? getFileURL(img[0]) : getFileURL(img[1])}
             alt="img-product"
@@ -90,7 +89,9 @@ export default function ProductItem({
       </div>
       <div className="product-item-info">
         <div className="product-item-text">
-          <h1 onClick={() => router.push("/male/" + id)}>{title}</h1>
+          <h1 onClick={() => router.push(`/${pathName.split("/")[1]}/` + id)}>
+            {title}
+          </h1>
           <p>{subTitle}</p>
         </div>
         <div className="product-item-price">

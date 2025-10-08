@@ -1,14 +1,9 @@
 import { StaticImageData } from "next/image";
+import { sizeT } from "./product";
 
 export interface BasketItemT {
-  id: number
-  title: string;
-  subTitle: string;
-  size: string;
-  color: string;
-  count: number;
-  price: number;
-  img: StaticImageData[] | string[];
-  discount?: number;
+  id: number;
+  size: sizeT;
   deleteBasketItem: (id: number) => void;
+  count: number
 }

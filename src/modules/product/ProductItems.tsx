@@ -27,7 +27,7 @@ export default function ProductItems({
   // const [propertys, setPropertys] = useState<number[] | null>(null);
   // const propertys: number[] = getKeyStorage("property");
 
-  console.log("query", { types, categorys, sizes, sorts });
+  // console.log("query", { types, categorys, sizes, sorts });
 
   const [page, setPage] = useState<number>(0);
   const [fetching, setFetching] = useState(true);

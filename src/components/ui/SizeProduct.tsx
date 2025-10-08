@@ -8,7 +8,7 @@ export default function SizesProduct({
   value,
   onChange,
 }: SizesProductT) {
-  console.log(value);
+  // console.log(value);
 
   useEffect(() => {
     onChange(sizes?.[0]);

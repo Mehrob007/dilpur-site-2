@@ -9,7 +9,7 @@ export interface ProductItemsT extends TypesProductHeaderT {
   title: string;
   Limit?: number;
   pagination?: boolean;
-  TypeIds?: number[]
+  TypeIds?: number[];
 }
 export interface detailsT {
   details?: null | { discount: number } | "new";
@@ -25,13 +25,18 @@ export interface ProductItemT extends detailsT {
   property?: boolean;
   compound?: string[];
   description?: string;
+  structure?: string;
   colors?: string[] | StaticImageData[];
   article?: string;
+  colorProduct?: string;
   sizeIds?: number[];
   size?: sizeT;
+  color?: string;
+  count?: 0;
 }
 export interface sizeT {
   name: string;
+  id?: number;
 }
 
 export interface ItemT {
