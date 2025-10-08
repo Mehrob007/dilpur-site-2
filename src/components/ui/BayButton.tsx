@@ -1,28 +1,69 @@
 "use client";
 import React, { ReactElement, useEffect, useState } from "react";
-import { sizes } from "@/constants/product";
 import checkCircle from "../../../public/icons/checkCircle.svg";
 import Image from "next/image";
 import { sizeT } from "@/types/product";
 import { useGlobalState } from "@/store/globalState";
+import { GetProductByIdREQ } from "@/api/product/product";
 
 export default function BayButton({ id }: { id: number }) {
   const [stateStage, setStateStage] = useState<number>(1);
   const { setBasketItems } = useGlobalState();
 
+  const [sizes, setSizes] = useState<sizeT[]>();
+
   const addProdductToBasket = ({ id, size }: { id: number; size: sizeT }) => {
-    const basketIds = JSON.parse(localStorage.getItem("basketIds") || "[]");
-    if (basketIds?.[0]) {
+    const basketIds: {
+      id: number;
+      size: sizeT;
+      count: number;
+    }[] = JSON.parse(localStorage.getItem("basketIds") || "[]");
+    if (basketIds?.find((e) => e.id === id)) {
       localStorage.setItem(
         "basketIds",
-        JSON.stringify([...basketIds, { id, size }])
+        JSON.stringify(
+          basketIds.map((e) => {
+            if (e.id === id) {
+              return { ...e, count: e.count + 1 };
+            } else {
+              return e;
+            }
+          })
+        )
       );
-      setBasketItems([...basketIds, { id, size }]);
+      setBasketItems(
+        basketIds.map((e) => {
+          if (e.id === id) {
+            return { ...e, count: e.count + 1 };
+          } else {
+            return e;
+          }
+        })
+      );
     } else {
-      localStorage.setItem("basketIds", JSON.stringify([{ id, size }]));
-      setBasketItems([{ id, size }]);
+      localStorage.setItem(
+        "basketIds",
+        JSON.stringify([...basketIds, { id, size, count: 1 }])
+      );
+      setBasketItems([...basketIds, { id, size, count: 1 }]);
     }
   };
+  const getDataBasket = async (id: number) => {
+    try {
+      const res = await GetProductByIdREQ({
+        id: id,
+      });
+      console.log("parseData", res?.data);
+      const data = res?.data;
+      setSizes(data?.sizes);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    getDataBasket(id);
+  }, []);
 
   const stage: { [key: number]: ReactElement } = {
     1: (
@@ -32,17 +73,18 @@ export default function BayButton({ id }: { id: number }) {
     ),
     2: (
       <div className={"stage-size"}>
-        {sizes.map((e, i) => (
-          <div
-            key={i}
-            onClick={() => {
-              addProdductToBasket({ id, size: e });
-              setStateStage(3);
-            }}
-          >
-            {e.name}
-          </div>
-        ))}
+        {sizes &&
+          sizes.map((e, i) => (
+            <div
+              key={i}
+              onClick={() => {
+                addProdductToBasket({ id, size: e });
+                setStateStage(3);
+              }}
+            >
+              {e.name}
+            </div>
+          ))}
       </div>
     ),
     3: (
