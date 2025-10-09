@@ -33,3 +33,7 @@ export interface globalStateT {
   setOpenModalKey: (key: string) => void;
   checkKeyModal: (key: string) => boolean;
 }
+
+export interface dataT {
+  [key: string]: string | number | FileList | string[] | File;
+}
