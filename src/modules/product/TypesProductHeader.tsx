@@ -1,22 +1,64 @@
 "use client";
 import SelectType from "@/components/element/SelectType";
-import { optionSort, optionTypes } from "@/constants/select";
+import { optionSort } from "@/constants/select";
 import { useGlobalState } from "@/store/globalState";
-import { TypesProductHeaderT } from "@/types/product";
+import { sizeT, TypesProductHeaderT } from "@/types/product";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import arrow1Icon from "@/../public/icons/arrow-1.svg";
+import { GetSizeREQ } from "@/api/product/size";
+import { GetTypeREQ } from "@/api/type/type";
+import { GetCategoryREQ } from "@/api/product/category";
 
 export default function TypesProductHeader({ type }: TypesProductHeaderT) {
   const pathName = usePathname();
   const { setClearSearch } = useGlobalState();
   const router = useRouter();
+  const [size, setSize] = useState<sizeT[] | []>([]);
+  const [types, setTypes] = useState<sizeT[] | []>([]);
+  const [category, setCategory] = useState<sizeT[] | []>([]);
+
+  const getDataSize = async () => {
+    try {
+      const res = await GetSizeREQ({});
+      setSize(res.data);
+    } catch (e) {
+      console.log(e);
+      setSize([]);
+    }
+  };
+  const getDataType = async () => {
+    try {
+      const res = await GetTypeREQ({});
+      setTypes(res.data);
+    } catch (e) {
+      console.log(e);
+      setTypes([]);
+    }
+  };
+
+  const getDataCategory = async () => {
+    try {
+      const res = await GetCategoryREQ({});
+      setCategory(res.data);
+    } catch (e) {
+      console.log(e);
+      setCategory([]);
+    }
+  };
+
+  useEffect(() => {
+    getDataSize();
+    getDataType();
+    getDataCategory();
+  }, []);
+
   if (type === "filter") {
     return (
       <div className="types-product-header filter">
         <SelectType
-          options={optionTypes}
+          options={types.map((e) => ({ label: e.name, value: String(e.id) }))}
           placeholder="Тип"
           style={{}}
           className="types-select"
@@ -24,13 +66,16 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
         />
         <SelectType
           id="category-filter"
-          options={optionTypes}
+          options={category.map((e) => ({
+            label: e.name,
+            value: String(e.id),
+          }))}
           placeholder="Категория"
           className="categorys-select"
         />
         <SelectType
           id="size-filter"
-          options={optionTypes}
+          options={size.map((e) => ({ label: e.name, value: String(e.id) }))}
           placeholder="Размер"
           className="sizes-select"
         />
