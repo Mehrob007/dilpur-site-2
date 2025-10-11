@@ -13,4 +13,5 @@ export interface SelectT {
   onChange?: (value: string) => void;
   error?: { [key: string]: string };
   style?: { [key: string]: string };
+  toggle?: boolean
 }

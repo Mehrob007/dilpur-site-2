@@ -6,7 +6,7 @@ import PartnerStores from "@/components/ui/PartnerStores";
 export default function Catalog() {
   return (
     <div className="catalog">
-      <ProductItems title={"Каталог"} type={"filter"} getURl={""} />
+      <ProductItems title={"Каталог"} type={"filter"} />
       <GiftСard />
       <PartnerStores />
     </div>

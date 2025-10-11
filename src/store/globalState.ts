@@ -43,7 +43,16 @@ export const useGlobalState = create<globalStateT>((set, get) => ({
     set((state) => ({
       searchArr: state.searchArr.filter((e) => e.value !== field),
     })),
-  setClearSearch: () => set({ searchArr: [] }),
+  setClearSearch: () => {
+    set({ searchArr: [] });
+    const params = new URLSearchParams(window.location.search);
+    params.delete("sizes");
+    params.delete("types");
+    params.delete("categorys");
+    params.delete("sorts");
+    const newPath = `${window.location.pathname}?${params.toString()}`;
+    window.history.replaceState({}, "", newPath);
+  },
   openModalKey: "",
   setOpenModalKey: (key) =>
     set((state) => {

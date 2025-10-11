@@ -14,6 +14,7 @@ export default function SelectType({
   style,
   checkBox = true,
   className,
+  toggle = true,
 }: SelectT) {
   const { setSearchArr, setRemuveSearch, setOpenModalKey, checkKeyModal } =
     useGlobalState();
@@ -37,6 +38,15 @@ export default function SelectType({
     } else {
       updatedValues = [...currentValues, value];
     }
+    params.delete(key);
+    updatedValues.forEach((v) => params.append(key, v));
+
+    router.push(`?${params.toString()}`);
+  };
+
+  const addParam = (key: string, value: string) => {
+    const updatedValues: string[] = [value];
+
     params.delete(key);
     updatedValues.forEach((v) => params.append(key, v));
 
@@ -80,7 +90,11 @@ export default function SelectType({
               if (!currentValues.includes(e.value))
                 setSearchArr(searchId(e.value));
               else setRemuveSearch(e.value);
-              toggleParam(key, e.value);
+              if (toggle) {
+                toggleParam(key, e.value);
+              } else {
+                addParam(key, e.value);
+              }
               if (!checkBox) setOpenModalKey(className as string);
               // setValue([e.value as string]);
               // setOpenModalKey(false);

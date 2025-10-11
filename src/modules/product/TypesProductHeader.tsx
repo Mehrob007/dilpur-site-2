@@ -85,6 +85,7 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
           options={optionSort}
           placeholder="Сортировать по"
           className="sorts-select"
+          toggle={false}
         />
         <p onClick={() => setClearSearch()}>Сбросить фильтры</p>
       </div>

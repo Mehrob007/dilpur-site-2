@@ -20,6 +20,6 @@ export const optionTypes = [
   { label: "Шорты", value: "6" },
 ];
 export const optionSort = [
-  { label: "По возрастанию цены", value: "1" },
-  { label: "По убыванию цены", value: "2" }
-]
+  { label: "По возрастанию цены", value: "asc" },
+  { label: "По убыванию цены", value: "desс" },
+];

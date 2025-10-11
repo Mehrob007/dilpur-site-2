@@ -55,7 +55,7 @@ export default function ProductItems({
         TypeIds: types.map((e) => +e),
         CategoriesIds: categorys.map((e) => +e),
         SizeIds: sizes.map((e) => +e),
-        // Sorts: sorts,
+        SortType: sorts || "",
       });
       if (reset) {
         setData(res.data);

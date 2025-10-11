@@ -18,6 +18,7 @@ export const GetProductREQ = async ({
   SizeIds,
   CategoriesIds,
   SeriesId,
+  SortType,
 }: {
   Limit?: number;
   Page?: number;
@@ -27,6 +28,7 @@ export const GetProductREQ = async ({
   SizeIds?: number[];
   CategoriesIds?: number[];
   SeriesId?: number;
+  SortType?: string;
 }) => {
   try {
     const productTypeIds = arrayParams(TypeIds, "productTypeIds");
@@ -40,6 +42,8 @@ export const GetProductREQ = async ({
         Id: Id,
         Name: Name,
         SeriesId: SeriesId,
+        SortType: SortType,
+        ColumnName: "Cost",
         ...productTypeIds,
         ...sizeIds,
         ...categoriesIds,
