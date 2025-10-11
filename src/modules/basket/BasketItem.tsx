@@ -11,6 +11,7 @@ export default function BasketItem({
   id,
   size,
   count,
+  order = false,
 }: BasketItemT) {
   const [data, setData] = useState<ProductItemT>();
   const { setBasketItems } = useGlobalState();
@@ -95,6 +96,7 @@ export default function BasketItem({
         discount: data?.preCost,
         price: data?.cost,
         img: data?.images,
+        article: data?.code,
         size,
       });
     } catch (e) {
@@ -118,6 +120,7 @@ export default function BasketItem({
         <div>
           <h1>{data?.title}</h1>
           <p>{data?.subTitle}</p>
+          {order && <span>{data?.article}</span>}
         </div>
         <div>
           <h2>
@@ -125,11 +128,13 @@ export default function BasketItem({
             <label>{data?.color}</label> | <label>{count} шт.</label>
           </h2>
         </div>
-        <nav>
-          <button onClick={() => minuseCount({ id })}>-</button>
-          <h2>{count}</h2>
-          <button onClick={() => plusCount({ id })}>+</button>
-        </nav>
+        {!order && (
+          <nav>
+            <button onClick={() => minuseCount({ id })}>-</button>
+            <h2>{count}</h2>
+            <button onClick={() => plusCount({ id })}>+</button>
+          </nav>
+        )}
         <div>
           <div>
             <div className="product-item-price">
@@ -142,15 +147,24 @@ export default function BasketItem({
                 <div className="price">{data?.price || 0 * count} c.</div>
               )}
             </div>
-            <Image
-              onClick={() => {
-                deleteBasketItem(id);
-              }}
-              src={trash}
-              alt="images"
-              width={24}
-              height={24}
-            />
+            {order && (
+              <nav>
+                <button onClick={() => minuseCount({ id })}>-</button>
+                <h4>{count}</h4>
+                <button onClick={() => plusCount({ id })}>+</button>
+              </nav>
+            )}
+            {
+              <Image
+                onClick={() => {
+                  deleteBasketItem(id);
+                }}
+                src={trash}
+                alt="images"
+                width={24}
+                height={24}
+              />
+            }
           </div>
         </div>
       </div>

@@ -59,5 +59,5 @@ export const useGlobalState = create<globalStateT>((set, get) => ({
       if (state.openModalKey !== key) return { openModalKey: key };
       else return { openModalKey: "" };
     }),
-  checkKeyModal: (key) => key === get().openModalKey,
+  checkKeyModal: (key) => key === get().openModalKey, 
 }));

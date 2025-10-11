@@ -11,9 +11,11 @@ import { GetProductByIdREQ } from "@/api/product/product";
 export default function BasketItems({
   open,
   onClose,
+  order = false,
 }: {
   open: boolean;
   onClose: () => void;
+  order?: boolean;
 }) {
   const { basketItems, setBasketItems } = useGlobalState();
   const route = useRouter();
@@ -51,11 +53,12 @@ export default function BasketItems({
   return (
     <>
       {/* <span className="bg-basket"></span> */}
-      <div className="basket">
+      <div className={`${order ? "basket-order" : "basket"}`}>
         <div className="basket-items">
           {basketItems?.length ? (
             basketItems?.map((prev, i) => (
               <BasketItem
+                order={order}
                 id={prev.id as number}
                 size={prev.size}
                 count={prev.count}
@@ -76,7 +79,7 @@ export default function BasketItems({
             </div>
           )}
         </div>
-        <button
+       {!order && <button
           className=""
           onClick={() => {
             if (basketItems?.length) {
@@ -88,7 +91,7 @@ export default function BasketItems({
           }}
         >
           {basketItems?.length ? "Перейти к оформлению" : "Перейти к покупкам"}
-        </button>
+        </button>}
       </div>
     </>
   );

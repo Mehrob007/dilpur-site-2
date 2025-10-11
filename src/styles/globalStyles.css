@@ -664,6 +664,10 @@
   display: flex;
   gap: 21px;
 }
+.basket .basket-items .basket-item > img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 .basket .basket-items .basket-item > div {
   padding: 14.5px 0;
   height: 144px;
@@ -757,6 +761,162 @@
   filter: brightness(30%);
 }
 .basket .product-item-price div {
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 19px;
+  leading-trim: CAP_HEIGHT;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.basket-order {
+  background-color: #ffffff;
+  padding: 20px;
+  width: 600px;
+  border: 1px solid #e5e5e5;
+  background-color: #fff;
+  max-height: calc(100vh - 200px);
+  overflow: auto;
+}
+.basket-order > button {
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 17px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #ffffff;
+  background-color: #8f8f8f;
+  width: 100%;
+  height: 50px;
+  border: none;
+  margin-top: 25px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.basket-order > button:hover {
+  background-color: #181818;
+}
+.basket-order .basket-items {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.basket-order .basket-items .basket-item {
+  display: flex;
+  gap: 21px;
+}
+.basket-order .basket-items .basket-item > img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 149px;
+  height: 208px;
+}
+.basket-order .basket-items .basket-item > div {
+  padding: 22.18px 0;
+  height: 163px;
+}
+.basket-order .basket-items .basket-item > div {
+  width: 391px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+.basket-order .basket-items .basket-item > div img {
+  position: absolute;
+  top: 22.18px;
+  right: 0;
+  cursor: pointer;
+}
+.basket-order .basket-items .basket-item > div .crossed {
+  color: #8f8f8f !important;
+}
+.basket-order .basket-items .basket-item > div .crossed::after {
+  background-color: #8f8f8f !important;
+}
+.basket-order .basket-items .basket-item > div nav {
+  display: flex;
+  gap: 17px;
+  align-items: center;
+  height: 24px;
+}
+.basket-order .basket-items .basket-item > div nav > button {
+  border: none;
+  background-color: transparent;
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 18px;
+  cursor: pointer;
+  letter-spacing: 0%;
+  color: #181818;
+}
+.basket-order .basket-items .basket-item > div h1 {
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 17px;
+  line-height: 80%;
+  height: 12px;
+  letter-spacing: 0%;
+  color: #181818;
+}
+.basket-order .basket-items .basket-item > div p {
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 17px;
+  line-height: 80%;
+  height: 12px;
+  letter-spacing: 0%;
+  margin-top: 15px;
+}
+.basket-order .basket-items .basket-item > div span {
+  display: block;
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 15px;
+  line-height: 80%;
+  height: 10px;
+  letter-spacing: 0%;
+  color: #8f8f8f;
+  margin-top: 15px;
+}
+.basket-order .basket-items .basket-item > div h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 15px;
+  line-height: 80%;
+  height: 13.8px;
+  letter-spacing: 0%;
+  margin-top: 15px;
+}
+.basket-order .basket-items .basket-item > div h2 label {
+  margin-top: 3px;
+}
+.basket-order .basket-items .basket-item > div h2 > span {
+  color: #8f8f8f;
+}
+.basket-order .basket-items .basket-item > div > div > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 13px;
+  margin-top: 15px;
+}
+.basket-order .basket-items .basket-item > div > div > div > img:hover {
+  filter: brightness(30%);
+}
+.basket-order .product-item-price div {
   font-family: Gilroy;
   font-weight: 500;
   font-style: Medium;

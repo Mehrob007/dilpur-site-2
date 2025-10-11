@@ -5,5 +5,6 @@ export interface BasketItemT {
   id: number;
   size: sizeT;
   deleteBasketItem: (id: number) => void;
-  count: number
+  count: number;
+  order?: boolean;
 }
