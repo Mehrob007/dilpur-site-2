@@ -168,7 +168,7 @@ export default function OrderForm() {
         <main>
           <h1>Состав заказа</h1>
           <nav>
-            {/* <BasketItems open={true} onClose={() => {}} /> */}
+            <BasketItems order={true} open={true} onClose={() => {}} />
           </nav>
         </main>
       </div>
