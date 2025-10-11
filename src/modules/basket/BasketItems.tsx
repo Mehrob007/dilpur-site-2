@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import BasketItem from "./BasketItem";
 import { useGlobalState } from "@/store/globalState";
 import { sizeT } from "@/types/product";
