@@ -2,11 +2,10 @@
 import React, { useEffect, useState } from "react";
 import BasketItem from "./BasketItem";
 import { useGlobalState } from "@/store/globalState";
-import { ProductItemT, sizeT } from "@/types/product";
+import { sizeT } from "@/types/product";
 import shoppingBasket from "@/../public/icons/shoppingBasket.svg";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { GetProductByIdREQ } from "@/api/product/product";
 
 export default function BasketItems({
   open,
