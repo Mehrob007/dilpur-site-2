@@ -7,4 +7,5 @@ export interface BasketItemT {
   deleteBasketItem: (id: number) => void;
   count: number;
   order?: boolean;
+  getPrice: (priceItme: number) => void;
 }

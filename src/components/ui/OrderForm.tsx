@@ -18,6 +18,9 @@ export default function OrderForm() {
     // }
   }, []);
 
+  console.log("price", price);
+  
+
   // console.log("basketItems", basketItems);
 
   return (
@@ -168,7 +171,13 @@ export default function OrderForm() {
         <main>
           <h1>Состав заказа</h1>
           <nav>
-            <BasketItems order={true} open={true} onClose={() => {}} />
+            <BasketItems
+            totalPrice={price}
+              setTotalPrice={setPrice}
+              order={true}
+              open={true}
+              onClose={() => {}}
+            />
           </nav>
         </main>
       </div>

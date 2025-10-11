@@ -11,10 +11,14 @@ export default function BasketItems({
   open,
   onClose,
   order = false,
+  setTotalPrice,
+  totalPrice,
 }: {
   open: boolean;
   onClose: () => void;
   order?: boolean;
+  totalPrice?: number;
+  setTotalPrice?: (price: number) => void;
 }) {
   const { basketItems, setBasketItems } = useGlobalState();
   const route = useRouter();
@@ -27,6 +31,10 @@ export default function BasketItems({
     localStorage.setItem("basketIds", JSON.stringify(newBasketItems));
     setBasketItems(newBasketItems);
     console.log("newBasketIds", newBasketItems);
+  };
+
+  const getPrice = (priceItme: number) => {
+    setTotalPrice && setTotalPrice((totalPrice as number) + priceItme);
   };
 
   useEffect(() => {
@@ -57,6 +65,7 @@ export default function BasketItems({
           {basketItems?.length ? (
             basketItems?.map((prev, i) => (
               <BasketItem
+                getPrice={getPrice}
                 order={order}
                 id={prev.id as number}
                 size={prev.size}
@@ -78,19 +87,23 @@ export default function BasketItems({
             </div>
           )}
         </div>
-       {!order && <button
-          className=""
-          onClick={() => {
-            if (basketItems?.length) {
-              route.push("/" + pathName?.split("/")?.[1] + "/order");
-            } else {
-              route.push("/" + pathName?.split("/")?.[1] + "/catalog");
-            }
-            onClose();
-          }}
-        >
-          {basketItems?.length ? "Перейти к оформлению" : "Перейти к покупкам"}
-        </button>}
+        {!order && (
+          <button
+            className=""
+            onClick={() => {
+              if (basketItems?.length) {
+                route.push("/" + pathName?.split("/")?.[1] + "/order");
+              } else {
+                route.push("/" + pathName?.split("/")?.[1] + "/catalog");
+              }
+              onClose();
+            }}
+          >
+            {basketItems?.length
+              ? "Перейти к оформлению"
+              : "Перейти к покупкам"}
+          </button>
+        )}
       </div>
     </>
   );
