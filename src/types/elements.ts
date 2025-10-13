@@ -14,6 +14,7 @@ export interface InputT {
   onChange: (value: string) => void;
   errors?: { [key: string]: string };
   id: string;
+  type?: string;
   placeholder?: string;
   style?: { [key: string]: string };
 }
