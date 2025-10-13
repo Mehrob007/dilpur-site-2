@@ -8,4 +8,5 @@ export interface BasketItemT {
   count: number;
   order?: boolean;
   getPrice: (priceItme: number) => void;
+  setSkitka: (price: number) => void;
 }
