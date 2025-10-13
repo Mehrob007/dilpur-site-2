@@ -13,18 +13,18 @@ export default function BasketItems({
   order = false,
   setTotalPrice,
   totalPrice,
+  setSkitka,
 }: {
   open: boolean;
   onClose: () => void;
   order?: boolean;
   totalPrice?: number;
   setTotalPrice?: (price: number) => void;
+  setSkitka?: (price: number) => void;
 }) {
   const { basketItems, setBasketItems } = useGlobalState();
   const route = useRouter();
   const pathName = usePathname();
-
-  // ArrDefData.filter((_, i) => basketIds?.includes(String(i)))
 
   const deleteBasketItem = (id: number) => {
     const newBasketItems = basketItems.filter((e) => e.id !== id);
@@ -35,6 +35,10 @@ export default function BasketItems({
 
   const getPrice = (priceItme: number) => {
     setTotalPrice && setTotalPrice((totalPrice as number) + priceItme);
+  };
+
+  const getSkitka = (priceItme: number) => {
+    setSkitka && setSkitka((totalPrice as number) + priceItme);
   };
 
   useEffect(() => {
@@ -65,6 +69,7 @@ export default function BasketItems({
           {basketItems?.length ? (
             basketItems?.map((prev, i) => (
               <BasketItem
+                setSkitka={getSkitka}
                 getPrice={getPrice}
                 order={order}
                 id={prev.id as number}
