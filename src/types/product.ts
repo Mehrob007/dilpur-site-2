@@ -33,6 +33,7 @@ export interface ProductItemT extends detailsT {
   size?: sizeT;
   color?: string;
   count?: 0;
+  products?: { id: number; size: sizeT; count: number }[];
 }
 export interface sizeT {
   name: string;
