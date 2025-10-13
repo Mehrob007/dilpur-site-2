@@ -5,6 +5,18 @@ export interface defItemT {
   name: string;
 }
 
+export interface defObjT {
+  [key: string]:
+    | string
+    | number
+    | string[]
+    | number[]
+    | FileList
+    | File
+    | boolean
+    | { id: number; size: sizeT; count: number }[];
+}
+
 export interface StoreState {
   propertys: number[];
   updatePropertys: (ids: number[]) => void;
