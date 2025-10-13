@@ -4,24 +4,44 @@ import Input from "../element/Input";
 import { useFormStore } from "@/hooks/useFormStore";
 import Textarea from "../element/Textarea";
 import BasketItems from "@/modules/basket/BasketItems";
-import { redirect } from "next/navigation";
 import { useGlobalState } from "@/store/globalState";
+import { PostOrderREQ } from "@/api/product/order";
 
 export default function OrderForm() {
-  const { basketItems, setBasketItems } = useGlobalState();
+  const { basketItems } = useGlobalState();
   const [price, setPrice] = useState(0);
+  const [skitka, setSkitka] = useState(0);
+  const [count, setCount] = useState(0);
   const { data, errors, setData } = useFormStore();
 
   useEffect(() => {
-    // if (basketItems?.[0]) {
-    //   redirect("/");
-    // }
-  }, []);
+    let count = 0;
+    basketItems.forEach((e) => {
+      count += e.count;
+    });
+    setCount(count);
+  }, [basketItems]);
 
+  const onSend = async () => {
+    try {
+      const res = await PostOrderREQ({
+        data: {
+          ...data,
+          street: data.street + ", " + data.floor + ", " + data.index + ", " + data.entrance,
+          products: basketItems.map((e) => ({
+            ...e,
+            productId: e.id,
+            sizeId: e.size.id,
+          })),
+        },
+      });
+      console.log("res", res);
+    } catch (e) {
+      console.error(e);
+    }
+  };
   console.log("price", price);
-  
-
-  // console.log("basketItems", basketItems);
+  console.log("data", data);
 
   return (
     <div className="form-order-main">
@@ -31,10 +51,10 @@ export default function OrderForm() {
           <div>
             <Input
               title="Имя"
-              value={data?.Name as string}
-              onChange={(value) => setData("Name", value)}
+              value={data?.name as string}
+              onChange={(value) => setData("name", value)}
               errors={errors}
-              id="Name"
+              id="name"
               placeholder="Имя"
             />
             <Input
@@ -51,6 +71,7 @@ export default function OrderForm() {
               onChange={(value) => setData("phone", value)}
               errors={errors}
               id="phone"
+              type="phone"
               placeholder="Телефон"
             />
             <Input
@@ -59,6 +80,7 @@ export default function OrderForm() {
               onChange={(value) => setData("email", value)}
               errors={errors}
               id="email"
+              type="email"
               placeholder="Email (необязательно)"
             />
           </div>
@@ -86,18 +108,18 @@ export default function OrderForm() {
             </nav>
             <Input
               title="Подъезд"
-              value={data?.pod as string}
-              onChange={(value) => setData("pod", value)}
+              value={data?.entrance as string}
+              onChange={(value) => setData("entrance", value)}
               errors={errors}
-              id="pod"
+              id="entrance"
               placeholder="Подъезд"
             />
             <Input
               title="Этаж"
-              value={data?.etaj as string}
-              onChange={(value) => setData("etaj", value)}
+              value={data?.floor as string}
+              onChange={(value) => setData("floor", value)}
               errors={errors}
-              id="etaj"
+              id="floor"
               placeholder="Этаж"
             />
             <Input
@@ -110,10 +132,10 @@ export default function OrderForm() {
             />
             <Input
               title="Код домофона (необязательно)"
-              value={data?.code_home as string}
-              onChange={(value) => setData("code_home", value)}
+              value={data?.code as string}
+              onChange={(value) => setData("code", value)}
               errors={errors}
-              id="code_home"
+              id="code"
               placeholder="Код домофона (необязательно)"
             />
           </div>
@@ -140,13 +162,13 @@ export default function OrderForm() {
               <footer>
                 <div>
                   <label>
-                    <span>4 товара на сумму</span> <span>{price}</span>
+                    <span>{count} товара на сумму</span> <span>{price}</span>
                   </label>
                   <label>
                     <span>Доставка</span> <span>20c</span>
                   </label>
                   <label className="skid">
-                    <span>Скидка</span> <span>400c</span>
+                    <span>Скидка</span> <span>{skitka}c</span>
                   </label>
                 </div>
               </footer>
@@ -156,13 +178,16 @@ export default function OrderForm() {
           <div>
             <nav>
               <h1>
-                <span>Итого</span> <span>14 020 с.{}</span>
+                <span>Итого</span>{" "}
+                <span>
+                  {price + 20} с.{}
+                </span>
               </h1>
             </nav>
           </div>
           <div>
             <nav>
-              <button>Оформить заказ</button>
+              <button onClick={onSend}>Оформить заказ</button>
             </nav>
           </div>
         </main>
@@ -172,11 +197,12 @@ export default function OrderForm() {
           <h1>Состав заказа</h1>
           <nav>
             <BasketItems
-            totalPrice={price}
+              totalPrice={price}
               setTotalPrice={setPrice}
               order={true}
               open={true}
               onClose={() => {}}
+              setSkitka={setSkitka}
             />
           </nav>
         </main>
