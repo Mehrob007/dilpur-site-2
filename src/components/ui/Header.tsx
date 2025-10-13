@@ -18,7 +18,7 @@ import { useGlobalState } from "@/store/globalState";
 import { GetTypeREQ } from "@/api/type/type";
 
 export default function Header() {
-  const { setOpenModalKey, checkKeyModal, openModalKey, type, setType } =
+  const { setOpenModalKey, checkKeyModal, openModalKey, setType } =
     useGlobalState();
   const [openNav, setOpenNav] = useState<defaultSubHeaderT>(defaultSubHeader);
   const pathName = usePathname();
@@ -35,7 +35,8 @@ export default function Header() {
   };
 
   useEffect(() => {
-    setOpenNav(defaultSubHeader);
+    setOpenNav({ open: false, type: "navigation" });
+    setOpenModalKey("");
   }, [pathName]);
   useEffect(() => {
     if (openNav) {
