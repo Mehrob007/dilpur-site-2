@@ -78,7 +78,7 @@ export const Get1CREQ = async ({
   numenclature?: string;
 }) => {
   try {
-    const res = await apiClient("api/admin/products/template/1C", {
+    const res = await apiClient("admin/products/template/1C", {
       params: {
         Limit: Limit,
         Page: Page,
