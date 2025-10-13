@@ -13,6 +13,7 @@ export default function BasketItem({
   count,
   order = false,
   getPrice,
+  setSkitka,
 }: BasketItemT) {
   const [data, setData] = useState<ProductItemT>();
   const { setBasketItems } = useGlobalState();
@@ -111,6 +112,7 @@ export default function BasketItem({
 
   useEffect(() => {
     getPrice((data?.discount ? data?.discount : data?.price || 0) * count);
+    data?.discount && setSkitka((+data?.price - +data?.discount) * count);
   }, [data?.discount, data?.price, count]);
 
   return (
@@ -149,7 +151,9 @@ export default function BasketItem({
                   <div className="crossed">{data?.price * count} c.</div>
                 </>
               ) : (
-                <div className="price">{data?.price && data?.price * count} c.</div>
+                <div className="price">
+                  {data?.price && data?.price * count} c.
+                </div>
               )}
             </div>
             {order && (
