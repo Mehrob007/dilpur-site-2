@@ -2017,6 +2017,19 @@
   width: calc(100% - 82px);
 }
 
+.input-error > span {
+  color: #d32a2a;
+}
+.input-error > input {
+  border-color: #d32a2a;
+}
+.input-error > input::-moz-placeholder {
+  color: #d32a2a;
+}
+.input-error > input::placeholder {
+  color: #d32a2a;
+}
+
 hr {
   height: 1px;
   width: 100%;

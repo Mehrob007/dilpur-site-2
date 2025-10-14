@@ -2117,6 +2117,18 @@ $grey-color-select: #e5e5e5;
     width: calc(100% - 82px);
   }
 }
+
+.input-error {
+  > span{
+    color: $red-color;
+  }
+  > input {
+    border-color: $red-color;
+    &::placeholder{
+      color: $red-color;
+    }
+  }
+}
 hr {
   height: 1px;
   width: 100%;
