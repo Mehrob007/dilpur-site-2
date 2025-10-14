@@ -12,7 +12,7 @@ export default function OrderForm() {
   const [price, setPrice] = useState(0);
   const [skitka, setSkitka] = useState(0);
   const [count, setCount] = useState(0);
-  const { data, errors, setData } = useFormStore();
+  const { data, errors, setData, validate } = useFormStore();
 
   useEffect(() => {
     let count = 0;
@@ -23,11 +23,26 @@ export default function OrderForm() {
   }, [basketItems]);
 
   const onSend = async () => {
+    const isValid = validate({
+      name: { required: true },
+      surname: { required: true },
+      phone: { required: true },
+    });
+
+    if (!isValid) return;
     try {
       const res = await PostOrderREQ({
         data: {
           ...data,
-          street: data.street + ", " + data.floor + ", " + data.index + ", " + data.entrance,
+          surname: data.name + " " + data.surname,
+          street:
+            data.street +
+            ", " +
+            data.floor +
+            ", " +
+            data.index +
+            ", " +
+            data.entrance,
           products: basketItems.map((e) => ({
             ...e,
             productId: e.id,
