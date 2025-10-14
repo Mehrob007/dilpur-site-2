@@ -1,5 +1,5 @@
 import { InputT } from "@/types/elements";
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useState } from "react";
 import ReactInputMask from "@mona-health/react-input-mask";
 
 export default function Input({
@@ -11,6 +11,7 @@ export default function Input({
   errors,
   type = "text",
 }: InputT) {
+  const [focus, setFocus] = useState(false);
   const handleSubmit = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const cleanPhone = event.target.value.replace(/\D/g, "");
@@ -20,31 +21,34 @@ export default function Input({
   return (
     <label
       htmlFor={id}
-      className={`input ${type === "phone" ? "input-phone" : ""}`}
+      className={`input ${type === "phone" && focus ? "input-phone" : ""} ${ errors?.[id] ? "input-error" : "" }`}
     >
       {title && (
-        <span className={!value?.length ? "input-placeholder" : ""}>
-          {title}
-        </span>
+        <span className={!focus ? "input-placeholder" : ""}>{title}</span>
       )}
       {type === "phone" ? (
         <ReactInputMask
-          mask="(99) 999-99-99"
+          mask="99-999-99-99"
           maskChar="___"
           value={value}
           onChange={handleSubmit}
           type="tel"
+          title="Телефон"
           id="phone-input"
           className="form-control"
-          placeholder="(XX) XXX-XX-XX"
+          placeholder={!focus ? "Телефон" : ""}
+          onFocus={setFocus.bind(null, true)}
+          onBlur={setFocus.bind(null, false)}
           required
         />
       ) : (
         <input
+          onFocus={setFocus.bind(null, true)}
+          onBlur={setFocus.bind(null, false)}
           id={id}
           type={type}
           value={value ?? ""}
-          placeholder={placeholder}
+          placeholder={!focus ? placeholder : ""}
           onChange={(e) => onChange(e.target.value)}
         />
       )}
