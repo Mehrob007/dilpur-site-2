@@ -26,7 +26,7 @@ export default function OrderForm() {
     const isValid = validate({
       name: { required: true },
       surname: { required: true },
-      phone: { required: true },
+      phone: { required: true, message: "Неверный номер телефона", minLength: 9, },
     });
 
     if (!isValid) return;
