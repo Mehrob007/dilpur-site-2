@@ -21,10 +21,15 @@ export default function Input({
   return (
     <label
       htmlFor={id}
-      className={`input ${type === "phone" && focus ? "input-phone" : ""} ${ errors?.[id] ? "input-error" : "" }`}
+      className={`input ${
+        type === "phone" &&
+        (value.length ? "input-phone" : focus ? "input-phone" : "")
+      } ${errors?.[id] ? "input-error" : ""}`}
     >
       {title && (
-        <span className={!focus ? "input-placeholder" : ""}>{title}</span>
+        <span className={value.length ? "" : focus ? "" : "input-placeholder"}>
+          {title}
+        </span>
       )}
       {type === "phone" ? (
         <ReactInputMask
@@ -36,7 +41,7 @@ export default function Input({
           title="Телефон"
           id="phone-input"
           className="form-control"
-          placeholder={!focus ? "Телефон" : ""}
+          // placeholder={!focus ? "Телефон" : ""}
           onFocus={setFocus.bind(null, true)}
           onBlur={setFocus.bind(null, false)}
           required
@@ -48,7 +53,7 @@ export default function Input({
           id={id}
           type={type}
           value={value ?? ""}
-          placeholder={!focus ? placeholder : ""}
+          // placeholder={!focus ? placeholder : ""}
           onChange={(e) => onChange(e.target.value)}
         />
       )}
