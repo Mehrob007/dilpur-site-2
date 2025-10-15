@@ -964,6 +964,8 @@
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
   aspect-ratio: 16/10;
 }
 .banner .slider-container .slider-track .slide .slide-content {
@@ -1953,17 +1955,23 @@
 }
 .input > span {
   position: absolute;
-  top: -7px;
-  left: 20px;
+  top: -9px;
+  left: 14px;
   color: #8f8f8f;
   background-color: #ffffff;
   opacity: 1;
   transition: all 0.2s ease-in-out;
+  padding: 0 6px;
 }
 .input > .input-placeholder {
-  top: 11px;
-  left: 17;
-  opacity: 0;
+  top: 17.5px;
+  left: 21px;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 17px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #505050;
 }
 .input > input {
   height: 50px;
@@ -1971,6 +1979,7 @@
   max-width: 100%;
   width: calc(100% - 42px);
   font-family: Gilroy;
+  color: #505050;
   font-weight: 500;
   font-style: Medium;
   font-size: 17px;
@@ -1995,6 +2004,14 @@
 }
 .input > p {
   color: #d32a2a;
+  margin-top: 13px;
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 15px;
+  line-height: 80%;
+  letter-spacing: 0%;
+  height: 10px;
 }
 
 .input-phone {
@@ -2011,6 +2028,7 @@
   font-size: 17px;
   line-height: 100%;
   letter-spacing: 0%;
+  color: #505050;
 }
 .input-phone > input {
   padding-left: 60px;
@@ -2075,7 +2093,7 @@ hr {
 .form-order-main > div > main > div {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 15px 20px;
 }
 .form-order-main > div > main > div > nav {
   grid-column: 1/3;
