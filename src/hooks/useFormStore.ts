@@ -61,7 +61,7 @@ export const useFormStore = create<FormState>((set, get) => ({
         rule.required &&
         (value === "" || value === undefined || value === null)
       ) {
-        errors[field] = rule.message || "Это поле обязательно для заполнения.";
+        errors[field] = rule.message || "Поле обязательно для заполнения.";
         return;
       }
 
