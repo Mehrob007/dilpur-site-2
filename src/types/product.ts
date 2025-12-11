@@ -9,7 +9,7 @@ export interface ProductItemsT extends TypesProductHeaderT {
   title: string;
   Limit?: number;
   pagination?: boolean;
-  TypeIds?: number[];
+  TypeId?: number;
 }
 export interface detailsT {
   details?: null | { discount: number } | "new";
@@ -34,6 +34,7 @@ export interface ProductItemT extends detailsT {
   color?: string;
   count?: 0;
   products?: { id: number; size: sizeT; count: number }[];
+  outOfStock?: boolean;
 }
 export interface sizeT {
   name: string;
