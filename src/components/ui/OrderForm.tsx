@@ -156,7 +156,7 @@ export default function OrderForm() {
           </div>
         </main>
         <main>
-          <h1>Доставка</h1>
+          <h1>Дополнительно</h1>
           <div>
             <nav>
               <Textarea
