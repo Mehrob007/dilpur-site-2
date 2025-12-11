@@ -1285,6 +1285,16 @@ $grey-color-select: #e5e5e5;
     line-height: 80%;
     letter-spacing: 0%;
   }
+
+  .out-of-stock {
+    font-family: Gilroy;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 22px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: $bg-color-new;
+  }
   .discount {
     color: $red-color;
   }

@@ -1208,6 +1208,15 @@
   line-height: 80%;
   letter-spacing: 0%;
 }
+.product-item-price .out-of-stock {
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 22px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #8f8f8f;
+}
 .product-item-price .discount {
   color: #d32a2a;
 }
