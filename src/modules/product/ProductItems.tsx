@@ -14,7 +14,7 @@ export default function ProductItems({
   type = null,
   Limit = 21,
   pagination = false,
-  TypeIds,
+  TypeId,
 }: ProductItemsT) {
   // const [data, setData] = useState<ProductItemT[] | null>(null);
   const [error, setError] = useState<boolean>(false);
@@ -52,7 +52,7 @@ export default function ProductItems({
         Limit,
         Name,
         Page: reset ? 0 : page,
-        TypeIds: types.map((e) => +e),
+        TypeIds: TypeId ? [TypeId] : types.map((e) => +e),
         CategoriesIds: categorys.map((e) => +e),
         SizeIds: sizes.map((e) => +e),
         SortType: sorts || "",
