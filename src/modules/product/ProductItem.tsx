@@ -19,6 +19,7 @@ export default function ProductItem({
   discount = 0,
   details = null,
   property,
+  outOfStock = false,
   id,
 }: ProductItemT) {
   const router = useRouter();
@@ -95,13 +96,19 @@ export default function ProductItem({
           <p>{subTitle}</p>
         </div>
         <div className="product-item-price">
-          {discount ? (
-            <>
-              <div className="discount">{discount} c.</div>{" "}
-              <div className="crossed">{price} c.</div>
-            </>
+          {!outOfStock ? (
+            <span className="out-of-stock">Нет в наличии</span>
           ) : (
-            <div className="price">{price} c.</div>
+            <>
+              {discount ? (
+                <>
+                  <div className="discount">{discount} c.</div>{" "}
+                  <div className="crossed">{price} c.</div>
+                </>
+              ) : (
+                <div className="price">{price} c.</div>
+              )}
+            </>
           )}
         </div>
       </div>
