@@ -8,17 +8,15 @@ import React from "react";
 
 export default function MainPage() {
   const { type } = useGlobalState();
+
+  console.log("type", type);
+
   return (
     <div className="main-page">
       <Banner />
 
       {type?.map((e, i) => (
-        <ProductItems
-          key={i}
-          title={e.name}
-          TypeIds={[e.id]}
-          type={"showAll"}
-        />
+        <ProductItems key={i} title={e?.name} TypeId={e?.id} type={"showAll"} />
       ))}
 
       {/* <ProductItems title={"Обувь"} type={"showAll"} getURl={""} />
