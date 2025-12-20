@@ -1,5 +1,6 @@
 "use client";
 import { GetProductByIdREQ } from "@/api/product/product";
+import { GetSeriesByIdREQ } from "@/api/series/series";
 import Description from "@/components/element/Description";
 import HiddenDescription from "@/components/element/HiddenDescription";
 import ButtonAddProduct from "@/components/ui/ButtonAddProduct";
@@ -20,7 +21,11 @@ export default function Product() {
   const [data, setData] = useState<ProductItemT | null>(null);
   const [sizes, setSizes] = useState<defDataT[] | null>(null);
   const [selectSize, setSelectSize] = useState<sizeT>();
-  const { setBasketItems, basketItems } = useGlobalState();
+  const [seriesProducts, setSeriesProducts] = useState<{
+    loading: boolean;
+    data: number[] | undefined;
+  } | null>(null);
+  const { setBasketItems } = useGlobalState();
 
   const addProdductToBasket = ({ id, size }: { id: number; size: sizeT }) => {
     const basketIds: {
@@ -81,6 +86,7 @@ export default function Product() {
         colorProduct: data?.color?.name,
         description: data?.description,
         structure: data?.structure,
+        series: data?.series,
       });
       setSizes(data?.sizes);
     } catch (e) {
@@ -117,6 +123,24 @@ export default function Product() {
   //   }
   // };
 
+  const getSeriesById = async (id: number) => {
+    try {
+      setSeriesProducts({ loading: true, data: undefined });
+      const res = await GetSeriesByIdREQ({ Id: id });
+      const data: { productIds: number[]; id: number } = res?.data;
+      // console.log("idProductData", data?.productIds);
+      setSeriesProducts({
+        loading: false,
+        data: data?.productIds.filter((e) => e !== data?.id),
+      });
+    } catch (e) {
+      setSeriesProducts({ loading: false, data: undefined });
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    if (data?.series?.id) getSeriesById(data?.series?.id);
+  }, [data]);
   useEffect(() => {
     getData();
   }, []);
@@ -135,7 +159,7 @@ export default function Product() {
     colors,
     colorProduct,
   } = data;
-  console.log("basketItems", basketItems);
+  console.log("data", data);
   return (
     <div className="product-page">
       <main className="max-width">
@@ -172,7 +196,14 @@ export default function Product() {
               <div className="price">{price} c.</div>
             )}
           </div>
-          {img[0] && <ColorProduct colors={[img[0]]} />}
+          {seriesProducts?.data && data?.id && (
+            <ColorProduct
+              colorsIds={[
+                data?.id,
+                ...seriesProducts?.data?.filter((e) => e !== data?.id),
+              ]}
+            />
+          )}
           {sizes && (
             <SizesProduct
               sizes={sizes}
