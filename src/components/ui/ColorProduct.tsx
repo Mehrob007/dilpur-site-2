@@ -1,22 +1,13 @@
 import { ColorProductT } from "@/types/colorProduct";
-import { getFileURL } from "@/utils/getFileURL";
-import Image from "next/image";
-import React from "react";
+import ColorProductItem from "./ColorProductItem";
 
-export default function ColorProduct({ colors }: ColorProductT) {
+export default function ColorProduct({ colorsIds }: ColorProductT) {
   return (
     <div className="details-product">
       <h1>Другие цвета</h1>
       <div>
-        {colors.map((e, i) => (
-          <Image
-            key={i}
-            src={getFileURL(e as string)}
-            alt={"color-product-img"}
-            width={82.5}
-            height={127}
-            className={i ? "off-color" : ""}
-          />
+        {colorsIds?.map((e, i) => (
+          <ColorProductItem key={i} id={e} index={i} />
         ))}
       </div>
     </div>
