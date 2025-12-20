@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import TypesProductHeader from "./TypesProductHeader";
 import ProductItem from "./ProductItem";
 import ProductItemsError from "./ProductItemsError";
-import { ArrDefData } from "@/constants/product";
 import { useStore } from "@/store/globalState";
 import { useSearchParams } from "next/navigation";
 import { GetProductREQ } from "@/api/product/product";
