@@ -1,6 +1,6 @@
 import { ProductItemT } from "@/types/product";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropertyOff from "../../../public/icons/PropertyOff.svg";
 import PropertyOn from "../../../public/icons/PropertyOn.svg";
 
@@ -9,7 +9,6 @@ import BayButton from "@/components/ui/BayButton";
 import ProductDetails from "@/components/ui/ProductDetails";
 import { usePathname, useRouter } from "next/navigation";
 import { getFileURL } from "@/utils/getFileURL";
-import { GetProductREQ } from "@/api/product/product";
 
 export default function ProductItem({
   img,
@@ -96,7 +95,7 @@ export default function ProductItem({
           <p>{subTitle}</p>
         </div>
         <div className="product-item-price">
-          {!outOfStock ? (
+          {outOfStock ? (
             <span className="out-of-stock">Нет в наличии</span>
           ) : (
             <>
