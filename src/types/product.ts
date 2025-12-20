@@ -16,6 +16,10 @@ export interface detailsT {
 }
 
 export interface ProductItemT extends detailsT {
+  series?: {
+    id: number;
+    name: string;
+  };
   id: number;
   img: string[];
   title: string;
