@@ -46,6 +46,7 @@ export const useGlobalState = create<globalStateT>((set, get) => ({
   setClearSearch: () => {
     set({ searchArr: [] });
     const params = new URLSearchParams(window.location.search);
+    params.delete("name");
     params.delete("sizes");
     params.delete("types");
     params.delete("categorys");
