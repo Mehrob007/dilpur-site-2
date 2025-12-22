@@ -21,7 +21,7 @@ export interface ProductItemT extends detailsT {
     name: string;
   };
   id: number;
-  img: string[];
+  img: string[] | StaticImageData[];
   title: string;
   subTitle: string;
   price: number;

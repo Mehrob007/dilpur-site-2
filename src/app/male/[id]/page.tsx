@@ -167,7 +167,7 @@ export default function Product() {
           {Array.isArray(img) &&
             img.map((e, i) => (
               <Image
-                src={getFileURL(e)}
+                src={getFileURL(e as string)}
                 key={i}
                 alt={`product-img-${i}`}
                 width={668}

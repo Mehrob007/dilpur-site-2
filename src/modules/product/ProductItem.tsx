@@ -48,7 +48,7 @@ export default function ProductItem({
           <Image
             onClick={() => router.push(`/${pathName.split("/")[1]}/` + id)}
             className="img-product"
-            src={!isHovered ? getFileURL(img[0]) : getFileURL(img[1])}
+            src={!isHovered ? getFileURL(img[0] as string) : getFileURL(img[1] as string)}
             alt="img-product"
             width={360}
             height={500}
