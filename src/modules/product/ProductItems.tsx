@@ -23,10 +23,11 @@ export default function ProductItems({
   const categorys = searchParams.getAll("categorys");
   const sizes = searchParams.getAll("sizes");
   const sorts = searchParams.get("sorts");
+  const name = searchParams.get("name");
   // const [propertys, setPropertys] = useState<number[] | null>(null);
   // const propertys: number[] = getKeyStorage("property");
 
-  console.log("query", { types, categorys, sizes, sorts });
+  console.log("query", { types, categorys, sizes, sorts, name });
 
   const [page, setPage] = useState<number>(0);
   const [fetching, setFetching] = useState(true);
@@ -49,7 +50,7 @@ export default function ProductItems({
     try {
       const res = await GetProductREQ({
         Limit,
-        Name,
+        Name: Name || (name as string),
         Page: reset ? 0 : page,
         TypeIds: TypeId ? [TypeId] : types.map((e) => +e),
         CategoriesIds: categorys.map((e) => +e),
@@ -68,7 +69,7 @@ export default function ProductItems({
   };
   useEffect(() => {
     getData(undefined, true);
-  }, [types.join(","), categorys.join(","), sizes.join(","), sorts]);
+  }, [types.join(","), categorys.join(","), sizes.join(","), sorts, name]);
 
   console.log("data", data);
 
