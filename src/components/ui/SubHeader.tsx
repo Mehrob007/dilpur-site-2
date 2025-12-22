@@ -1,7 +1,7 @@
 "use client";
 import { SubHeaderT } from "@/types/def";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import InputSearch from "../element/InputSearch";
 import { popularQueries } from "@/constants/header";
@@ -13,6 +13,7 @@ export default function SubHeader({ navLinks, type }: SubHeaderT) {
   const [searchValue, setSearchValue] = useState<string>("");
   const { setOpenModalKey, checkKeyModal } = useGlobalState();
   const pathName = usePathname();
+  const router = useRouter();
   return (
     <>
       <div
@@ -27,7 +28,19 @@ export default function SubHeader({ navLinks, type }: SubHeaderT) {
               onChange={(e) => setSearchValue(e)}
             />
             <nav>
-              <button>Найти</button>
+              <button
+                onClick={() => {
+                  router.push(
+                    "/" +
+                      pathName?.split("/")?.[1] +
+                      "/catalog?name=" +
+                      searchValue
+                  );
+                  setOpenModalKey("");
+                }}
+              >
+                Найти
+              </button>
               <button onClick={() => setOpenModalKey("")}>Закрыть</button>
             </nav>
           </div>
