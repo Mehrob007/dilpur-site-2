@@ -1397,7 +1397,6 @@
   color: #ffffff;
   width: 180px;
   height: 42px;
-  padding-top: 5px;
   border-radius: 1000px;
   border: none;
   cursor: pointer;
@@ -1408,6 +1407,10 @@
   line-height: 80%;
   letter-spacing: 0%;
   text-align: center;
+  transition: all 0.1s ease-in-out;
+}
+.types-product-header > button:hover {
+  scale: 1.05;
 }
 
 .product-items-error {
