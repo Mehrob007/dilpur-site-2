@@ -1052,6 +1052,37 @@
   line-height: 80%;
   letter-spacing: 0%;
   text-transform: uppercase;
+  display: flex;
+  gap: 10px;
+  align-items: end;
+  justify-content: center;
+}
+.product-items .product-items-header > h1 > span {
+  background-color: #181818;
+  color: #ffffff;
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 19px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-transform: lowercase;
+  border-radius: 100px;
+  min-width: 131px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-items .product-items-header > span {
+  background-color: #181818;
+  color: #ffffff;
+  font-family: Gilroy;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 19px;
+  line-height: 100%;
+  letter-spacing: 0%;
 }
 .product-items .product-items-content {
   display: grid;
