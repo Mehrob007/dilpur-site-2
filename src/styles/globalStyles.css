@@ -1069,7 +1069,7 @@
   flex: 1;
 }
 .product-item .product-item-img .image {
-  height: 40vw;
+  height: 100%;
   position: relative;
 }
 .product-item .product-item-img .image:hover .bay-button > div {
