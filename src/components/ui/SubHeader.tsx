@@ -2,18 +2,24 @@
 import { SubHeaderT } from "@/types/def";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputSearch from "../element/InputSearch";
 import { popularQueries } from "@/constants/header";
 import Image from "next/image";
 import searchIcon from "@/../public/icons/searchIcon.svg";
 import { useGlobalState } from "@/store/globalState";
+import ProductItems from "@/modules/product/ProductItems";
+import arrowForButton from "@/../public/icons/arrow-right-white-small.svg";
 
 export default function SubHeader({ navLinks, type }: SubHeaderT) {
   const [searchValue, setSearchValue] = useState<string>("");
   const { setOpenModalKey, checkKeyModal } = useGlobalState();
   const pathName = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    setSearchValue("");
+  }, [pathName]);
   return (
     <>
       <div
@@ -34,32 +40,67 @@ export default function SubHeader({ navLinks, type }: SubHeaderT) {
                     "/" +
                       pathName?.split("/")?.[1] +
                       "/catalog?name=" +
-                      searchValue
+                      searchValue,
                   );
                   setOpenModalKey("");
+                  setSearchValue("");
                 }}
               >
                 Найти
               </button>
-              <button onClick={() => setOpenModalKey("")}>Закрыть</button>
+              <button
+                onClick={() => {
+                  setOpenModalKey("");
+                  setSearchValue("");
+                }}
+              >
+                Закрыть
+              </button>
             </nav>
           </div>
-          <div className="header-nav-search-res">
-            <h1>Популярные запросы</h1>
-            <div>
-              {popularQueries.map((e, i) => (
-                <span key={i} onClick={() => console.log(e.value)}>
-                  <Image
-                    src={searchIcon}
-                    alt="searchIcon"
-                    width={16}
-                    height={16}
-                  />{" "}
-                  {e.label}
-                </span>
-              ))}
+          {searchValue.length ? (
+            <div className="header-nav-search-products">
+              <ProductItems
+                type={null}
+                title="Результаты поиска"
+                Limit={3}
+                searchName={searchValue}
+              />
+              <button
+                onClick={() => {
+                  router.push(
+                    "/" +
+                      pathName?.split("/")?.[1] +
+                      "/catalog?name=" +
+                      searchValue,
+                  );
+                  setOpenModalKey("");
+                  setSearchValue("");
+                }}
+                className="button-search-nav"
+              >
+                Смотреть все результаты{" "}
+                <Image src={arrowForButton} alt="arrowForButton" />
+              </button>
             </div>
-          </div>
+          ) : (
+            <div className="header-nav-search-res">
+              <h1>Популярные запросы</h1>
+              <div>
+                {popularQueries.map((e, i) => (
+                  <span key={i} onClick={() => console.log(e.value)}>
+                    <Image
+                      src={searchIcon}
+                      alt="searchIcon"
+                      width={16}
+                      height={16}
+                    />{" "}
+                    {e.label}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div

@@ -477,7 +477,7 @@ $grey-color-select: #e5e5e5;
   }
   .header-nav {
     display: flex;
-    height: 82px;
+    min-height: 82px;
 
     justify-content: center;
     align-items: center;
@@ -514,9 +514,9 @@ $grey-color-select: #e5e5e5;
     }
   }
   .header-nav-search {
-    height: 265px;
-    top: -220px;
-    padding-bottom: 25px;
+    min-height: 265px;
+    top: -260px;
+    padding: 40px 0;
     .header-nav-content {
       width: 100%;
       display: flex;
@@ -553,6 +553,50 @@ $grey-color-select: #e5e5e5;
               color: $white-color;
             }
           }
+        }
+      }
+      .header-nav-search-products {
+        .product-items{
+          gap: 25px;
+        }
+        .product-items-header h1 {
+          font-family: Gilroy;
+          font-weight: 600;
+          font-style: Semibold;
+          font-size: 17px;
+          line-height: 100%;
+          letter-spacing: 0%;
+        }
+        h1,
+        p,
+        .crossed,
+        .price {
+          color: $white-color !important;
+        }
+        .crossed::after {
+          background-color: $white-color;
+        }
+        .button-search-nav {
+          margin: 0 auto;
+          background-color: transparent;
+          color: $bg-color-new;
+          border: 1px solid $bg-color-new;
+          border-radius: 100px;
+          height: 42px;
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          justify-content: center;
+          padding: 0 26px;
+          cursor: pointer;
+          font-family: Gilroy;
+          font-weight: 500;
+          font-style: Medium;
+          font-size: 17px;
+          line-height: 100%;
+          letter-spacing: 0%;
+          text-align: center;
+          margin-top: 40px;
         }
       }
       .header-nav-search-res {
@@ -1161,9 +1205,9 @@ $grey-color-select: #e5e5e5;
     flex: 1;
     .image {
       // height: 40vw;
-      // height: 500px;
+      height: 700px;
       // width: 360px;
-      height: 100%;
+      // height: 40vw;
       position: relative;
       &:hover {
         // .img-product1 {
