@@ -14,7 +14,7 @@ export default function ProductItems({
   Limit = 21,
   pagination = false,
   TypeId,
-  searchName
+  searchName,
 }: ProductItemsT) {
   // const [data, setData] = useState<ProductItemT[] | null>(null);
   const [error, setError] = useState<boolean>(false);
@@ -24,7 +24,7 @@ export default function ProductItems({
   const categorys = searchParams.getAll("categorys");
   const sizes = searchParams.getAll("sizes");
   const sorts = searchParams.get("sorts");
-  const name = searchParams.get("name") || searchName;
+  const name = searchName || searchParams.get("name");
   // const [propertys, setPropertys] = useState<number[] | null>(null);
   // const propertys: number[] = getKeyStorage("property");
 
