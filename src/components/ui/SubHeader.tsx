@@ -2,7 +2,7 @@
 import { SubHeaderT } from "@/types/def";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputSearch from "../element/InputSearch";
 import { popularQueries } from "@/constants/header";
 import Image from "next/image";
@@ -16,6 +16,10 @@ export default function SubHeader({ navLinks, type }: SubHeaderT) {
   const { setOpenModalKey, checkKeyModal } = useGlobalState();
   const pathName = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    setSearchValue("");
+  }, [pathName]);
   return (
     <>
       <div
