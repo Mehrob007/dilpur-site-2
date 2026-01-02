@@ -10,6 +10,7 @@ export interface ProductItemsT extends TypesProductHeaderT {
   Limit?: number;
   pagination?: boolean;
   TypeId?: number;
+  searchName?: string;
 }
 export interface detailsT {
   details?: null | { discount: number } | "new";
