@@ -17,13 +17,13 @@ export default function ProductItem({
   price,
   discount = 0,
   details = null,
-  property,
+  // property,
   outOfStock = false,
   id,
 }: ProductItemT) {
   const router = useRouter();
   const [isHovered, setIsHovered] = useState<boolean>(false);
-  const { setProperty, deleteProperty } = useStore();
+  const { setProperty, deleteProperty, propertys } = useStore();
   const pathName = usePathname();
 
   // console.table({
@@ -48,7 +48,11 @@ export default function ProductItem({
           <Image
             onClick={() => router.push(`/${pathName.split("/")[1]}/` + id)}
             className="img-product"
-            src={!isHovered ? getFileURL(img[0] as string) : getFileURL(img[1] as string)}
+            src={
+              !isHovered
+                ? getFileURL(img[0] as string)
+                : getFileURL(img[1] as string)
+            }
             alt="img-product"
             width={360}
             height={500}
@@ -68,7 +72,7 @@ export default function ProductItem({
           ""
         )} */}
         <div className="property-like">
-          {property ? (
+          {propertys?.includes(id as number) ? (
             <Image
               src={PropertyOn}
               alt="PropertyOn"
