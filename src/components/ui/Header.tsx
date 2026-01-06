@@ -14,15 +14,16 @@ import { defaultSubHeader, links, navLinks } from "@/constants/header";
 import BasketItems from "@/modules/basket/BasketItems";
 import SubHeader from "./SubHeader";
 import { defaultSubHeaderT } from "@/types/def";
-import { useGlobalState } from "@/store/globalState";
+import { useGlobalState, useStore } from "@/store/globalState";
 import { GetTypeREQ } from "@/api/type/type";
 
 export default function Header() {
   const { setOpenModalKey, checkKeyModal, openModalKey, setType } =
     useGlobalState();
   const [openNav, setOpenNav] = useState<defaultSubHeaderT>(defaultSubHeader);
-  const pathName = usePathname();
   const [isHovered, setIsHovered] = useState<number>(0);
+  const { propertys, updatePropertys } = useStore();
+  const pathName = usePathname();
 
   const getType = async () => {
     try {
@@ -38,16 +39,25 @@ export default function Header() {
     setOpenNav({ open: false, type: "navigation" });
     setOpenModalKey("");
   }, [pathName]);
+
   useEffect(() => {
     if (openNav) {
       setOpenModalKey("");
     }
   }, [openNav.open]);
+
+  useEffect(() => {
+    if (!propertys) return;
+    localStorage.setItem("favorites", JSON.stringify(propertys));
+  }, [propertys]);
+
   useEffect(() => {
     getType();
+    const prop = localStorage.getItem("favorites");
+    if (!prop) return;
+    updatePropertys(JSON.parse(prop));
   }, []);
-
-  // console.log("type", type);
+  // console.log("propertys", propertys);
 
   return (
     <div className="header">
