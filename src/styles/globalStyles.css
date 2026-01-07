@@ -1713,6 +1713,8 @@
   text-align: center;
   background-color: #181818;
   color: #ffffff;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
 }
 .gift-card .gift-card-bottom button span {
   height: 12px;
@@ -1720,6 +1722,9 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+.gift-card .gift-card-bottom button:hover {
+  scale: 1.05;
 }
 
 .partner-stores {

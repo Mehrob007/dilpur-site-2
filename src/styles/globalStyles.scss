@@ -556,7 +556,7 @@ $grey-color-select: #e5e5e5;
         }
       }
       .header-nav-search-products {
-        .product-items{
+        .product-items {
           gap: 25px;
         }
         .product-items-header h1 {
@@ -1807,12 +1807,17 @@ $grey-color-select: #e5e5e5;
       text-align: center;
       background-color: $black-color;
       color: $white-color;
+      cursor: pointer;
+      transition: all 0.1s ease-in-out;
       span {
         height: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 10px;
+      }
+      &:hover {
+        scale: 1.05;
       }
     }
   }
