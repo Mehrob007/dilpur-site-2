@@ -57,7 +57,7 @@ export default function ProductItem({
             width={360}
             height={500}
           />
-          <BayButton id={id || 0} />
+          <BayButton id={id || 0} cost={price} preCost={discount} />
         </div>
 
         <ProductDetails details={details} />
