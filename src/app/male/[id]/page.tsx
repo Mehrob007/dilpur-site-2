@@ -27,11 +27,23 @@ export default function Product() {
   } | null>(null);
   const { setBasketItems } = useGlobalState();
 
-  const addProdductToBasket = ({ id, size }: { id: number; size: sizeT }) => {
+  const addProdductToBasket = ({
+    id,
+    size,
+    cost,
+    preCost,
+  }: {
+    id: number;
+    size: sizeT;
+    cost: number;
+    preCost?: number;
+  }) => {
     const basketIds: {
       id: number;
       size: sizeT;
       count: number;
+      cost: number;
+      preCost?: number;
     }[] = JSON.parse(localStorage.getItem("basketIds") || "[]");
     if (basketIds?.find((e) => e.id === id)) {
       localStorage.setItem(
@@ -58,9 +70,9 @@ export default function Product() {
     } else {
       localStorage.setItem(
         "basketIds",
-        JSON.stringify([...basketIds, { id, size, count: 1 }])
+        JSON.stringify([...basketIds, { id, size, count: 1, cost, preCost }])
       );
-      setBasketItems([...basketIds, { id, size, count: 1 }]);
+      setBasketItems([...basketIds, { id, size, count: 1, cost, preCost }]);
     }
   };
 
@@ -217,6 +229,8 @@ export default function Product() {
                 addProdductToBasket({
                   id: +id,
                   size: selectSize as sizeT,
+                  cost: price,
+                  preCost: discount,
                 })
               }
               id={+id}
