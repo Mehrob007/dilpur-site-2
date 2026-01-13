@@ -6,17 +6,37 @@ import { sizeT } from "@/types/product";
 import { useGlobalState } from "@/store/globalState";
 import { GetProductByIdREQ } from "@/api/product/product";
 
-export default function BayButton({ id }: { id: number }) {
+export default function BayButton({
+  id,
+  cost,
+  preCost,
+}: {
+  id: number;
+  cost: number;
+  preCost?: number;
+}) {
   const [stateStage, setStateStage] = useState<number>(1);
   const { setBasketItems } = useGlobalState();
 
   const [sizes, setSizes] = useState<sizeT[]>();
 
-  const addProdductToBasket = ({ id, size }: { id: number; size: sizeT }) => {
+  const addProdductToBasket = ({
+    id,
+    size,
+    cost,
+    preCost,
+  }: {
+    id: number;
+    size: sizeT;
+    cost: number;
+    preCost?: number;
+  }) => {
     const basketIds: {
       id: number;
       size: sizeT;
       count: number;
+      cost: number;
+      preCost?: number;
     }[] = JSON.parse(localStorage.getItem("basketIds") || "[]");
     if (basketIds?.find((e) => e.id === id)) {
       localStorage.setItem(
@@ -43,9 +63,9 @@ export default function BayButton({ id }: { id: number }) {
     } else {
       localStorage.setItem(
         "basketIds",
-        JSON.stringify([...basketIds, { id, size, count: 1 }])
+        JSON.stringify([...basketIds, { id, size, count: 1, cost, preCost }])
       );
-      setBasketItems([...basketIds, { id, size, count: 1 }]);
+      setBasketItems([...basketIds, { id, size, count: 1, cost, preCost }]);
     }
   };
   const getDataBasket = async (id: number) => {
@@ -78,7 +98,12 @@ export default function BayButton({ id }: { id: number }) {
             <div
               key={i}
               onClick={() => {
-                addProdductToBasket({ id, size: e });
+                addProdductToBasket({
+                  id,
+                  size: e,
+                  cost: cost,
+                  preCost: preCost,
+                });
                 setStateStage(3);
               }}
             >
