@@ -9,7 +9,7 @@ import basket from "../../../public/icons/basket.svg";
 import profile from "../../../public/icons/profile.svg";
 import closeNav from "../../../public/icons/closeNav.svg";
 import Link from "next/link";
-import { redirect, usePathname, useRouter } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { defaultSubHeader, links, navLinks } from "@/constants/header";
 import BasketItems from "@/modules/basket/BasketItems";
 import SubHeader from "./SubHeader";
@@ -24,7 +24,6 @@ export default function Header() {
   const [isHovered, setIsHovered] = useState<number>(0);
   const { propertys, updatePropertys } = useStore();
   const pathName = usePathname();
-  const router = useRouter();
 
   const getType = async () => {
     try {
@@ -114,7 +113,6 @@ export default function Header() {
               }}
               onMouseEnter={() => setIsHovered(2)}
               onMouseLeave={() => setIsHovered(0)}
-              onClick={() => router.push("/favorites")}
               src={favorites}
               alt="icons-header"
               width={24}
