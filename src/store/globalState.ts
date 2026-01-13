@@ -25,6 +25,11 @@ export const useGlobalState = create<globalStateT>((set, get) => ({
     set(() => ({
       basketItems: obj,
     })),
+  shopItem: null,
+  setShopItem: (obj) =>
+    set(() => ({
+      shopItem: obj,
+    })),
   type: [],
   setType: (obj) =>
     set({
