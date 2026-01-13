@@ -7,6 +7,8 @@ import BasketItems from "@/modules/basket/BasketItems";
 import { useGlobalState } from "@/store/globalState";
 import { PostOrderREQ } from "@/api/product/order";
 
+const OrderPrice = 20;
+
 export default function OrderForm() {
   const { basketItems } = useGlobalState();
   const [price, setPrice] = useState(0);
@@ -26,7 +28,11 @@ export default function OrderForm() {
     const isValid = validate({
       name: { required: true },
       surname: { required: true },
-      phone: { required: true, message: "Неверный номер телефона", minLength: 9, },
+      phone: {
+        required: true,
+        message: "Неверный номер телефона",
+        minLength: 9,
+      },
     });
 
     if (!isValid) return;
@@ -180,7 +186,7 @@ export default function OrderForm() {
                     <span>{count} товара на сумму</span> <span>{price}</span>
                   </label>
                   <label>
-                    <span>Доставка</span> <span>20c</span>
+                    <span>Доставка</span> <span>{OrderPrice}c</span>
                   </label>
                   <label className="skid">
                     <span>Скидка</span> <span>{skitka}c</span>
@@ -195,7 +201,7 @@ export default function OrderForm() {
               <h1>
                 <span>Итого</span>{" "}
                 <span>
-                  {price + 20} с.{}
+                  {price + OrderPrice} с.{}
                 </span>
               </h1>
             </nav>
