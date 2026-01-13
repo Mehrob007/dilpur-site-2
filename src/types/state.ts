@@ -1,4 +1,5 @@
 import { sizeT } from "./product";
+import { shopT } from "./shop";
 
 export interface defItemT {
   id: number;
@@ -33,11 +34,28 @@ export interface globalStateT {
   searchArr: searchArrT[];
   setSearchArr: (obj: searchArrT) => void;
 
-  basketItems: { id: number; size: sizeT; count: number }[];
-  setBasketItems: (obj: { id: number; size: sizeT; count: number }[]) => void;
+  basketItems: {
+    id: number;
+    size: sizeT;
+    count: number;
+    cost: number;
+    preCost?: number;
+  }[];
+  setBasketItems: (
+    obj: {
+      id: number;
+      size: sizeT;
+      count: number;
+      cost: number;
+      preCost?: number;
+    }[]
+  ) => void;
 
   type: defItemT[];
   setType: (type: defItemT[]) => void;
+
+  shopItem: shopT | null;
+  setShopItem: (shopItem: shopT) => void;
 
   setRemuveSearch: (item: string) => void;
   setClearSearch: () => void;
