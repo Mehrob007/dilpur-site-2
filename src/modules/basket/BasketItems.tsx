@@ -44,12 +44,39 @@ export default function BasketItems({
   useEffect(() => {
     const basketIds = localStorage.getItem("basketIds");
     const newBasketIds = basketIds
-      ? (JSON.parse(basketIds) as { id: number; size: sizeT; count: number }[])
+      ? (JSON.parse(basketIds) as {
+          id: number;
+          size: sizeT;
+          count: number;
+          cost: number;
+          preCost?: number;
+        }[])
       : [];
     setBasketItems(newBasketIds);
   }, [open]);
 
+  useEffect(() => {
+    const totalCost = basketItems.reduce((sum, s) => {
+      if (s.preCost === null || s.preCost === undefined || s.preCost < 0) {
+        return sum + s?.cost * s.count;
+      } else {
+        return sum + s?.preCost * s.count;
+      }
+    }, 0);
+    setTotalPrice && setTotalPrice(totalCost);
+
+    const skitka = basketItems.reduce((sum, s) => {
+      if (s.preCost === null || s.preCost === undefined || s.preCost < 0) {
+        return sum + 0;
+      } else {
+        return sum + (s?.cost - s?.preCost) * s.count;
+      }
+    }, 0);
+    setSkitka && setSkitka(skitka);
+  }, [basketItems]);
+
   if (!open) return;
+
   // basketItems.filter(
   //   (e, i) => e.id === ArrDefData?.[i]?.id && ArrDefData?.[i]
   // );
@@ -60,6 +87,8 @@ export default function BasketItems({
   //     parseBasket.push({ ...found, size: basketItems[i].size });
   //   }
   // }
+
+  console.log("basketItems", basketItems);
 
   return (
     <>
