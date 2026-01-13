@@ -12,9 +12,9 @@ export default function BasketItem({
   size,
   count,
   order = false,
-  getPrice,
-  setSkitka,
-}: BasketItemT) {
+}: // getPrice,
+// setSkitka,
+BasketItemT) {
   const [data, setData] = useState<ProductItemT>();
   const { setBasketItems } = useGlobalState();
 
@@ -23,6 +23,8 @@ export default function BasketItem({
       id: number;
       size: sizeT;
       count: number;
+      cost: number;
+      preCost?: number;
     }[] = JSON.parse(localStorage.getItem("basketIds") || "[]");
     if (basketIds?.find((e) => e.id === id)) {
       localStorage.setItem(
@@ -53,6 +55,8 @@ export default function BasketItem({
       id: number;
       size: sizeT;
       count: number;
+      cost: number;
+      preCost?: number;
     }[] = JSON.parse(localStorage.getItem("basketIds") || "[]");
     if (
       basketIds?.find((e) => e.id === id) &&
@@ -106,14 +110,14 @@ export default function BasketItem({
     }
   };
 
+  // useEffect(() => {
+  //   getPrice((data?.discount ? data?.discount : data?.price || 0) * count);
+  //   data?.discount && setSkitka((+data?.price - +data?.discount) * count);
+  // }, [data?.discount, data?.price, count]);
+
   useEffect(() => {
     getDataBasket(id, size);
   }, []);
-
-  useEffect(() => {
-    getPrice((data?.discount ? data?.discount : data?.price || 0) * count);
-    data?.discount && setSkitka((+data?.price - +data?.discount) * count);
-  }, [data?.discount, data?.price, count]);
 
   return (
     <div className="basket-item">
