@@ -3,12 +3,13 @@ import location from "../../../public/icons/locationIconBlack.svg";
 import XBlack from "../../../public/icons/XBlack.svg";
 import Image from "next/image";
 import React from "react";
+import { getFileURL } from "@/utils/getFileURL";
 
 export default function ShopItem() {
   const { checkKeyModal, shopItem, setOpenModalKey } = useGlobalState();
   if (!checkKeyModal("ModalShop")) return;
   return (
-    <div className="shop-item">
+    <div className="shop-item" onClick={() => setOpenModalKey("")}>
       <main>
         <Image
           src={XBlack}
@@ -17,7 +18,14 @@ export default function ShopItem() {
           width={24}
           height={24}
         />
-        <nav></nav>
+        <nav>
+          <Image
+            src={getFileURL(shopItem?.fileName as string)}
+            alt="shop"
+            width={120}
+            height={120}
+          />
+        </nav>
         <main>
           <div>
             <h1>{shopItem?.name}</h1>
@@ -30,8 +38,11 @@ export default function ShopItem() {
             <h2>График работы</h2>
             <span>{shopItem?.working}</span>
           </div>
-          <div>
-            <span>{shopItem?.phones}</span>
+
+          <div className="phone">
+            {shopItem?.phones?.map((phone, i) => (
+              <span key={i}>+992 {phone.replace(/(.{3})(?=.)/g, "$1-")}</span>
+            ))}
           </div>
           <button
             className="button"
