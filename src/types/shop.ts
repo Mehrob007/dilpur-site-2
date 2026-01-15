@@ -4,6 +4,6 @@ export type shopT = {
   address: string;
   url: string | null;
   fileName: string;
-  phones: string | null;
+  phones: string[] | null;
   working: string | null;
 };
