@@ -1,5 +1,5 @@
 "use client";
-import { ItemT, ProductItemsT, ProductItemT } from "@/types/product";
+import { ItemT, ProductItemsT } from "@/types/product";
 import React, { useEffect, useState } from "react";
 import TypesProductHeader from "./TypesProductHeader";
 import ProductItem from "./ProductItem";
