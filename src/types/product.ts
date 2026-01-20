@@ -47,7 +47,13 @@ export interface sizeT {
 }
 
 export interface ItemT {
-  [key: string]: string | number | StaticImageData | { name: string };
+  [key: string]:
+    | string
+    | number
+    | StaticImageData
+    | { name: string }
+    | string[]
+    | { images: string[] };
 }
 export interface HeaderProduct {
   name: string;
