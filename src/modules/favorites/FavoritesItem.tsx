@@ -72,22 +72,24 @@ export default function FavoritesItem({ id }: { id: number }) {
           />
           <BayButton
             id={id || 0}
-            cost={data?.price as number}
-            preCost={data?.discount as number}
+            cost={data?.cost as number}
+            preCost={data?.preCost as number}
           />
         </div>
 
-        {/* <ProductDetails details={details} /> */}
+        <ProductDetails
+          preCostProcent={
+            data?.preCost && data?.cost
+              ? Math.floor(
+                  ((Number(data.preCost) - Number(data.cost)) /
+                    Number(data.preCost)) *
+                    100,
+                )
+              : 0
+          }
+          details={data?.tags as string[]}
+        />
 
-        {/* {details && typeof details === "object" ? (
-          <span className="product-item-img-discount">
-            -{details.discount}%
-          </span>
-        ) : details === "new" ? (
-          <span className="product-item-img-new">НОВИНКА</span>
-        ) : (
-          ""
-        )} */}
         <div className="property-like">
           {propertys?.includes(id as number) ? (
             <Image
