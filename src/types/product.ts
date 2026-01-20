@@ -13,7 +13,8 @@ export interface ProductItemsT extends TypesProductHeaderT {
   searchName?: string;
 }
 export interface detailsT {
-  details?: null | { discount: number } | "new";
+  details?: string[];
+  preCostProcent?: number;
 }
 
 export interface ProductItemT extends detailsT {
