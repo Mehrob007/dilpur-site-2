@@ -100,7 +100,7 @@ export default function ProductItems({
               subTitle={e.preName as string}
               price={e.cost as number}
               discount={e.preCost as number}
-              // details={e.tags as string[]}
+              details={e.tags as string[]}
               // property={e.property}
             />
           ))
