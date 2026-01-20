@@ -9,7 +9,7 @@ import basket from "../../../public/icons/basket.svg";
 import profile from "../../../public/icons/profile.svg";
 import closeNav from "../../../public/icons/closeNav.svg";
 import Link from "next/link";
-import { redirect, usePathname } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import { defaultSubHeader, links, navLinks } from "@/constants/header";
 import BasketItems from "@/modules/basket/BasketItems";
 import SubHeader from "./SubHeader";
@@ -23,6 +23,7 @@ export default function Header() {
   const [openNav, setOpenNav] = useState<defaultSubHeaderT>(defaultSubHeader);
   const [isHovered, setIsHovered] = useState<number>(0);
   const { propertys, updatePropertys } = useStore();
+  const router = useRouter();
   const pathName = usePathname();
 
   const getType = async () => {
@@ -47,16 +48,18 @@ export default function Header() {
   }, [openNav.open]);
 
   useEffect(() => {
-    if (!propertys) return;
-    localStorage.setItem("favorites", JSON.stringify(propertys));
-  }, [propertys]);
-
-  useEffect(() => {
     getType();
     const prop = localStorage.getItem("favorites");
     if (!prop) return;
     updatePropertys(JSON.parse(prop));
   }, []);
+
+  useEffect(() => {
+    // const favorites = localStorage.getItem("favorites");
+    if (!propertys) return;
+    localStorage.setItem("favorites", JSON.stringify(propertys));
+  }, [propertys]);
+
   // console.log("propertys", propertys);
 
   return (
@@ -117,6 +120,7 @@ export default function Header() {
               alt="icons-header"
               width={24}
               height={24}
+              onClick={() => router.push("/favorites")}
             />
             <Image
               style={{
