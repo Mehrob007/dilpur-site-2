@@ -14,7 +14,7 @@ export default function Catalog() {
       <ProductItems
         title={name?.length ? "Найдено" : "Каталог"}
         type={"filter"}
-        showCount={Boolean(name?.length)}
+        // showCount={Boolean(name?.length)}
       />
       <GiftСard />
       <PartnerStores />
