@@ -15,8 +15,8 @@ export default function ProductItem({
   title,
   subTitle,
   price,
+  details ,
   discount = 0,
-  details = null,
   // property,
   outOfStock = false,
   id,
@@ -60,7 +60,17 @@ export default function ProductItem({
           <BayButton id={id || 0} cost={price} preCost={discount} />
         </div>
 
-        <ProductDetails details={details} />
+        {/* <ProductDetails details={details} /> */}
+        <ProductDetails
+          preCostProcent={
+            discount
+              ? Math.floor(
+                  ((Number(discount) - Number(price)) / Number(discount)) * 100,
+                )
+              : 0
+          }
+          details={details as string[]}
+        />
 
         {/* {details && typeof details === "object" ? (
           <span className="product-item-img-discount">
