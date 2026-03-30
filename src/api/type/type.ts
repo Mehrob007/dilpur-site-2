@@ -5,11 +5,13 @@ export const GetTypeREQ = async ({
   Page,
   Id,
   Name,
+  Sex,
 }: {
   Limit?: number;
   Page?: number;
   Id?: number;
   Name?: string;
+  Sex?: number;
 }) => {
   try {
     const res = await apiClient("products/type", {
@@ -18,6 +20,7 @@ export const GetTypeREQ = async ({
         Page: Page,
         Id: Id,
         Name: Name,
+        Sex: Sex,
       },
     });
     return res.data;
