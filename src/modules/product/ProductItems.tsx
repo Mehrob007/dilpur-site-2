@@ -5,7 +5,7 @@ import TypesProductHeader from "./TypesProductHeader";
 import ProductItem from "./ProductItem";
 import ProductItemsError from "./ProductItemsError";
 import { useStore } from "@/store/globalState";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { GetProductREQ } from "@/api/product/product";
 
 export default function ProductItems({
@@ -19,6 +19,7 @@ export default function ProductItems({
   // const [data, setData] = useState<ProductItemT[] | null>(null);
   const [error, setError] = useState<boolean>(false);
   const { propertys } = useStore();
+  const pathName = usePathname();
   const searchParams = useSearchParams();
   const types = searchParams.getAll("types");
   const categorys = searchParams.getAll("categorys");
@@ -49,6 +50,7 @@ export default function ProductItems({
 
   const getData = async (Name?: string, reset: boolean = false) => {
     try {
+      const sex = pathName?.includes("/female") ? 2 : 1;
       const res = await GetProductREQ({
         Limit,
         Name: Name || (name as string),
@@ -57,6 +59,7 @@ export default function ProductItems({
         CategoriesIds: categorys.map((e) => +e),
         SizeIds: sizes.map((e) => +e),
         SortType: sorts || "",
+        Sex: sex,
       });
       if (reset) {
         setData(res.data);
@@ -70,7 +73,14 @@ export default function ProductItems({
   };
   useEffect(() => {
     getData(undefined, true);
-  }, [types.join(","), categorys.join(","), sizes.join(","), sorts, name]);
+  }, [
+    types.join(","),
+    categorys.join(","),
+    sizes.join(","),
+    sorts,
+    name,
+    pathName,
+  ]);
 
   console.log("data", data);
 

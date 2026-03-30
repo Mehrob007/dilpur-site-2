@@ -26,15 +26,16 @@ export default function Header() {
   const router = useRouter();
   const pathName = usePathname();
 
-  const getType = async () => {
+  const getType = React.useCallback(async () => {
     try {
-      const res = await GetTypeREQ({});
+      const sex = pathName?.includes("/female") ? 2 : 1;
+      const res = await GetTypeREQ({ Sex: sex });
 
       setType(res.data.reverse());
     } catch (e) {
       console.error(e);
     }
-  };
+  }, [pathName, setType]);
 
   useEffect(() => {
     setOpenNav({ open: false, type: "navigation" });
@@ -47,12 +48,17 @@ export default function Header() {
     }
   }, [openNav.open]);
 
+  const pathSegment = pathName?.split("/")?.[1];
+
   useEffect(() => {
     getType();
+  }, [getType, pathSegment]);
+
+  useEffect(() => {
     const prop = localStorage.getItem("favorites");
     if (!prop) return;
     updatePropertys(JSON.parse(prop));
-  }, []);
+  }, [updatePropertys]);
 
   useEffect(() => {
     // const favorites = localStorage.getItem("favorites");
