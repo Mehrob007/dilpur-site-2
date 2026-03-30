@@ -122,18 +122,23 @@ export default function Header() {
               height={24}
               onClick={() => router.push("/favorites")}
             />
-            <Image
-              style={{
-                opacity: Boolean(!isHovered) || isHovered === 3 ? "1" : "0.2",
-              }}
-              onMouseEnter={() => setIsHovered(3)}
-              onMouseLeave={() => setIsHovered(0)}
-              src={basket}
-              alt="icons-header"
-              onClick={() => setOpenModalKey("basket")}
-              width={24}
-              height={24}
-            />
+            <div className="">
+              <Image
+                style={{
+                  opacity: Boolean(!isHovered) || isHovered === 3 ? "1" : "0.2",
+                }}
+                onMouseEnter={() => setIsHovered(3)}
+                onMouseLeave={() => setIsHovered(0)}
+                src={basket}
+                alt="icons-header"
+                onClick={() => setOpenModalKey("basket")}
+                width={24}
+                height={24}
+              />
+              <span>
+
+              </span>
+            </div>
             <Image
               style={{
                 opacity: Boolean(!isHovered) || isHovered === 4 ? "1" : "0.2",
