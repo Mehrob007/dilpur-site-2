@@ -18,7 +18,7 @@ import { useGlobalState, useStore } from "@/store/globalState";
 import { GetTypeREQ } from "@/api/type/type";
 
 export default function Header() {
-  const { setOpenModalKey, checkKeyModal, openModalKey, setType } =
+  const { setOpenModalKey, checkKeyModal, openModalKey, setType, basketItems } =
     useGlobalState();
   const [openNav, setOpenNav] = useState<defaultSubHeaderT>(defaultSubHeader);
   const [isHovered, setIsHovered] = useState<number>(0);
@@ -122,7 +122,7 @@ export default function Header() {
               height={24}
               onClick={() => router.push("/favorites")}
             />
-            <div className="">
+            <div className="icons-basket">
               <Image
                 style={{
                   opacity: Boolean(!isHovered) || isHovered === 3 ? "1" : "0.2",
@@ -135,9 +135,7 @@ export default function Header() {
                 width={24}
                 height={24}
               />
-              <span>
-
-              </span>
+              {basketItems?.length ? <span>{basketItems?.length}</span> : ""}
             </div>
             <Image
               style={{

@@ -88,8 +88,6 @@ export default function BasketItems({
   //   }
   // }
 
-  console.log("basketItems", basketItems);
-
   return (
     <>
       {/* <span className="bg-basket"></span> */}
