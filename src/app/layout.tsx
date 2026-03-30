@@ -20,6 +20,8 @@ export const metadata: Metadata = {
   description: " ",
 };
 
+import NextTopLoader from "nextjs-toploader";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <NextTopLoader color="#181818" showSpinner={false} />
         <Header />
         <main className="layout">{children}</main>
         <Footer />
