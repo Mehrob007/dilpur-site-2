@@ -55,8 +55,8 @@ export default function Product() {
             } else {
               return e;
             }
-          })
-        )
+          }),
+        ),
       );
       setBasketItems(
         basketIds.map((e) => {
@@ -65,12 +65,12 @@ export default function Product() {
           } else {
             return e;
           }
-        })
+        }),
       );
     } else {
       localStorage.setItem(
         "basketIds",
-        JSON.stringify([...basketIds, { id, size, count: 1, cost, preCost }])
+        JSON.stringify([...basketIds, { id, size, count: 1, cost, preCost }]),
       );
       setBasketItems([...basketIds, { id, size, count: 1, cost, preCost }]);
     }
@@ -92,7 +92,7 @@ export default function Product() {
         price: data?.cost,
         discount: data?.preCost,
         article: data?.code,
-        details: null,
+        // details: null,
         property: false,
         colors: [""],
         colorProduct: data?.color?.name,
@@ -168,7 +168,7 @@ export default function Product() {
     discount,
     article,
     details,
-    colors,
+    // colors,
     colorProduct,
   } = data;
   console.log("data", data);
@@ -243,7 +243,7 @@ export default function Product() {
           <Description title="Состав" description={data?.structure as string} />
           <HiddenDescription
             title="Доставка и возврат"
-            description={`В Душанбе доставка занимает от нескольких часов, по \n Таджикистану — от нескольких дней.  Вы можете вернуть \n товар, лично посетив наш магазин, предварительно \n согласовав возврат  с нами по телефону. \n \n
+            description={`В Душанбе доставка занимает от нескольких часов, по \n Таджикистану — от нескольких дней.  Вы можете вернуть \n товар, лично посетив наш магазин, предварительно \n согласовав возврат  с нами по телефону. \n
 Для уточнения деталей обращайтесь к нашим менеджерам`}
           />
         </div>
