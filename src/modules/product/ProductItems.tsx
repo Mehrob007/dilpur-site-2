@@ -83,9 +83,9 @@ export default function ProductItems({
       </div>
       <div
         onScroll={(e) => scrollHandler(e.currentTarget)}
-        className={error ? "" : "product-items-content"}
+        className={error || !data?.length ? "" : "product-items-content"}
       >
-        {error ? (
+        {error || !data?.length ? (
           <ProductItemsError />
         ) : (
           Array.isArray(data) &&
