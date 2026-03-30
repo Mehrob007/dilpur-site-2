@@ -110,7 +110,7 @@
 .hidden-description > header img {
   cursor: pointer;
   rotate: 0deg;
-  transition: rotate 0.1s ease-in-out;
+  transition: rotate 0.3s ease-in-out;
 }
 .hidden-description > header .active-plus {
   rotate: -45deg;
@@ -472,7 +472,7 @@
   letter-spacing: 0%;
   text-decoration: none;
   color: #505050;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .header .header-nav .header-nav-content a:hover {
   color: #ffffff;
@@ -516,7 +516,7 @@
   line-height: 100%;
   letter-spacing: 0%;
   border: none;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
 .header .header-nav-search .header-nav-content .header-nav-search-input nav button:first-child:hover {
@@ -683,7 +683,7 @@
   background-color: #ffffff;
   padding: 20px;
   width: 400px;
-  top: 104%;
+  top: 106%;
   right: 0;
   background-color: #fff;
   max-height: calc(100vh - 200px);
@@ -705,7 +705,7 @@
   border: none;
   margin-top: 25px;
   cursor: pointer;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .basket > button:hover {
   background-color: #181818;
@@ -848,7 +848,7 @@
   border: none;
   margin-top: 25px;
   cursor: pointer;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .basket-order > button:hover {
   background-color: #181818;
@@ -1169,12 +1169,13 @@
   bottom: 20px;
   left: 20px;
   background: rgba(255, 255, 255, 0.6);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  gap: 10px;
+  backdrop-filter: blur(10px);
 }
 .product-item .product-item-img .image .bay-button > div:hover {
   background: rgba(255, 255, 255, 0.8980392157);
+}
+.product-item .product-item-img .image .bay-button > div {
+  gap: 10px;
 }
 .product-item .product-item-img .image .bay-button > div > div {
   width: 64px;
@@ -1189,7 +1190,7 @@
   line-height: 100%;
   letter-spacing: 0%;
   text-align: center;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.3s ease-in-out;
   color: #aeaeae;
 }
 .product-item .product-item-img .image .bay-button > div > div:hover {
@@ -1480,7 +1481,7 @@
   line-height: 80%;
   letter-spacing: 0%;
   text-align: center;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .types-product-header > button:hover {
   scale: 1.05;
@@ -1713,6 +1714,11 @@
   text-align: center;
   background-color: #181818;
   color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.gift-card .gift-card-bottom button:hover {
+  scale: 1.05;
 }
 .gift-card .gift-card-bottom button span {
   height: 12px;
@@ -1766,8 +1772,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  -webkit-backdrop-filter: brightness(30%);
-          backdrop-filter: brightness(30%);
+  backdrop-filter: brightness(30%);
   position: fixed;
   top: 0;
   left: 0;
@@ -1957,7 +1962,7 @@
   line-height: 80%;
   letter-spacing: 0%;
   height: 12px;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .footer .footer-top .footer-nav nav a:hover {
   color: #ffffff;
@@ -1995,7 +2000,7 @@
   flex-direction: column;
   gap: 10px;
   padding: 6px;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.3s ease-in-out;
   border: 1px solid transparent;
 }
 .footer .footer-bottom .footer-bottom-content .footer-gps div:hover {

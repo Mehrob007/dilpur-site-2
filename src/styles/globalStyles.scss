@@ -118,7 +118,7 @@ $grey-color-select: #e5e5e5;
     img {
       cursor: pointer;
       rotate: 0deg;
-      transition: rotate 0.1s ease-in-out;
+      transition: rotate 0.3s ease-in-out;
     }
 
     .active-plus {
@@ -132,7 +132,9 @@ $grey-color-select: #e5e5e5;
 
   .dropdown {
     overflow: hidden;
-    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    transition:
+      opacity 0.2s ease-in-out,
+      transform 0.2s ease-in-out;
     opacity: 0;
     pointer-events: none;
     // padding:  0;
@@ -500,7 +502,7 @@ $grey-color-select: #e5e5e5;
         letter-spacing: 0%;
         text-decoration: none;
         color: $link-color;
-        transition: all 0.1s ease-in-out;
+        transition: all 0.3s ease-in-out;
         &:hover {
           color: $white-color;
           text-decoration: underline;
@@ -542,7 +544,7 @@ $grey-color-select: #e5e5e5;
             line-height: 100%;
             letter-spacing: 0%;
             border: none;
-            transition: all 0.1s ease-in-out;
+            transition: all 0.3s ease-in-out;
             cursor: pointer;
             &:first-child:hover {
               background-color: $white-color;
@@ -710,13 +712,16 @@ $grey-color-select: #e5e5e5;
   background-color: $white-color;
   padding: 20px;
   width: 400px;
-  top: 104%;
+  top: 106%;
   right: 0;
   background-color: #fff;
   max-height: calc(100vh - 200px);
   overflow: auto;
-  box-shadow: 0px 14px 30px 0px #0000001a, 0px 55px 55px 0px #00000017,
-    0px 124px 74px 0px #0000000d, 0px 220px 88px 0px #00000003,
+  box-shadow:
+    0px 14px 30px 0px #0000001a,
+    0px 55px 55px 0px #00000017,
+    0px 124px 74px 0px #0000000d,
+    0px 220px 88px 0px #00000003,
     0px 344px 96px 0px #00000000;
 
   // z-index: 100;
@@ -735,7 +740,7 @@ $grey-color-select: #e5e5e5;
     border: none;
     margin-top: 25px;
     cursor: pointer;
-    transition: all 0.1s ease-in-out;
+    transition: all 0.3s ease-in-out;
     &:hover {
       background-color: $black-color;
     }
@@ -891,7 +896,7 @@ $grey-color-select: #e5e5e5;
     border: none;
     margin-top: 25px;
     cursor: pointer;
-    transition: all 0.1s ease-in-out;
+    transition: all 0.3s ease-in-out;
     &:hover {
       background-color: $black-color;
     }
@@ -1263,7 +1268,7 @@ $grey-color-select: #e5e5e5;
             line-height: 100%;
             letter-spacing: 0%;
             text-align: center;
-            transition: all 0.1s ease-in-out;
+            transition: all 0.3s ease-in-out;
             color: $grey-color;
             &:hover {
               color: $black-color;
@@ -1568,7 +1573,7 @@ $grey-color-select: #e5e5e5;
     line-height: 80%;
     letter-spacing: 0%;
     text-align: center;
-    transition: all 0.1s ease-in-out;
+    transition: all 0.3s ease-in-out;
     &:hover {
       scale: 1.05;
     }
@@ -1758,8 +1763,11 @@ $grey-color-select: #e5e5e5;
       top: 70px;
       left: 30px;
       transition: all 0.7s ease-in-out;
-      box-shadow: -3px 2px 8px 0px #0000000d, -12px 7px 14px 0px #0000000a,
-        -27px 16px 19px 0px #00000008, -48px 28px 22px 0px #00000003,
+      box-shadow:
+        -3px 2px 8px 0px #0000000d,
+        -12px 7px 14px 0px #0000000a,
+        -27px 16px 19px 0px #00000008,
+        -48px 28px 22px 0px #00000003,
         -75px 43px 24px 0px #00000000;
     }
     .gift-card2 {
@@ -1768,8 +1776,11 @@ $grey-color-select: #e5e5e5;
       right: 0;
       top: 70px;
       transition: all 0.7s ease-in-out;
-      box-shadow: -3px 2px 8px 0px #0000000d, -12px 7px 14px 0px #0000000a,
-        -27px 16px 19px 0px #00000008, -48px 28px 22px 0px #00000003,
+      box-shadow:
+        -3px 2px 8px 0px #0000000d,
+        -12px 7px 14px 0px #0000000a,
+        -27px 16px 19px 0px #00000008,
+        -48px 28px 22px 0px #00000003,
         -75px 43px 24px 0px #00000000;
     }
     .card {
@@ -1807,6 +1818,11 @@ $grey-color-select: #e5e5e5;
       text-align: center;
       background-color: $black-color;
       color: $white-color;
+      cursor: pointer;
+      transition: all .3s ease-in-out;
+      &:hover {
+        scale: 1.05;
+      }
       span {
         height: 12px;
         display: flex;
@@ -1881,7 +1897,7 @@ $grey-color-select: #e5e5e5;
     z-index: 9999;
     gap: 40px;
     position: relative;
-    > img{
+    > img {
       position: absolute;
       right: 20px;
       top: 20px;
@@ -1947,11 +1963,11 @@ $grey-color-select: #e5e5e5;
           height: 13px;
         }
       }
-      > div.phone{
+      > div.phone {
         display: flex !important;
         gap: 10px;
       }
-      > button{
+      > button {
         border-radius: 0;
         width: 100%;
       }
@@ -2049,7 +2065,7 @@ $grey-color-select: #e5e5e5;
           line-height: 80%;
           letter-spacing: 0%;
           height: 12px;
-          transition: all 0.1s ease-in-out;
+          transition: all 0.3s ease-in-out;
           &:hover {
             color: $white-color;
           }
@@ -2087,7 +2103,7 @@ $grey-color-select: #e5e5e5;
           flex-direction: column;
           gap: 10px;
           padding: 6px;
-          transition: all 0.1s ease-in-out;
+          transition: all 0.3s ease-in-out;
           border: 1px solid transparent;
           &:hover {
             cursor: pointer;
