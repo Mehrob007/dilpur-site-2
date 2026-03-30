@@ -464,6 +464,28 @@ $grey-color-select: #e5e5e5;
       }
       .header-content-right {
         height: 100%;
+        .icons-basket {
+          position: relative;
+          > span {
+            top: 0;
+            right: -3px;
+            background-color: $red-color;
+            color: $white-color;
+            width: 14px;
+            height: 14px;
+            border-radius: 50px;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Gilroy;
+            font-weight: 700;
+            font-style: Bold;
+            font-size: 10px;
+            line-height: 100%;
+            letter-spacing: 0%;
+          }
+        }
       }
       .logoTitle {
         position: absolute;
@@ -1581,7 +1603,7 @@ $grey-color-select: #e5e5e5;
 }
 
 .product-items-error {
-  // min-height: 595px;
+  min-height: 595px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -1593,7 +1615,9 @@ $grey-color-select: #e5e5e5;
   & > div {
     display: flex;
     align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    gap: 30px;
+    color: $grey-color;
     h1 {
       font-family: Gilroy;
       font-weight: 500;
@@ -1602,8 +1626,16 @@ $grey-color-select: #e5e5e5;
       line-height: 80%;
       letter-spacing: 0%;
       text-align: center;
-      color: $grey-color;
       height: 20px;
+    }
+    & > span {
+      font-family: Gilroy;
+      font-weight: 600;
+      font-style:  Italic;
+      font-size: 120px;
+      line-height: 80%;
+      letter-spacing: 0%;
+      text-align: center;
     }
   }
 }
@@ -1819,7 +1851,7 @@ $grey-color-select: #e5e5e5;
       background-color: $black-color;
       color: $white-color;
       cursor: pointer;
-      transition: all .3s ease-in-out;
+      transition: all 0.3s ease-in-out;
       &:hover {
         scale: 1.05;
       }

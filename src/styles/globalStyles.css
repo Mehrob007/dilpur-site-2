@@ -438,6 +438,28 @@
 .header .header-main .header-content .header-content-right {
   height: 100%;
 }
+.header .header-main .header-content .header-content-right .icons-basket {
+  position: relative;
+}
+.header .header-main .header-content .header-content-right .icons-basket > span {
+  top: 0;
+  right: -3px;
+  background-color: #d32a2a;
+  color: #ffffff;
+  width: 14px;
+  height: 14px;
+  border-radius: 50px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Gilroy;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 10px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
 .header .header-main .header-content .logoTitle {
   position: absolute;
   width: calc(100% - 80px);
@@ -1488,6 +1510,7 @@
 }
 
 .product-items-error {
+  min-height: 595px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -1499,7 +1522,9 @@
 .product-items-error > div {
   display: flex;
   align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 30px;
+  color: #aeaeae;
 }
 .product-items-error > div h1 {
   font-family: Gilroy;
@@ -1509,8 +1534,16 @@
   line-height: 80%;
   letter-spacing: 0%;
   text-align: center;
-  color: #aeaeae;
   height: 20px;
+}
+.product-items-error > div > span {
+  font-family: Gilroy;
+  font-weight: 600;
+  font-style: Italic;
+  font-size: 120px;
+  line-height: 80%;
+  letter-spacing: 0%;
+  text-align: center;
 }
 
 .details-product {
