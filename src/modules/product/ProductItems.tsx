@@ -50,7 +50,7 @@ export default function ProductItems({
 
   const getData = async (Name?: string, reset: boolean = false) => {
     try {
-      const sex = pathName?.includes("/female") ? 2 : 1;
+      const sender = pathName?.includes("/female") ? 2 : 1;
       const res = await GetProductREQ({
         Limit,
         Name: Name || (name as string),
@@ -59,7 +59,7 @@ export default function ProductItems({
         CategoriesIds: categorys.map((e) => +e),
         SizeIds: sizes.map((e) => +e),
         SortType: sorts || "",
-        Sex: sex,
+        Gender: sender,
       });
       if (reset) {
         setData(res.data);

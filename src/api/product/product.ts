@@ -19,7 +19,7 @@ export const GetProductREQ = async ({
   CategoriesIds,
   SeriesId,
   SortType,
-  Sex,
+  Gender,
 }: {
   Limit?: number;
   Page?: number;
@@ -30,7 +30,7 @@ export const GetProductREQ = async ({
   CategoriesIds?: number[];
   SeriesId?: number;
   SortType?: string;
-  Sex?: number;
+  Gender?: number;
 }) => {
   try {
     const productTypeIds = arrayParams(TypeIds, "productTypeIds");
@@ -45,7 +45,7 @@ export const GetProductREQ = async ({
         Name: Name,
         SeriesId: SeriesId,
         SortType: SortType,
-        Sex: Sex,
+        Gender: Gender,
         ColumnName: "Cost",
         ...productTypeIds,
         ...sizeIds,
