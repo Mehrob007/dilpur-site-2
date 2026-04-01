@@ -39,7 +39,8 @@ export const ArrDefData: ProductItemT[] = [
     subTitle: "Пиджак из трикотажной ткани",
     price: 2550,
     discount: 2200,
-    details: { discount: 54 },
+    preCostProcent: 54,
+    details: [],
     id: 2,
   },
   {
@@ -58,7 +59,8 @@ export const ArrDefData: ProductItemT[] = [
     subTitle: "Пиджак из трикотажной ткани",
     price: 2550,
     discount: 2200,
-    details: { discount: 54 },
+    preCostProcent: 54,
+    details: [],
     id: 3,
   },
   {
@@ -77,7 +79,8 @@ export const ArrDefData: ProductItemT[] = [
     subTitle: "Пиджак из трикотажной ткани",
     price: 2550,
     discount: 2200,
-    details: { discount: 54 },
+    preCostProcent: 54,
+    details: [],
     id: 4,
   },
   {
@@ -96,7 +99,8 @@ export const ArrDefData: ProductItemT[] = [
     subTitle: "Пиджак из трикотажной ткани",
     price: 2550,
     discount: 2200,
-    details: { discount: 54 },
+    preCostProcent: 54,
+    details: [],
     id: 5,
   },
   {
@@ -115,7 +119,8 @@ export const ArrDefData: ProductItemT[] = [
     subTitle: "Пиджак из трикотажной ткани",
     price: 2550,
     discount: 2200,
-    details: { discount: 54 },
+    preCostProcent: 54,
+    details: [],
     id: 6,
   },
   {
@@ -134,7 +139,8 @@ export const ArrDefData: ProductItemT[] = [
     subTitle: "Пиджак из трикотажной ткани",
     price: 2550,
     discount: 2200,
-    details: { discount: 54 },
+    preCostProcent: 54,
+    details: [],
     id: 7,
   },
 ];
