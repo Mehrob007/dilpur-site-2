@@ -1530,7 +1530,7 @@
   font-family: Gilroy;
   font-weight: 500;
   font-style: Medium;
-  font-size: 28px;
+  font-size: 20px;
   line-height: 80%;
   letter-spacing: 0%;
   text-align: center;
@@ -2038,8 +2038,6 @@
 }
 .footer .footer-bottom .footer-bottom-content .footer-gps div:hover {
   cursor: pointer;
-  border-radius: 5px;
-  border: 1px solid #505050;
 }
 .footer .footer-bottom .footer-bottom-content .footer-gps div h1 {
   display: flex;

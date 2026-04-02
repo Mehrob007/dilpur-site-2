@@ -1622,7 +1622,7 @@ $grey-color-select: #e5e5e5;
       font-family: Gilroy;
       font-weight: 500;
       font-style: Medium;
-      font-size: 28px;
+      font-size: 20px;
       line-height: 80%;
       letter-spacing: 0%;
       text-align: center;
@@ -2139,8 +2139,8 @@ $grey-color-select: #e5e5e5;
           border: 1px solid transparent;
           &:hover {
             cursor: pointer;
-            border-radius: 5px;
-            border: 1px solid $link-color;
+            // border-radius: 5px;
+            // border: 1px solid $link-color;
           }
           h1 {
             display: flex;

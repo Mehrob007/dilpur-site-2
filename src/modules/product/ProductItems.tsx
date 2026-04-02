@@ -50,7 +50,7 @@ export default function ProductItems({
 
   const getData = async (Name?: string, reset: boolean = false) => {
     try {
-      const sender = pathName?.includes("/female") ? 2 : 1;
+      const sender = pathName?.includes("/female") ? 1 : 0;
       const res = await GetProductREQ({
         Limit,
         Name: Name || (name as string),

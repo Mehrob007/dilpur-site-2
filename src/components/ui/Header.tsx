@@ -28,7 +28,7 @@ export default function Header() {
 
   const getType = React.useCallback(async () => {
     try {
-      const sender = pathName?.includes("/female") ? 2 : 1;
+      const sender = pathName?.includes("/female") ? 1 : 0;
       const res = await GetTypeREQ({ Gender: sender });
 
       setType(res.data.reverse());
