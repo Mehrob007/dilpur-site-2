@@ -1164,7 +1164,7 @@
   flex: 1;
 }
 .product-item .product-item-img .image {
-  height: 700px;
+  height: 540px;
   position: relative;
 }
 .product-item .product-item-img .image:hover .bay-button > div {
@@ -2024,9 +2024,9 @@
 }
 .footer .footer-bottom .footer-bottom-content .footer-gps {
   gap: 30px 60px;
-  display: grid;
-  grid-template-columns: repeat(3, 250px);
-  max-width: 905px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1405px;
 }
 .footer .footer-bottom .footer-bottom-content .footer-gps div {
   display: flex;
@@ -2035,6 +2035,7 @@
   padding: 6px;
   transition: all 0.3s ease-in-out;
   border: 1px solid transparent;
+  width: 250px;
 }
 .footer .footer-bottom .footer-bottom-content .footer-gps div:hover {
   cursor: pointer;

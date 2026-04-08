@@ -1232,7 +1232,7 @@ $grey-color-select: #e5e5e5;
     flex: 1;
     .image {
       // height: 40vw;
-      height: 700px;
+      height: 540px;
       // width: 360px;
       // height: 40vw;
       position: relative;
@@ -1631,7 +1631,7 @@ $grey-color-select: #e5e5e5;
     & > span {
       font-family: Gilroy;
       font-weight: 600;
-      font-style:  Italic;
+      font-style: Italic;
       font-size: 120px;
       line-height: 80%;
       letter-spacing: 0%;
@@ -2127,9 +2127,11 @@ $grey-color-select: #e5e5e5;
       }
       .footer-gps {
         gap: 30px 60px;
-        display: grid;
-        grid-template-columns: repeat(3, 250px);
-        max-width: 905px;
+        // display: grid;
+        // grid-template-columns: repeat(3, 250px);
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 1405px;
         div {
           display: flex;
           flex-direction: column;
@@ -2137,6 +2139,7 @@ $grey-color-select: #e5e5e5;
           padding: 6px;
           transition: all 0.3s ease-in-out;
           border: 1px solid transparent;
+          width: 250px;
           &:hover {
             cursor: pointer;
             // border-radius: 5px;
