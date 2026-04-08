@@ -1,12 +1,8 @@
 import apiClient from "@/utils/apiClient";
 
 const arrayParams = (arr?: number[], key?: string) => {
-  if (!Array.isArray(arr)) return;
-  let obj: { [key: string]: number } = {};
-  arr.map((e) => {
-    obj = { ...obj, [key || "error_key"]: e };
-  });
-  return obj;
+  if (!Array.isArray(arr) || arr.length === 0) return {};
+  return { [key || "error_key"]: arr };
 };
 
 export const GetProductREQ = async ({
@@ -50,6 +46,9 @@ export const GetProductREQ = async ({
         ...productTypeIds,
         ...sizeIds,
         ...categoriesIds,
+      },
+      paramsSerializer: {
+        indexes: null, // this will produce key=val1&key=val2 instead of key[0]=val1
       },
     });
     return res.data;
