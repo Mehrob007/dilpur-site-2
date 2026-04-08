@@ -1356,6 +1356,7 @@ $grey-color-select: #e5e5e5;
   top: 23px;
   left: 20px;
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   span {
     padding: 6px;
@@ -1363,7 +1364,7 @@ $grey-color-select: #e5e5e5;
     padding-bottom: 5px;
   }
 }
-.product-item-img-new {
+.product-item-img-new, .product-item-img-hit, .product-item-img-action {
   font-family: Gilroy;
   font-weight: 500;
   font-style: Medium;
@@ -1371,7 +1372,12 @@ $grey-color-select: #e5e5e5;
   line-height: 80%;
   letter-spacing: 0%;
   color: $white-color;
+}
+.product-item-img-new {
   background-color: $bg-color-new;
+}
+.product-item-img-hit, .product-item-img-action {
+  background-color: $red-color;
 }
 .product-item-price {
   display: flex;
