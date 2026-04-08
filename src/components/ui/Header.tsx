@@ -66,7 +66,7 @@ export default function Header() {
     localStorage.setItem("favorites", JSON.stringify(propertys));
   }, [propertys]);
 
-  // console.log("propertys", propertys);
+  console.log("basketItems", basketItems);
 
   return (
     <div className="header">
@@ -141,7 +141,13 @@ export default function Header() {
                 width={24}
                 height={24}
               />
-              {basketItems?.length ? <span>{basketItems?.length}</span> : ""}
+              {basketItems?.length ? (
+                <span>
+                  {basketItems.reduce((acc, item) => acc + item.count, 0)}
+                </span>
+              ) : (
+                ""
+              )}
             </div>
             <Image
               style={{
