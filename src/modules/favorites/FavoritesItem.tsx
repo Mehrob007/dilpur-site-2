@@ -113,9 +113,9 @@ export default function FavoritesItem({ id }: { id: number }) {
       <div className="product-item-info">
         <div className="product-item-text">
           <h1 onClick={() => router.push(`/${pathName.split("/")[1]}/` + id)}>
-            {data?.name as string}
+            {(data?.brand as { name: string })?.name}
           </h1>
-          <p>{data?.description as string}</p>
+          <p>{data?.name as string}</p>
         </div>
         <div className="product-item-price">
           {outOfStock ? (
