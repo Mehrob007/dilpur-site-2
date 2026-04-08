@@ -18,7 +18,7 @@ export default function ProductItems({
 }: ProductItemsT) {
   // const [data, setData] = useState<ProductItemT[] | null>(null);
   const [error, setError] = useState<boolean>(false);
-  const { propertys } = useStore();
+  // const { propertys } = useStore();
   const pathName = usePathname();
   const searchParams = useSearchParams();
   const types = searchParams.getAll("types");
@@ -66,6 +66,7 @@ export default function ProductItems({
         setPage(0);
       } else setData([...data, ...res.data]);
     } catch (e) {
+      setData([]);
       console.log(e);
     } finally {
       setFetching(false);
@@ -106,8 +107,8 @@ export default function ProductItems({
               img={
                 Array.isArray(e.fileNames) ? (e.fileNames as string[]) : [""]
               }
-              title={e.name as string}
-              subTitle={e.preName as string}
+              title={(e?.brand as { name: string })?.name as string}
+              subTitle={e.name as string}
               price={e.cost as number}
               discount={e.preCost as number}
               details={e.tags as string[]}
