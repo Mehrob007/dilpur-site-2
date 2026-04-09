@@ -6,15 +6,19 @@ import Textarea from "../element/Textarea";
 import BasketItems from "@/modules/basket/BasketItems";
 import { useGlobalState } from "@/store/globalState";
 import { PostOrderREQ } from "@/api/product/order";
+import SuccessModal from "./SuccessModal";
+import { useRouter } from "next/navigation";
 
 const OrderPrice = 20;
 
 export default function OrderForm() {
-  const { basketItems } = useGlobalState();
+  const { basketItems, setBasketItems } = useGlobalState();
   const [price, setPrice] = useState(0);
   const [skitka, setSkitka] = useState(0);
   const [count, setCount] = useState(0);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const { data, errors, setData, validate } = useFormStore();
+  const router = useRouter();
 
   useEffect(() => {
     let count = 0;
@@ -57,6 +61,11 @@ export default function OrderForm() {
         },
       });
       console.log("res", res);
+      if (res) {
+        setShowSuccessModal(true);
+        setBasketItems([]);
+        localStorage.removeItem("basketIds");
+      }
     } catch (e) {
       console.error(e);
     }
@@ -228,6 +237,13 @@ export default function OrderForm() {
           </nav>
         </main>
       </div>
+      <SuccessModal
+        isOpen={showSuccessModal}
+        onClose={() => {
+          setShowSuccessModal(false);
+          router.push("/");
+        }}
+      />
     </div>
   );
 }
