@@ -1217,25 +1217,30 @@ $grey-color-select: #e5e5e5;
   }
   .product-items-content {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 60px 40px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+      gap: 30px 15px;
+    }
   }
 }
 .product-item {
-  // background-color: $off-color;
   display: flex;
   flex-direction: column;
   gap: 19px;
+  width: 100%;
+  max-width: 380px;
   .product-item-img {
     // width: 360px;
     position: relative;
     flex: 1;
     .image {
-      // height: 40vw;
-      height: 540px;
-      // width: 360px;
-      // height: 40vw;
+      width: 100%;
+      aspect-ratio: 3 / 4;
       position: relative;
+      overflow: hidden;
       &:hover {
         // .img-product1 {
         //   display: flex;
