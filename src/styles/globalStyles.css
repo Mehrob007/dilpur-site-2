@@ -2120,7 +2120,7 @@
   padding: 6px;
   transition: all 0.3s ease-in-out;
   border: 1px solid transparent;
-  width: autos;
+  width: auto;
 }
 .footer .footer-bottom .footer-bottom-content .footer-gps div:hover {
   cursor: pointer;
