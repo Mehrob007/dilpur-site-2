@@ -19,6 +19,7 @@ import React, { useEffect, useState } from "react";
 export default function Product() {
   const { id } = useParams();
   const [data, setData] = useState<ProductItemT | null>(null);
+  const [loading, setLoading] = useState(true);
   const [sizes, setSizes] = useState<defDataT[] | null>(null);
   const [selectSize, setSelectSize] = useState<sizeT>();
   const [seriesProducts, setSeriesProducts] = useState<{
@@ -103,6 +104,8 @@ export default function Product() {
       setSizes(data?.sizes);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -156,6 +159,40 @@ export default function Product() {
   useEffect(() => {
     getData();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="product-page">
+        <main className="max-width">
+          <div className="product-page-images product-page-skeleton-images">
+            <div className="skeleton-img" />
+            <div className="skeleton-img" />
+            <div className="skeleton-img" />
+            <div className="skeleton-img" />
+          </div>
+          <div className="product-page-details">
+            <div className="product-page-header">
+              <div className="skeleton-line skeleton-title" />
+              <div className="skeleton-line skeleton-subtitle" />
+              <div className="skeleton-line skeleton-meta" />
+            </div>
+            <div className="skeleton-line skeleton-price" />
+            <div className="skeleton-sizes">
+              <div className="skeleton-line skeleton-size-btn" />
+              <div className="skeleton-line skeleton-size-btn" />
+              <div className="skeleton-line skeleton-size-btn" />
+              <div className="skeleton-line skeleton-size-btn" />
+            </div>
+            <div className="skeleton-line skeleton-add-btn" />
+            <div className="skeleton-line skeleton-desc" />
+            <div className="skeleton-line skeleton-desc" />
+            <div className="skeleton-line skeleton-desc-short" />
+            <div className="skeleton-line skeleton-desc" />
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   if (!data) return null;
 

@@ -1546,6 +1546,59 @@ $grey-color-select: #e5e5e5;
   }
 }
 
+// ── Skeleton / shimmer loading state ────────────────────────────────
+@keyframes skeleton-shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+
+%skeleton-base {
+  background: linear-gradient(
+    90deg,
+    #e8e8e8 25%,
+    #f5f5f5 50%,
+    #e8e8e8 75%
+  );
+  background-size: 600px 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+.skeleton-img {
+  @extend %skeleton-base;
+  width: calc(50% - 3px);
+  aspect-ratio: 3 / 4;
+}
+
+.skeleton-line {
+  @extend %skeleton-base;
+}
+
+.skeleton-title       { width: 55%; height: 22px; }
+.skeleton-subtitle    { width: 75%; height: 15px; }
+.skeleton-meta        { width: 45%; height: 12px; }
+.skeleton-price       { width: 30%; height: 20px; margin-top: 4px; }
+.skeleton-add-btn     { width: 100%; height: 50px; }
+.skeleton-desc        { width: 100%; height: 14px; }
+.skeleton-desc-short  { width: 65%;  height: 14px; }
+
+.skeleton-sizes {
+  display: flex;
+  gap: 15px;
+}
+.skeleton-size-btn {
+  width: 82px;
+  height: 50px;
+  border-radius: 0;
+}
+
+.product-page-skeleton-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+// ────────────────────────────────────────────────────────────────────
+
 .filter {
   height: 100%;
   display: flex;
