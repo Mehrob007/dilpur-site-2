@@ -210,7 +210,7 @@ export default function Product() {
   } = data;
   console.log("data", data);
   return (
-    <div className="product-page">
+    <div className="product-page product-page-loaded">
       <main className="max-width">
         <div className="product-page-images">
           {Array.isArray(img) &&
