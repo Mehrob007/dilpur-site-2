@@ -8,8 +8,6 @@ import React from "react";
 export default function Page() {
   const { propertys } = useStore();
 
-  console.log("propertys", propertys);
-
   return (
     <div className="catalog">
       <FavoritesItems title="Избранное" ids={propertys} />

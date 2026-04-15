@@ -48,8 +48,6 @@ export default function FavoritesItem({ id }: { id: number }) {
     getDataById();
   }, []);
 
-  console.log("data", data);
-
   return (
     <div className="product-item">
       <div className="product-item-img">

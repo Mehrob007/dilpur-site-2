@@ -171,7 +171,6 @@ export default function Product() {
     // colors,
     colorProduct,
   } = data;
-  console.log("data", data);
   return (
     <div className="product-page">
       <main className="max-width">

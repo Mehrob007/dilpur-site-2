@@ -29,8 +29,6 @@ export default function ProductItems({
   // const [propertys, setPropertys] = useState<number[] | null>(null);
   // const propertys: number[] = getKeyStorage("property");
 
-  console.log("query", { types, categorys, sizes, sorts, name });
-
   const [page, setPage] = useState<number>(0);
   const [fetching, setFetching] = useState(true);
   const [data, setData] = useState<ItemT[] | []>([]);
@@ -82,8 +80,6 @@ export default function ProductItems({
     name,
     pathName,
   ]);
-
-  console.log("data", data);
 
   return (
     <div className="product-items max-width">

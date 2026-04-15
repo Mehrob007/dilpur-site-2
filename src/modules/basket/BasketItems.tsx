@@ -30,7 +30,6 @@ export default function BasketItems({
     const newBasketItems = basketItems.filter((e) => e.id !== id);
     localStorage.setItem("basketIds", JSON.stringify(newBasketItems));
     setBasketItems(newBasketItems);
-    console.log("newBasketIds", newBasketItems);
   };
 
   const getPrice = (priceItme: number) => {

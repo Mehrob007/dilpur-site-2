@@ -4,6 +4,7 @@ import "./globals.css";
 import "@/styles/globalStyles.css";
 import Header from "@/components/ui/Header";
 import Footer from "@/components/ui/Footer";
+import PageTransition from "@/components/ui/PageTransition";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +33,9 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <NextTopLoader color="#181818" showSpinner={false} />
         <Header />
-        <main className="layout">{children}</main>
+        <main className="layout">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer />
       </body>
     </html>

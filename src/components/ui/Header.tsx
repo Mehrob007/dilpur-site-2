@@ -66,7 +66,6 @@ export default function Header() {
     localStorage.setItem("favorites", JSON.stringify(propertys));
   }, [propertys]);
 
-  console.log("basketItems", basketItems);
 
   return (
     <div className="header">

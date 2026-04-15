@@ -27,7 +27,6 @@ export default function Footer() {
   const getShops = async () => {
     try {
       const res = await GetShopREQ();
-      console.log("parseData", res?.data);
       const data = res?.data;
       setShops(data);
     } catch (e) {

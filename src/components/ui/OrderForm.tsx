@@ -60,7 +60,6 @@ export default function OrderForm() {
           })),
         },
       });
-      console.log("res", res);
       if (res) {
         setShowSuccessModal(true);
         setBasketItems([]);
@@ -70,9 +69,6 @@ export default function OrderForm() {
       console.error(e);
     }
   };
-  console.log("price", price);
-  console.log("data", data);
-
   return (
     <div className="form-order-main">
       <div className="left-com">

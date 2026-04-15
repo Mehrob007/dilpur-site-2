@@ -92,7 +92,6 @@ BasketItemT) {
       const res = await GetProductByIdREQ({
         id: id,
       });
-      console.log("parseData", res?.data);
       const data = res?.data;
       setData({
         ...data,
