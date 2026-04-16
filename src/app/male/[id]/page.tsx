@@ -100,6 +100,7 @@ export default function Product() {
         description: data?.description,
         structure: data?.structure,
         series: data?.series,
+        shop: data?.shop,
       });
       setSizes(data?.sizes);
     } catch (e) {
@@ -156,6 +157,7 @@ export default function Product() {
   useEffect(() => {
     if (data?.series?.id) getSeriesById(data?.series?.id);
   }, [data]);
+
   useEffect(() => {
     getData();
   }, []);
@@ -206,8 +208,10 @@ export default function Product() {
     article,
     details,
     // colors,
+    shop,
     colorProduct,
   } = data;
+
   return (
     <div className="product-page product-page-loaded">
       <main className="max-width">
@@ -247,9 +251,9 @@ export default function Product() {
           {seriesProducts?.data && data?.id && (
             <ColorProduct
               colorsIds={[
-                data?.id,
                 ...seriesProducts?.data?.filter((e) => e !== data?.id),
-              ]}
+                data?.id,
+              ].sort((a, b) => a - b)}
             />
           )}
           {sizes && (
@@ -270,6 +274,7 @@ export default function Product() {
                 })
               }
               id={+id}
+              shopId={shop?.id}
             />
           )}
           <Description
