@@ -11,7 +11,7 @@ interface SuccessModalProps {
 }
 
 export default function SuccessModal({ isOpen, onClose }: SuccessModalProps) {
-  if (isOpen) return null;
+  if (!isOpen) return null;
 
   return (
     <div className="success-modal-overlay" onClick={onClose}>

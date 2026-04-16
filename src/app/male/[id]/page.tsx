@@ -241,7 +241,7 @@ export default function Product() {
           <div className="product-item-price">
             {discount ? (
               <>
-                <div className="discount">{discount} c.</div>{" "}
+                <div className="discount">{discount} c.</div>
                 <div className="crossed">{price} c.</div>
               </>
             ) : (
@@ -274,7 +274,7 @@ export default function Product() {
                 })
               }
               id={+id}
-              shopId={shop?.id}
+              shop={shop}
             />
           )}
           <Description

@@ -245,7 +245,7 @@ export default function Product() {
                 })
               }
               id={+id}
-              shopId={shop?.id}
+              shop={shop}
             />
           )}
           <Description

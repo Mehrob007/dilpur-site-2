@@ -17,7 +17,7 @@ export default function OrderForm() {
   const [skitka, setSkitka] = useState(0);
   const [count, setCount] = useState(0);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const { data, errors, setData, validate } = useFormStore();
+  const { data, errors, setData, validate, setClear } = useFormStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -237,6 +237,7 @@ export default function OrderForm() {
         isOpen={showSuccessModal}
         onClose={() => {
           setShowSuccessModal(false);
+          setClear();
           router.push("/");
         }}
       />

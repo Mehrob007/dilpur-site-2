@@ -9,7 +9,7 @@ import { GetShopByIdREQ } from "@/api/shop/shop";
 export default function ButtonAddProduct({
   id,
   onClick,
-  shopId,
+  shop,
 }: ButtonAddProductT) {
   const { propertys, setProperty, deleteProperty } = useStore();
   const { setOpenModalKey, setShopItem } = useGlobalState();
@@ -51,7 +51,9 @@ export default function ButtonAddProduct({
       </div>
       <p>
         В наличии в магазине{" "}
-        <span onClick={() => shopId && getShopById(shopId)}>Дилпур</span>
+        <span onClick={() => shop?.id && getShopById(shop?.id)}>
+          {shop?.name}
+        </span>
       </p>
     </div>
   );
