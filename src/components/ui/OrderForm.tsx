@@ -7,6 +7,7 @@ import BasketItems from "@/modules/basket/BasketItems";
 import { useGlobalState } from "@/store/globalState";
 import { PostOrderREQ } from "@/api/product/order";
 import SuccessModal from "./SuccessModal";
+import ErrorModal from "./ErrorModal";
 import { useRouter } from "next/navigation";
 
 const OrderPrice = 20;
@@ -17,6 +18,8 @@ export default function OrderForm() {
   const [skitka, setSkitka] = useState(0);
   const [count, setCount] = useState(0);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorCode, setErrorCode] = useState<string | number>("");
   const { data, errors, setData, validate, setClear } = useFormStore();
   const router = useRouter();
 
@@ -65,8 +68,10 @@ export default function OrderForm() {
         setBasketItems([]);
         localStorage.removeItem("basketIds");
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
+      setErrorCode(e.response?.status || e.message || "Unknown");
+      setShowErrorModal(true);
     }
   };
   return (
@@ -240,6 +245,11 @@ export default function OrderForm() {
           setClear();
           router.push("/");
         }}
+      />
+      <ErrorModal
+        isOpen={showErrorModal}
+        onClose={() => setShowErrorModal(false)}
+        errorCode={errorCode}
       />
     </div>
   );
