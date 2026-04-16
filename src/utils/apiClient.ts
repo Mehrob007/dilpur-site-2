@@ -7,7 +7,7 @@ const getToken = () => {
 };
 
 const apiClient = axios.create({
-  baseURL: BASE_URL,
+  baseURL: `${BASE_URL}api/`,
   headers: {
     "Content-Type": "application/json",
   } as AxiosRequestHeaders,

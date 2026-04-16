@@ -37,6 +37,7 @@ export interface ProductItemT extends detailsT {
   colorProduct?: string;
   sizeIds?: number[];
   size?: sizeT;
+  shop?: sizeT;
   color?: string;
   count?: 0;
   products?: { id: number; size: sizeT; count: number }[];
