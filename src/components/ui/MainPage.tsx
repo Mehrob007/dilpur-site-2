@@ -9,7 +9,6 @@ import React from "react";
 export default function MainPage() {
   const { type } = useGlobalState();
 
-
   return (
     <div className="main-page">
       <Banner />

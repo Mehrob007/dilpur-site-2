@@ -6,7 +6,7 @@ import { getFileURL } from "@/utils/getFileURL";
 
 export default function ColorProductItem({
   id,
-  index,
+  // index,
 }: {
   id: number;
   index: number;
@@ -14,7 +14,7 @@ export default function ColorProductItem({
   const pathName = usePathname();
   const router = useRouter();
   const [data, setData] = useState<{ images: string[]; id: number } | null>(
-    null
+    null,
   );
   const getData = async () => {
     try {
@@ -36,7 +36,7 @@ export default function ColorProductItem({
       alt={"color-product-img"}
       width={82.5}
       height={127}
-      className={index ? "off-color" : ""}
+      className={id !== +pathName?.split("/")?.[2] ? "off-color" : ""}
     />
   );
 }
