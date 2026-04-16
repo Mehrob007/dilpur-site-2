@@ -168,9 +168,13 @@ export default function Product() {
     discount,
     article,
     details,
+    shop,
     // colors,
     colorProduct,
   } = data;
+
+
+  
   return (
     <div className="product-page">
       <main className="max-width">
