@@ -19,6 +19,7 @@ import React, { useEffect, useState } from "react";
 export default function Product() {
   const { id } = useParams();
   const [data, setData] = useState<ProductItemT | null>(null);
+  const [loading, setLoading] = useState(true);
   const [sizes, setSizes] = useState<defDataT[] | null>(null);
   const [selectSize, setSelectSize] = useState<sizeT>();
   const [seriesProducts, setSeriesProducts] = useState<{
@@ -99,41 +100,15 @@ export default function Product() {
         description: data?.description,
         structure: data?.structure,
         series: data?.series,
+        shop: data?.shop,
       });
       setSizes(data?.sizes);
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(false);
     }
   };
-
-  // const getSeriesId = async () => {
-  //   if (!id) return;
-  //   try {
-  //     const res = await GetProductByIdREQ({
-  //       SeriesId: +id,
-  //     });
-  //     const data = res?.data;
-  //     console.log("idProductData", data);
-  //     // setData({
-  //     //   id: data?.id,
-  //     //   img: data?.fileNames,
-  //     //   title: data?.brand?.name,
-  //     //   subTitle: data?.name,
-  //     //   price: data?.cost,
-  //     //   discount: data?.preCost,
-  //     //   article: data?.code,
-  //     //   details: null,
-  //     //   property: false,
-  //     //   colors: [""],
-  //     //   colorProduct: data?.color?.name,
-  //     //   description: data?.description,
-  //     //   structure: data?.structure,
-  //     // });
-  //     setSizes(data?.sizes);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
 
   const getSeriesById = async (id: number) => {
     try {
@@ -153,9 +128,44 @@ export default function Product() {
   useEffect(() => {
     if (data?.series?.id) getSeriesById(data?.series?.id);
   }, [data]);
+
   useEffect(() => {
     getData();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="product-page">
+        <main className="max-width">
+          <div className="product-page-images product-page-skeleton-images">
+            <div className="skeleton-img" />
+            <div className="skeleton-img" />
+            <div className="skeleton-img" />
+            <div className="skeleton-img" />
+          </div>
+          <div className="product-page-details">
+            <div className="product-page-header">
+              <div className="skeleton-line skeleton-title" />
+              <div className="skeleton-line skeleton-subtitle" />
+              <div className="skeleton-line skeleton-meta" />
+            </div>
+            <div className="skeleton-line skeleton-price" />
+            <div className="skeleton-sizes">
+              <div className="skeleton-line skeleton-size-btn" />
+              <div className="skeleton-line skeleton-size-btn" />
+              <div className="skeleton-line skeleton-size-btn" />
+              <div className="skeleton-line skeleton-size-btn" />
+            </div>
+            <div className="skeleton-line skeleton-add-btn" />
+            <div className="skeleton-line skeleton-desc" />
+            <div className="skeleton-line skeleton-desc" />
+            <div className="skeleton-line skeleton-desc-short" />
+            <div className="skeleton-line skeleton-desc" />
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   if (!data) return null;
 
@@ -173,10 +183,8 @@ export default function Product() {
     colorProduct,
   } = data;
 
-
-  
   return (
-    <div className="product-page">
+    <div className="product-page product-page-loaded">
       <main className="max-width">
         <div className="product-page-images">
           {Array.isArray(img) &&
@@ -214,9 +222,9 @@ export default function Product() {
           {seriesProducts?.data && data?.id && (
             <ColorProduct
               colorsIds={[
-                data?.id,
                 ...seriesProducts?.data?.filter((e) => e !== data?.id),
-              ]}
+                data?.id,
+              ].sort((a, b) => a - b)}
             />
           )}
           {sizes && (
@@ -237,6 +245,7 @@ export default function Product() {
                 })
               }
               id={+id}
+              shopId={shop?.id}
             />
           )}
           <Description
