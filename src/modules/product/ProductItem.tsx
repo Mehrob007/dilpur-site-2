@@ -1,6 +1,6 @@
 import { ProductItemT } from "@/types/product";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropertyOff from "../../../public/icons/PropertyOff.svg";
 import PropertyOn from "../../../public/icons/PropertyOn.svg";
 
@@ -15,7 +15,7 @@ export default function ProductItem({
   title,
   subTitle,
   price,
-  details ,
+  details,
   discount = 0,
   // property,
   outOfStock = false,
