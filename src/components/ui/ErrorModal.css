@@ -23,7 +23,6 @@
   border-radius: 4px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
-
 .error-modal-content .close-btn {
   position: absolute;
   top: 20px;
@@ -35,26 +34,21 @@
   display: flex;
   transition: transform 0.2s ease;
 }
-
 .error-modal-content .close-btn img {
   filter: invert(1);
 }
-
 .error-modal-content .close-btn:hover {
   transform: scale(1.1);
 }
-
 .error-modal-content .modal-body {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
 }
-
 .error-modal-content .modal-body .logo-wrapper {
   margin-bottom: 20px;
 }
-
 .error-modal-content .modal-body .error-title {
   font-family: Gilroy, sans-serif;
   font-weight: 700;
@@ -65,7 +59,6 @@
   letter-spacing: 1px;
   color: #ff4d4d !important;
 }
-
 .error-modal-content .modal-body .error-subtitle {
   font-family: Gilroy, sans-serif;
   font-weight: 400;
@@ -74,14 +67,12 @@
   color: #cccccc !important;
   margin: 0;
 }
-
 .error-modal-content .modal-body .error-subtitle .error-code {
   display: block;
   margin: 10px 0;
   font-weight: 600;
   color: #ff4d4d;
 }
-
 .error-modal-content .modal-body .retry-btn {
   margin-top: 20px;
   padding: 15px 40px;
@@ -95,7 +86,6 @@
   cursor: pointer;
   transition: transform 0.1s ease, background-color 0.2s ease;
 }
-
 .error-modal-content .modal-body .retry-btn:hover {
   background-color: #fff;
   color: #181818;
@@ -105,10 +95,10 @@
   .error-modal-content {
     padding: 60px 20px;
   }
-  .error-modal-content .modal-body .error-title {
+  .error-modal-content .error-title {
     font-size: 32px;
   }
-  .error-modal-content .modal-body .error-subtitle {
+  .error-modal-content .error-subtitle {
     font-size: 16px;
   }
-}
+}/*# sourceMappingURL=ErrorModal.css.map */

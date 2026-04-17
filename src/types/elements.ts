@@ -19,6 +19,10 @@ export interface InputT {
   style?: { [key: string]: string };
 }
 
+export interface AutocompleteT extends InputT {
+  options: string[];
+}
+
 export interface optionsT {
   label: string;
   value: string;

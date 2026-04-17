@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Input from "../element/Input";
+import Autocomplete from "../element/Autocomplete";
+import { CITIES } from "@/constants/cities";
 import { useFormStore } from "@/hooks/useFormStore";
 import Textarea from "../element/Textarea";
 import BasketItems from "@/modules/basket/BasketItems";
@@ -120,13 +122,14 @@ export default function OrderForm() {
           <h1>Доставка</h1>
           <div>
             <nav>
-              <Input
+              <Autocomplete
                 title="Город"
                 value={data?.city as string}
                 onChange={(value) => setData("city", value)}
                 errors={errors}
                 id="city"
                 placeholder="Город"
+                options={CITIES}
               />
               <Input
                 title="Улица, дом"
