@@ -19,7 +19,9 @@ export default function ColorProductItem({
   const getData = async () => {
     try {
       const res = await GetProductByIdREQ({ id: id });
-      setData(res.data);
+      if (res && res.data) {
+        setData(res.data);
+      }
     } catch (e) {
       console.log(e);
     }
