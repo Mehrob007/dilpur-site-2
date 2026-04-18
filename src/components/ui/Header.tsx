@@ -31,7 +31,9 @@ export default function Header() {
       const sender = pathName?.includes("/female") ? 1 : 0;
       const res = await GetTypeREQ({ Gender: sender });
 
-      setType(res.data.reverse());
+      if (res && res.data) {
+        setType(res.data.reverse());
+      }
     } catch (e) {
       console.error(e);
     }
@@ -81,20 +83,24 @@ export default function Header() {
             />
           </div>
           <div className="header-content-left">
-            <Image
-              onClick={() => setOpenModalKey("navigation")}
-              src={checkKeyModal("navigation") ? closeNav : burgerIcons}
-              alt="burgerIcons"
-              width={24}
-              height={24}
-            />
+            <div className="burger-menu-wrapper">
+              <Image
+                onClick={() => setOpenModalKey("navigation")}
+                src={checkKeyModal("navigation") ? closeNav : burgerIcons}
+                alt="burgerIcons"
+                className="burger-icon"
+                width={24}
+                height={24}
+              />
+            </div>
             {links.map((e, i) => {
               const isActive = pathName.includes(e.href);
               return (
                 <Link
                   href={e.href}
                   key={i}
-                  className={`${isActive ? "active-link" : ""}`}
+                  id={`nav-link-${i}`}
+                  className={`header-link-item header-desktop-link ${isActive ? "active-link" : ""}`}
                 >
                   {e.label}
                 </Link>
