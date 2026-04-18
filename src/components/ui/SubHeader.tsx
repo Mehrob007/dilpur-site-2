@@ -4,27 +4,52 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import InputSearch from "../element/InputSearch";
-import { popularQueries } from "@/constants/header";
+import { popularQueries, links } from "@/constants/header";
+
 import Image from "next/image";
 import searchIcon from "@/../public/icons/searchIcon.svg";
 import { useGlobalState } from "@/store/globalState";
 import ProductItems from "@/modules/product/ProductItems";
 import arrowForButton from "@/../public/icons/arrow-right-white-small.svg";
 
+import { GetShopREQ } from "@/api/shop/shop";
+import { shopT } from "@/types/shop";
+import locationIcon from "@/../public/icons/locationIcon.svg";
+import profileIcon from "@/../public/icons/profile.svg";
+
 export default function SubHeader({ navLinks, type }: SubHeaderT) {
   const [searchValue, setSearchValue] = useState<string>("");
-  const { setOpenModalKey, checkKeyModal } = useGlobalState();
+  const { setOpenModalKey, checkKeyModal, setShopItem } = useGlobalState();
   const pathName = usePathname();
   const router = useRouter();
+
+  const [shops, setShops] = useState<shopT[]>([]);
+
+  const getShops = async () => {
+    try {
+      const res = await GetShopREQ();
+      if (res && res.data) {
+        setShops(res.data);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    getShops();
+  }, []);
 
   useEffect(() => {
     setSearchValue("");
   }, [pathName]);
+
+  const currentGender = pathName?.includes("/female") ? "female" : "male";
+
   return (
     <>
       <div
-        className="header-nav header-nav-search"
-        style={{ top: checkKeyModal("filter") ? "70px " : "" }}
+        className={`header-nav header-nav-search ${checkKeyModal("filter") ? "isOpen" : ""}`}
       >
         <div className="header-nav-content max-width">
           <div className="header-nav-search-input">
@@ -104,22 +129,79 @@ export default function SubHeader({ navLinks, type }: SubHeaderT) {
         </div>
       </div>
       <div
-        className="header-nav"
-        style={{ top: checkKeyModal("navigation") ? "70px " : "" }}
+        className={`header-nav ${checkKeyModal("navigation") ? "isOpen" : ""}`}
       >
         <div className="header-nav-content">
-          {navLinks.map((e, i) => {
-            const isActive = pathName.includes(e.href);
-            return (
-              <Link
-                href={`/${pathName.split("/")[1]}${e.href}`}
-                key={i}
-                className={`${isActive ? "active-link" : ""}`}
-              >
-                {e.label}
-              </Link>
-            );
-          })}
+          <div className="mobile-menu-header">
+            <div
+              className={`gender-tab ${currentGender === "male" ? "active" : ""}`}
+              onClick={() => router.push("/male")}
+            >
+              Мужчинам
+            </div>
+            <div
+              className={`gender-tab ${currentGender === "female" ? "active" : ""}`}
+              onClick={() => router.push("/female")}
+            >
+              Женщинам
+            </div>
+          </div>
+          <div className="mobile-only-links">
+            {navLinks.map((e, i) => {
+              const isActive = pathName.includes(e.href);
+              return (
+                <Link
+                  href={`/${pathName.split("/")[1]}${e.href}`}
+                  key={i}
+                  className={`${isActive ? "active-link" : ""}`}
+                >
+                  {e.label}
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="mobile-menu-footer">
+            <div className="mobile-menu-secondary-links">
+              <Link href="/favorites">Избранное</Link>
+              <Link href="/profile">Войти</Link>
+              <Link href="/delivery">Доставка</Link>
+            </div>
+
+            <div className="mobile-menu-shops">
+              <h1>Магазины</h1>
+              <div className="shops-list">
+                {shops.map((e, i) => (
+                  <div
+                    key={i}
+                    className="mobile-shop-item"
+                    onClick={() => {
+                      setOpenModalKey("ModalShop");
+                      setShopItem(e);
+                    }}
+                  >
+                    <Image src={locationIcon} alt="location" width={16} height={16} />
+                    <span>{e.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          <div className="desktop-links">
+            {navLinks.map((e, i) => {
+              const isActive = pathName.includes(e.href);
+              return (
+                <Link
+                  href={`/${pathName.split("/")[1]}${e.href}`}
+                  key={i}
+                  className={`${isActive ? "active-link" : ""}`}
+                >
+                  {e.label}
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>
