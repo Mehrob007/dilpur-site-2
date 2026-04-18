@@ -59,10 +59,12 @@ export default function ProductItems({
         SortType: sorts || "",
         Gender: sender,
       });
-      if (reset) {
-        setData(res.data);
-        setPage(0);
-      } else setData([...data, ...res.data]);
+      if (res && res.data) {
+        if (reset) {
+          setData(res.data);
+          setPage(0);
+        } else setData([...data, ...res.data]);
+      }
     } catch (e) {
       setData([]);
       console.log(e);
