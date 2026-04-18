@@ -29,7 +29,11 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
   const getDataSize = useCallback(async (typeId?: number) => {
     try {
       const res = await GetSizeREQ({ TypeId: typeId });
-      setSize(res.data);
+      if (res && res.data) {
+        setSize(res.data);
+      } else {
+        setSize([]);
+      }
     } catch (e) {
       console.log(e);
       setSize([]);
@@ -40,7 +44,11 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
     try {
       const sender = pathName?.includes("/female") ? 1 : 0;
       const res = await GetTypeREQ({ Gender: sender });
-      setTypes(res.data);
+      if (res && res.data) {
+        setTypes(res.data);
+      } else {
+        setTypes([]);
+      }
     } catch (e) {
       console.log(e);
       setTypes([]);
@@ -50,7 +58,11 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
   const getDataCategory = useCallback(async (typeId?: number) => {
     try {
       const res = await GetCategoryREQ({ TypeId: typeId });
-      setCategory(res.data);
+      if (res && res.data) {
+        setCategory(res.data);
+      } else {
+        setCategory([]);
+      }
     } catch (e) {
       console.log(e);
       setCategory([]);
