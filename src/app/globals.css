@@ -263,4 +263,6 @@ table {
 }
 body {
   font-family: "Gilroy";
+  overflow-x: hidden;
+  max-width: 100vw;
 }
