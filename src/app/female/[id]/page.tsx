@@ -14,7 +14,7 @@ import { defDataT, ProductItemT, sizeT } from "@/types/product";
 import { getFileURL } from "@/utils/getFileURL";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 export default function Product() {
   const { id } = useParams();
@@ -77,14 +77,13 @@ export default function Product() {
     }
   };
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     if (!id) return;
     try {
       const res = await GetProductByIdREQ({
         id: +id,
       });
       const data = res?.data;
-      // console.log("idProductData", data);
       setData({
         id: data?.id,
         img: data?.images,
@@ -93,7 +92,6 @@ export default function Product() {
         price: data?.cost,
         discount: data?.preCost,
         article: data?.code,
-        // details: null,
         property: false,
         colors: [""],
         colorProduct: data?.color?.name,
@@ -108,14 +106,13 @@ export default function Product() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
 
-  const getSeriesById = async (id: number) => {
+  const getSeriesById = useCallback(async (id: number) => {
     try {
       setSeriesProducts({ loading: true, data: undefined });
       const res = await GetSeriesByIdREQ({ Id: id });
       const data: { productIds: number[]; id: number } = res?.data;
-      // console.log("idProductData", data?.productIds);
       setSeriesProducts({
         loading: false,
         data: data?.productIds.filter((e) => e !== data?.id),
@@ -124,14 +121,14 @@ export default function Product() {
       setSeriesProducts({ loading: false, data: undefined });
       console.log(e);
     }
-  };
+  }, []);
   useEffect(() => {
     if (data?.series?.id) getSeriesById(data?.series?.id);
-  }, [data]);
+  }, [data, getSeriesById]);
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   if (loading) {
     return (

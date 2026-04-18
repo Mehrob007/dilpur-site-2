@@ -70,7 +70,8 @@ export default function OrderForm() {
         setBasketItems([]);
         localStorage.removeItem("basketIds");
       }
-    } catch (e: any) {
+    } catch (error) {
+      const e = error as { response?: { status: number }; message?: string };
       console.error(e);
       setErrorCode(e.response?.status || e.message || "Unknown");
       setShowErrorModal(true);

@@ -1,10 +1,9 @@
 "use client";
 import { ItemT, ProductItemsT } from "@/types/product";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import TypesProductHeader from "./TypesProductHeader";
 import ProductItem from "./ProductItem";
 import ProductItemsError from "./ProductItemsError";
-import { useStore } from "@/store/globalState";
 import { usePathname, useSearchParams } from "next/navigation";
 import { GetProductREQ } from "@/api/product/product";
 
@@ -12,12 +11,11 @@ export default function ProductItems({
   title,
   type = null,
   Limit = 21,
-  pagination = false,
   TypeId,
   searchName,
 }: ProductItemsT) {
   // const [data, setData] = useState<ProductItemT[] | null>(null);
-  const [error, setError] = useState<boolean>(false);
+  const [error] = useState<boolean>(false);
   // const { propertys } = useStore();
   const pathName = usePathname();
   const searchParams = useSearchParams();
@@ -46,7 +44,7 @@ export default function ProductItems({
     }
   };
 
-  const getData = async (Name?: string, reset: boolean = false) => {
+  const getData = useCallback(async (Name?: string, reset: boolean = false) => {
     try {
       const sender = pathName?.includes("/female") ? 1 : 0;
       const res = await GetProductREQ({
@@ -63,7 +61,7 @@ export default function ProductItems({
         if (reset) {
           setData(res.data);
           setPage(0);
-        } else setData([...data, ...res.data]);
+        } else setData((prev) => [...prev, ...res.data]);
       }
     } catch (e) {
       setData([]);
@@ -71,16 +69,21 @@ export default function ProductItems({
     } finally {
       setFetching(false);
     }
-  };
+  }, [Limit, TypeId, categorys, name, page, pathName, sizes, sorts, types]);
+  const typesKey = types.join(",");
+  const categorysKey = categorys.join(",");
+  const sizesKey = sizes.join(",");
+
   useEffect(() => {
     getData(undefined, true);
   }, [
-    types.join(","),
-    categorys.join(","),
-    sizes.join(","),
+    typesKey,
+    categorysKey,
+    sizesKey,
     sorts,
     name,
     pathName,
+    getData
   ]);
 
   return (

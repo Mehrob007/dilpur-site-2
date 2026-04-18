@@ -6,7 +6,6 @@ export default function Input({
   id,
   value = "",
   onChange,
-  placeholder,
   title,
   errors,
   type = "text",

@@ -14,7 +14,7 @@ import { defDataT, ProductItemT, sizeT } from "@/types/product";
 import { getFileURL } from "@/utils/getFileURL";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 export default function Product() {
   const { id } = useParams();
@@ -77,7 +77,7 @@ export default function Product() {
     }
   };
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     if (!id) return;
     try {
       const res = await GetProductByIdREQ({
@@ -108,38 +108,9 @@ export default function Product() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
 
-  // const getSeriesId = async () => {
-  //   if (!id) return;
-  //   try {
-  //     const res = await GetProductByIdREQ({
-  //       SeriesId: +id,
-  //     });
-  //     const data = res?.data;
-  //     console.log("idProductData", data);
-  //     // setData({
-  //     //   id: data?.id,
-  //     //   img: data?.fileNames,
-  //     //   title: data?.brand?.name,
-  //     //   subTitle: data?.name,
-  //     //   price: data?.cost,
-  //     //   discount: data?.preCost,
-  //     //   article: data?.code,
-  //     //   details: null,
-  //     //   property: false,
-  //     //   colors: [""],
-  //     //   colorProduct: data?.color?.name,
-  //     //   description: data?.description,
-  //     //   structure: data?.structure,
-  //     // });
-  //     setSizes(data?.sizes);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-  const getSeriesById = async (id: number) => {
+  const getSeriesById = useCallback(async (id: number) => {
     try {
       setSeriesProducts({ loading: true, data: undefined });
       const res = await GetSeriesByIdREQ({ Id: id });
@@ -153,14 +124,14 @@ export default function Product() {
       setSeriesProducts({ loading: false, data: undefined });
       console.log(e);
     }
-  };
+  }, []);
   useEffect(() => {
     if (data?.series?.id) getSeriesById(data?.series?.id);
-  }, [data]);
+  }, [data, getSeriesById]);
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   if (loading) {
     return (

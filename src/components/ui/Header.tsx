@@ -42,13 +42,13 @@ export default function Header() {
   useEffect(() => {
     setOpenNav({ open: false, type: "navigation" });
     setOpenModalKey("");
-  }, [pathName]);
+  }, [pathName, setOpenModalKey]);
 
   useEffect(() => {
     if (openNav) {
       setOpenModalKey("");
     }
-  }, [openNav.open]);
+  }, [openNav, setOpenModalKey]);
 
   const pathSegment = pathName?.split("/")?.[1];
 

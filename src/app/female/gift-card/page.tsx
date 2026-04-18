@@ -56,7 +56,7 @@ export default function Page() {
               options={optionsNaminal}
               error={errors}
             />
-            <button className="button">
+            <button className="button" onClick={onSend}>
               <span>
                 Оформить карту{" "}
                 <Image src={arrow} alt="arrow" width={15} height={12} />

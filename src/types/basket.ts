@@ -1,4 +1,3 @@
-import { StaticImageData } from "next/image";
 import { sizeT } from "./product";
 
 export interface BasketItemT {

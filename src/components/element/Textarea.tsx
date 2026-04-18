@@ -5,7 +5,6 @@ export default function Textarea({
   id,
   value = "",
   onChange,
-  placeholder,
   title,
   errors,
 }: InputT) {

@@ -12,7 +12,7 @@ export default function SizesProduct({
 
   useEffect(() => {
     onChange(sizes?.[0]);
-  }, []);
+  }, [onChange, sizes]);
 
   return (
     <div className="details-product">

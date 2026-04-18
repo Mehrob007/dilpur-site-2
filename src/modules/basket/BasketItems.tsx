@@ -33,11 +33,11 @@ export default function BasketItems({
   };
 
   const getPrice = (priceItme: number) => {
-    setTotalPrice && setTotalPrice((totalPrice as number) + priceItme);
+    if (setTotalPrice) setTotalPrice((totalPrice as number) + priceItme);
   };
 
   const getSkitka = (priceItme: number) => {
-    setSkitka && setSkitka((totalPrice as number) + priceItme);
+    if (setSkitka) setSkitka((totalPrice as number) + priceItme);
   };
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function BasketItems({
         }[])
       : [];
     setBasketItems(newBasketIds);
-  }, [open]);
+  }, [open, setBasketItems]);
 
   useEffect(() => {
     const totalCost = basketItems.reduce((sum, s) => {
@@ -62,7 +62,7 @@ export default function BasketItems({
         return sum + s?.preCost * s.count;
       }
     }, 0);
-    setTotalPrice && setTotalPrice(totalCost);
+    if (setTotalPrice) setTotalPrice(totalCost);
 
     const skitka = basketItems.reduce((sum, s) => {
       if (s.preCost === null || s.preCost === undefined || s.preCost < 0) {
@@ -71,8 +71,8 @@ export default function BasketItems({
         return sum + (s?.cost - s?.preCost) * s.count;
       }
     }, 0);
-    setSkitka && setSkitka(skitka);
-  }, [basketItems]);
+    if (setSkitka) setSkitka(skitka);
+  }, [basketItems, setSkitka, setTotalPrice]);
 
   if (!open) return;
 

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import InputSearch from "../element/InputSearch";
-import { popularQueries, links } from "@/constants/header";
+import { popularQueries } from "@/constants/header";
 
 import Image from "next/image";
 import searchIcon from "@/../public/icons/searchIcon.svg";
@@ -15,9 +15,9 @@ import arrowForButton from "@/../public/icons/arrow-right-white-small.svg";
 import { GetShopREQ } from "@/api/shop/shop";
 import { shopT } from "@/types/shop";
 import locationIcon from "@/../public/icons/locationIcon.svg";
-import profileIcon from "@/../public/icons/profile.svg";
+// import profileIcon from "@/../public/icons/profile.svg";
 
-export default function SubHeader({ navLinks, type }: SubHeaderT) {
+export default function SubHeader({ navLinks }: SubHeaderT) {
   const [searchValue, setSearchValue] = useState<string>("");
   const { setOpenModalKey, checkKeyModal, setShopItem } = useGlobalState();
   const pathName = usePathname();

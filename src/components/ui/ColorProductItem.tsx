@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { GetProductByIdREQ } from "@/api/product/product";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
@@ -16,7 +16,7 @@ export default function ColorProductItem({
   const [data, setData] = useState<{ images: string[]; id: number } | null>(
     null,
   );
-  const getData = async () => {
+  const getData = useCallback(async () => {
     try {
       const res = await GetProductByIdREQ({ id: id });
       if (res && res.data) {
@@ -25,11 +25,11 @@ export default function ColorProductItem({
     } catch (e) {
       console.log(e);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
   return (
     <Image
       onClick={() => router.push("/" + pathName?.split("/")?.[1] + "/" + id)}

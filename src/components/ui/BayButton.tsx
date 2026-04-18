@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState, useCallback } from "react";
 import checkCircle from "../../../public/icons/checkCircle.svg";
 import Image from "next/image";
 import { sizeT } from "@/types/product";
@@ -68,7 +68,7 @@ export default function BayButton({
       setBasketItems([...basketIds, { id, size, count: 1, cost, preCost }]);
     }
   };
-  const getDataBasket = async (id: number) => {
+  const getDataBasket = useCallback(async (id: number) => {
     try {
       const res = await GetProductByIdREQ({
         id: id,
@@ -78,11 +78,11 @@ export default function BayButton({
     } catch (e) {
       console.error(e);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getDataBasket(id);
-  }, []);
+  }, [getDataBasket, id]);
 
   const stage: { [key: number]: ReactElement } = {
     1: (
