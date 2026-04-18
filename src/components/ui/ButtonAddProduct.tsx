@@ -18,7 +18,9 @@ export default function ButtonAddProduct({
   const getShopById = async (id: number) => {
     try {
       const res = await GetShopByIdREQ(id);
-      setShopItem(res.data);
+      if (res && res.data) {
+        setShopItem(res.data);
+      }
       setOpenModalKey("ModalShop");
     } catch (e) {
       console.error(e);
