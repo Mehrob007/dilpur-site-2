@@ -604,8 +604,10 @@
   .header .header-nav .header-nav-content {
     flex-direction: column !important;
     gap: 0 !important;
-    padding: 20px !important;
-    width: calc(100% - 40px) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-top: 40px !important;
+    width: calc(100% - 100px) !important;
     align-items: flex-start !important;
     justify-content: flex-start !important;
   }
