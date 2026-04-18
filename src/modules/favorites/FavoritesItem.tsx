@@ -35,11 +35,12 @@ export default function FavoritesItem({ id }: { id: number }) {
   const getDataById = async () => {
     try {
       const res = await GetProductByIdREQ({ id });
-
-      setData({
-        ...res.data,
-      });
-      setOutOfStock(res?.data?.outOfStock);
+      if (res && res.data) {
+        setData({
+          ...res.data,
+        });
+        setOutOfStock(res?.data?.outOfStock);
+      }
     } catch (e) {
       console.error(e);
     }
