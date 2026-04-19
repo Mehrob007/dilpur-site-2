@@ -1,21 +1,37 @@
 "use client";
 import Image from "next/image";
 import giftCord2 from "../../../../public/images/giftCord2.svg";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import arrow from "../../../../public/icons/arrow.svg";
 import PartnerStores from "@/components/ui/PartnerStores";
 import Select from "@/components/element/Select";
-import { options, optionsNaminal } from "@/constants/select";
+import { optionsNaminal } from "@/constants/select";
 import { useFormStore } from "@/hooks/useFormStore";
 import apiClient from "@/utils/apiClient";
+import { GetShopREQ } from "@/api/shop/shop";
+import { shopT } from "@/types/shop";
 
 export default function Page() {
   const { data, errors, setData, validate } = useFormStore();
+  const [shops, setShops] = useState<shopT[]>([]);
+
+  const getShops = async () => {
+    try {
+      const res = await GetShopREQ();
+      setShops(res?.data || []);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    getShops();
+  }, []);
 
   const onSend = async () => {
     const isValid = validate({
-      main_title: { required: true },
-      main_photo_id: { required: true },
+      shop: { required: true },
+      nominal: { required: true },
     });
     if (isValid) {
       try {
@@ -39,20 +55,29 @@ export default function Page() {
           </p>
         </div>
         <div className="gift-card-main-content">
-          <Image src={giftCord2} alt="img-gift-card" width={500} height={300} />
+          <Image
+            src={giftCord2}
+            alt="img-gift-card"
+            width={500}
+            height={300}
+            className="main-gift-card-img"
+          />
           <div>
             <Select
               id="shop-gift-card"
               placeholder="Выберите магазин"
-              onChange={(e) => setData("key", e)}
-              options={options}
+              onChange={(e) => setData("shop", e)}
+              options={shops.map((e) => ({
+                label: e.name,
+                value: String(e.id),
+              }))}
               error={errors}
               style={{ zIndex: "5" }}
             />
             <Select
               id="price-gift-card"
               placeholder="Номинал"
-              onChange={(e) => setData("key", e)}
+              onChange={(e) => setData("nominal", e)}
               options={optionsNaminal}
               error={errors}
             />
