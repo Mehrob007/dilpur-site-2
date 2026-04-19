@@ -22,11 +22,19 @@ export default function Product() {
   const [loading, setLoading] = useState(true);
   const [sizes, setSizes] = useState<defDataT[] | null>(null);
   const [selectSize, setSelectSize] = useState<sizeT>();
+  const [activeImage, setActiveImage] = useState(0);
   const [seriesProducts, setSeriesProducts] = useState<{
     loading: boolean;
     data: number[] | undefined;
   } | null>(null);
   const { setBasketItems } = useGlobalState();
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const scrollLeft = e.currentTarget.scrollLeft;
+    const width = e.currentTarget.offsetWidth;
+    const index = Math.round(scrollLeft / width);
+    setActiveImage(index);
+  };
 
   const addProdductToBasket = ({
     id,
@@ -186,17 +194,28 @@ export default function Product() {
   return (
     <div className="product-page product-page-loaded">
       <main className="max-width">
-        <div className="product-page-images">
-          {Array.isArray(img) &&
-            img.map((e, i) => (
-              <Image
-                src={getFileURL(e as string)}
-                key={i}
-                alt={`product-img-${i}`}
-                width={668}
-                height={890}
-              />
-            ))}
+        <div className="product-page-images-container">
+          <div className="product-page-images" onScroll={handleScroll}>
+            {Array.isArray(img) &&
+              img.map((e, i) => (
+                <Image
+                  src={getFileURL(e as string)}
+                  key={i}
+                  alt={`product-img-${i}`}
+                  width={668}
+                  height={890}
+                />
+              ))}
+          </div>
+          <div className="product-image-dots">
+            {Array.isArray(img) &&
+              img.map((_, i) => (
+                <span
+                  key={i}
+                  className={activeImage === i ? "active-dot" : ""}
+                />
+              ))}
+          </div>
         </div>
         <div className="product-page-details">
           <ProductDetails details={details} />
