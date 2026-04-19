@@ -17,7 +17,7 @@ export default function Select({
 
   useEffect(() => {
     if (value && onChange) onChange(value.value);
-  }, [value]);
+  }, [value, onChange]);
 
   return (
     <div className="select" style={style}>
