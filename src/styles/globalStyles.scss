@@ -375,7 +375,7 @@ $desktop: 1024px;
   }
 
   .select-content {
-    width: 320px;
+    width: 100%;
     padding: 20px 0 10px 0;
     display: flex;
     flex-direction: column;
@@ -423,6 +423,7 @@ $desktop: 1024px;
     opacity: 1;
     max-height: 190px;
     margin-top: 20px;
+    width: 100%;
   }
 }
 
@@ -594,13 +595,13 @@ $desktop: 1024px;
     z-index: 1000;
 
     &.isOpen {
-      top: 80px; // Desktop open position
+      top: 80px;
     }
 
     @media (max-width: $tablet) {
       position: fixed !important;
       top: 0 !important;
-      left: 0 !important;
+      left: -100%;
       width: 100vw !important;
       height: 100vh !important;
       min-height: 100vh !important;
@@ -609,13 +610,12 @@ $desktop: 1024px;
       justify-content: flex-start;
       overflow-y: auto;
       padding-top: var(--header-height);
-      transform: translateY(-100%);
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      visibility: hidden;
+      transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); // visibility: hidden;
 
       &.isOpen {
-        transform: translateY(0);
-        visibility: visible;
+        left: 0%;
+        // top: 0%;
+        // visibility: visible;
       }
     }
 
@@ -633,7 +633,7 @@ $desktop: 1024px;
         padding: 0 !important;
         margin: 0 !important;
         margin-top: 40px !important;
-        width: calc(100% - 100px) !important;
+        width: calc(100% - 0px) !important;
         align-items: flex-start !important;
         justify-content: flex-start !important;
       }
@@ -678,8 +678,9 @@ $desktop: 1024px;
         @media (max-width: $tablet) {
           display: flex;
           flex-direction: column;
-          width: 100%;
+          width: calc(100% - 40px);
           gap: 15px;
+          margin: 0 auto;
           margin-bottom: 40px;
 
           a {
@@ -706,6 +707,7 @@ $desktop: 1024px;
           flex-direction: column;
           width: 100%;
           gap: 30px;
+          padding: 0 20px;
           margin-top: auto;
           padding-top: 40px;
           border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -791,7 +793,7 @@ $desktop: 1024px;
 
     @media (max-width: $tablet) {
       position: fixed !important;
-      top: 0 !important;
+      top: -100% !important;
       left: 0 !important;
       width: 100vw !important;
       height: 100vh !important;
@@ -801,14 +803,13 @@ $desktop: 1024px;
       justify-content: flex-start;
       overflow-y: auto;
       padding-top: var(--header-height);
-      transform: translateY(-100%);
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      visibility: hidden;
+      // transform: translateY(-100%);
+      transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      // visibility: hidden;
       padding: 20px !important;
 
       &.isOpen {
-        transform: translateY(0);
-        visibility: visible;
+        top: 0% !important;
       }
     }
     .header-nav-content {
@@ -821,16 +822,21 @@ $desktop: 1024px;
         justify-content: center;
         gap: 20px;
         height: 50px;
+        width: 100%;
 
         @media (max-width: $tablet) {
           flex-direction: column !important;
           height: auto !important;
           gap: 15px !important;
-          width: 100% !important;
+          width: calc(100% - 40px) !important;
+          margin-top: 30px;
         }
         nav {
           display: flex;
           align-items: center;
+          @media (max-width: $tablet) {
+            width: 100%;
+          }
           button {
             width: 120px;
             height: 50px;
@@ -845,6 +851,10 @@ $desktop: 1024px;
             border: none;
             transition: all 0.3s ease-in-out;
             cursor: pointer;
+            @media (max-width: $tablet) {
+              flex: 1;
+              width: auto;
+            }
             &:first-child:hover {
               background-color: $white-color;
               // color: ;
@@ -907,6 +917,10 @@ $desktop: 1024px;
         display: flex;
         flex-direction: column;
         gap: 25px;
+        @media (max-width: $tablet) {
+          margin-top: 20px;
+          padding: 0;
+        }
         h1 {
           font-family: Gilroy;
           font-weight: 600;
@@ -941,7 +955,7 @@ $desktop: 1024px;
   max-height: 50px;
 
   @media (max-width: $tablet) {
-    width: 100% !important;
+    width: calc(100% - 20px) !important;
   }
   border: 1px solid $crossed-color;
   display: flex;
@@ -1011,14 +1025,14 @@ $desktop: 1024px;
 }
 .basket {
   position: absolute;
-  z-index: 999;
+  z-index: 2;
   background-color: $white-color;
   padding: 20px;
   width: 400px;
-  top: 106%;
+  top: -500%;
   right: 0;
-  background-color: #fff;
   max-height: calc(100vh - 200px);
+  transition: all 0.4s ease-in-out;
   overflow: auto;
   box-shadow:
     0px 14px 30px 0px #0000001a,
@@ -1026,8 +1040,50 @@ $desktop: 1024px;
     0px 124px 74px 0px #0000000d,
     0px 220px 88px 0px #00000003,
     0px 344px 96px 0px #00000000;
+  @media (min-width: $tablet) {
+    &.active {
+      top: 100% !important;
+    }
+  }
 
-  // z-index: 100;
+  .basket-header {
+    display: none;
+  }
+  @media (max-width: $tablet) {
+    position: fixed !important;
+    padding-top: 60px;
+    top: 0 !important;
+    right: -100%;
+    width: calc(100% - 40px) !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    z-index: 1000 !important;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: none;
+    // z-index: 999 !important;
+
+    &.active {
+      right: 0% !important;
+    }
+
+    .basket-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-top: 10px;
+
+      h1 {
+        font-family: Gilroy;
+        font-size: 38px;
+        font-weight: 500;
+        color: $black-color;
+      }
+    }
+  }
+
   & > button {
     font-family: Gilroy;
     font-weight: 500;
@@ -1047,7 +1103,12 @@ $desktop: 1024px;
     &:hover {
       background-color: $black-color;
     }
+
+    @media (max-width: $tablet) {
+      margin-bottom: 20px;
+    }
   }
+
   .basket-items {
     display: flex;
     flex-direction: column;
@@ -1062,6 +1123,7 @@ $desktop: 1024px;
       & > div {
         padding: 14.5px 0;
         height: 144px;
+        flex: 1;
       }
 
       > div {
@@ -1541,6 +1603,7 @@ $desktop: 1024px;
       }
     }
   }
+
   .product-items-content {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -1774,6 +1837,9 @@ $desktop: 1024px;
   flex-direction: column;
   gap: 120px;
   position: relative;
+  @media (max-width: $tablet) {
+    padding: 0;
+  }
   > main {
     width: calc(100% - 80px);
     display: grid;
@@ -1781,14 +1847,76 @@ $desktop: 1024px;
     grid-template-columns: 1fr 440px;
     gap: 40px;
 
+    @media (max-width: $tablet) {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 0;
+      gap: 0;
+    }
+
+    .product-page-images-container {
+      position: relative;
+      width: 100%;
+
+      @media (min-width: 769px) {
+        .product-image-dots {
+          display: none;
+        }
+      }
+
+      .product-image-dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 2;
+
+        span {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: rgba($white-color, 0.4);
+          border: 1px solid rgba($white-color, 0.8);
+          transition: all 0.3s;
+
+          &.active-dot {
+            background: $white-color;
+            width: 24px;
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+
     .product-page-images {
       display: flex;
       flex-wrap: wrap;
       align-items: flex-start;
       justify-content: flex-start;
       gap: 6px;
-      // max-height: 1125px;
-      // margin-left: -90px;
+
+      @media (max-width: $tablet) {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 0;
+        width: 100%;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        img {
+          min-width: 100%;
+          scroll-snap-align: center;
+          width: 100%;
+          height: auto;
+        }
+      }
+
       img {
         object-fit: cover;
         width: calc(50% - 12px);
@@ -1802,6 +1930,14 @@ $desktop: 1024px;
       display: flex;
       flex-direction: column;
       gap: 40px;
+
+      @media (max-width: $tablet) {
+        position: static;
+        // padding: 20px;
+        gap: 30px;
+        width: 100%;
+      }
+
       .product-item-details {
         top: 0;
         left: 0;
@@ -1953,47 +2089,266 @@ $desktop: 1024px;
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 40px;
-
   @media (max-width: 768px) {
-    gap: 20px 10px;
-    flex-wrap: wrap;
-    justify-content: center;
+    width: 100%;
   }
-  & > p {
-    font-family: Gilroy;
+
+  .desktop-filters {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+
+    & > p {
+      font-family: Gilroy;
+      font-weight: 500;
+      font-style: Medium;
+      font-size: 15px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      text-align: center;
+      color: $bg-color-new;
+      cursor: pointer;
+      &:hover {
+        color: $black-color;
+      }
+    }
+    .types-select {
+      .select-content {
+        left: -75px;
+      }
+    }
+    .categorys-select {
+      .select-content {
+        left: -46px;
+      }
+    }
+    .sizes-select {
+      .select-content {
+        left: -57px;
+      }
+    }
+    .sorts-select {
+      .select-content {
+        left: -34px;
+        width: 190px;
+      }
+    }
+  }
+
+  .mobile-filters-trigger {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    font-family: "Gilroy";
     font-weight: 500;
-    font-style: Medium;
-    font-size: 15px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    text-align: center;
-    color: $bg-color-new;
+    font-size: 14px;
     cursor: pointer;
-    &:hover {
-      color: $black-color;
+    padding: 0;
+    background-color: $black-color;
+    // border-radius: 0;
+    padding: 0 20px;
+    width: 100%;
+
+    @media (max-width: 768px) {
+      display: flex;
     }
   }
-  .types-select {
-    .select-content {
-      left: -75px;
+}
+.mobile-filters-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid #f0f0f0;
+
+  h2 {
+    font-family: "Gilroy";
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+}
+
+// Mobile Filter Modal
+.mobile-filters-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 2000;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+
+  &.active {
+    transform: translateY(0);
+  }
+
+  .mobile-filters-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-filters-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 20px;
+
+    .filter-section {
+      border-bottom: 1px solid #f0f0f0;
+      padding: 20px 0;
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+
+        span {
+          font-family: "Gilroy";
+          font-weight: 600;
+          font-size: 15px;
+        }
+
+        img {
+          width: 12px;
+          height: 12px;
+          transition: transform 0.3s ease;
+          &.rotate {
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+      .section-content {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        &.grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 10px;
+        }
+
+        .filter-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          cursor: pointer;
+
+          .label {
+            font-family: "Gilroy";
+            font-weight: 400;
+            font-size: 14px;
+          }
+
+          .radio-indicator {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #d9d9d9;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &.active {
+              border-color: black;
+              &::after {
+                content: "";
+                width: 10px;
+                height: 10px;
+                background: black;
+                border-radius: 50%;
+              }
+            }
+          }
+
+          .checkbox-indicator {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #d9d9d9;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &.active {
+              background: black;
+              border-color: black;
+              &::after {
+                content: "✓";
+                color: white;
+                font-size: 12px;
+              }
+            }
+          }
+        }
+
+        .size-item {
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid #f0f0f0;
+          font-family: "Gilroy";
+          font-size: 13px;
+          cursor: pointer;
+
+          &.active {
+            background: black;
+            color: white;
+            border-color: black;
+          }
+        }
+      }
     }
   }
-  .categorys-select {
-    .select-content {
-      left: -46px;
+
+  .mobile-filters-footer {
+    display: flex;
+    padding: 20px;
+    gap: 10px;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+
+    button {
+      flex: 1;
+      height: 50px;
+      font-family: "Gilroy";
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
     }
-  }
-  .sizes-select {
-    background-color: red;
-    .select-content {
-      left: -57px;
+
+    .reset-btn {
+      background: white;
+      border: 1px solid black;
+      color: black;
     }
-  }
-  .sorts-select {
-    .select-content {
-      left: -34px;
-      width: 190px;
+
+    .apply-btn {
+      background: black;
+      border: none;
+      color: white;
     }
   }
 }
@@ -2381,6 +2736,7 @@ $desktop: 1024px;
   left: 0;
   height: 100vh;
   width: 100%;
+  z-index: 9999;
   > main {
     width: calc(809px - 40px);
     height: calc(360px - 40px);
@@ -2388,8 +2744,8 @@ $desktop: 1024px;
     background-color: $white-color;
     display: flex;
     align-items: center;
-    z-index: 9999;
     gap: 40px;
+    
     position: relative;
     > img {
       position: absolute;
@@ -2464,6 +2820,49 @@ $desktop: 1024px;
       > button {
         border-radius: 0;
         width: 100%;
+      }
+    }
+
+    @media (max-width: $tablet) {
+      flex-direction: column;
+      width: calc(100% - 30px);
+      height: auto;
+      max-height: 85vh;
+      overflow-y: auto;
+      gap: 20px;
+      padding: 50px 20px 30px;
+      align-items: flex-start;
+
+      > nav {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        flex-shrink: 0;
+      }
+
+      main {
+        width: 100%;
+        padding: 0;
+        gap: 20px;
+
+        > div {
+          gap: 15px;
+          > h1 {
+            font-size: 24px;
+            height: auto;
+            line-height: 1.2;
+          }
+          > p, > h2, > span {
+            font-size: 16px;
+            height: auto;
+            line-height: normal;
+          }
+        }
+      }
+
+      > img {
+        top: 15px;
+        right: 15px;
       }
     }
   }
@@ -2767,6 +3166,14 @@ $desktop: 1024px;
   color: $black-color;
   display: flex;
   height: 40px;
+
+  @media (max-width: $tablet) {
+    font-size: 14px;
+    height: auto;
+    justify-content: center;
+    width: 100%;
+  }
+
   > label {
     cursor: pointer;
     display: flex;
@@ -2782,6 +3189,13 @@ $desktop: 1024px;
   display: flex;
   flex-direction: column;
   gap: 140px;
+
+  @media (max-width: $tablet) {
+    gap: 80px;
+    padding-bottom: 60px;
+    padding-top: 80px;
+  }
+
   .gift-card-main {
     padding-top: 80px;
     width: 820px;
@@ -2789,11 +3203,23 @@ $desktop: 1024px;
     flex-direction: column;
     align-items: center;
     gap: 60px;
+
+    @media (max-width: $tablet) {
+      width: 100% !important;
+      padding-top: 100px;
+      gap: 40px;
+    }
+
     .gift-card-main-header {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 30px;
+
+      @media (max-width: $tablet) {
+        gap: 20px;
+      }
+
       h1 {
         font-family: Gilroy;
         font-weight: 400;
@@ -2805,6 +3231,12 @@ $desktop: 1024px;
         text-align: center;
         color: $black-color;
         height: 35px;
+
+        @media (max-width: $tablet) {
+          font-size: 32px;
+          height: auto;
+          line-height: 120%;
+        }
       }
       p {
         color: $bg-color-new;
@@ -2816,16 +3248,50 @@ $desktop: 1024px;
         letter-spacing: 0%;
         text-align: center;
         width: 381px;
+
+        @media (max-width: $tablet) {
+          width: 100%;
+          font-size: 15px;
+          line-height: 140%;
+        }
       }
     }
     .gift-card-main-content {
       display: flex;
       gap: 60px;
+
+      @media (max-width: $tablet) {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        width: 100%;
+
+        .main-gift-card-img {
+          width: 100% !important;
+          height: auto !important;
+          max-width: 480px;
+        }
+
+        .select .select-header {
+          width: calc(100% - 20px) !important;
+        }
+      }
+
       > div {
         padding-top: 39px;
         display: flex;
         flex-direction: column;
         gap: 40px;
+
+        @media (max-width: $tablet) {
+          padding-top: 0;
+          width: 100%;
+          gap: 20px;
+
+          button {
+            width: 100%;
+          }
+        }
       }
     }
   }
@@ -2947,56 +3413,103 @@ hr {
 }
 .order-page {
   padding-top: 80px;
+  @media (max-width: $tablet) {
+    padding-top: 40px;
+  }
 }
 .form-order-main {
   display: flex;
   gap: 100px;
   width: 100%;
+
+  @media (max-width: $tablet) {
+    flex-direction: column;
+    gap: 40px;
+  }
+
   > .left-com {
     width: calc(100% - 100px - 44%);
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
   }
   > .right-com {
     width: calc(44%);
+    @media (max-width: $tablet) {
+      width: 100%;
+      order: -1; // Specific for mobile: show order summary first or second? 
+      // User might prefer it at the bottom, but often seeing what you buy is good.
+      // Actually, usually on checkout, form is first.
+    }
   }
+
   > div {
     display: flex;
     flex-direction: column;
     gap: 80px;
+
+    @media (max-width: $tablet) {
+      gap: 40px;
+    }
+
     > main {
       display: flex;
       flex-direction: column;
       gap: 40px;
+
+      @media (max-width: $tablet) {
+        gap: 20px;
+      }
+
       > h1 {
         font-family: Gilroy;
         font-weight: 400;
         font-style: Regular;
         font-size: 28px;
-        line-height: 80%;
-        height: 20px;
+        line-height: normal;
+        height: auto;
         letter-spacing: 0%;
         color: $black-color;
+
+        @media (max-width: $tablet) {
+          font-size: 22px;
+        }
       }
       > div {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 15px 20px;
 
+        @media (max-width: $tablet) {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+
         > nav {
           grid-column: 1 / 3;
           display: grid;
           grid-template-columns: 1fr;
           gap: 20px;
+
+          @media (max-width: $tablet) {
+            grid-column: 1;
+          }
+
           > h1 {
             font-family: Gilroy;
             font-weight: 400;
             font-style: Regular;
             font-size: 28px;
-            line-height: 80%;
-            height: 20px;
+            line-height: normal;
+            height: auto;
             letter-spacing: 0%;
             color: $black-color;
             display: flex;
             justify-content: space-between;
+
+            @media (max-width: $tablet) {
+              font-size: 22px;
+            }
           }
           > button {
             font-family: Gilroy;
@@ -3011,6 +3524,7 @@ hr {
             background-color: $black-color;
             color: $white-color;
             cursor: pointer;
+            width: 100%;
           }
           > footer {
             width: 100%;
