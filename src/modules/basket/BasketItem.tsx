@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import trash from "../../../public/icons/Trash.svg";
 import { BasketItemT } from "@/types/basket";
@@ -85,7 +85,7 @@ BasketItemT) {
       );
     }
   };
-  const getDataBasket = async (id: number, size: sizeT) => {
+  const getDataBasket = useCallback(async (id: number, size: sizeT) => {
     console.log({ id, size });
 
     try {
@@ -107,7 +107,7 @@ BasketItemT) {
     } catch (e) {
       console.error(e);
     }
-  };
+  }, []);
 
   // useEffect(() => {
   //   getPrice((data?.discount ? data?.discount : data?.price || 0) * count);
@@ -116,7 +116,7 @@ BasketItemT) {
 
   useEffect(() => {
     getDataBasket(id, size);
-  }, []);
+  }, [getDataBasket, id, size]);
 
   return (
     <div className="basket-item">

@@ -68,7 +68,6 @@ export default function Header() {
     localStorage.setItem("favorites", JSON.stringify(propertys));
   }, [propertys]);
 
-
   return (
     <div className="header">
       <div className="header-main">
@@ -77,7 +76,7 @@ export default function Header() {
             <Image
               src={logoTitle}
               alt="logoTitle"
-              onClick={() => redirect("/" + pathName?.split("/")?.[1])}
+              onClick={() => router.back()}
               width={188}
               height={40}
             />
@@ -165,10 +164,6 @@ export default function Header() {
               width={24}
               height={24}
             />
-            <BasketItems
-              open={checkKeyModal("basket")}
-              onClose={() => setOpenModalKey("")}
-            />
           </div>
         </div>
       </div>
@@ -176,6 +171,10 @@ export default function Header() {
         navLinks={navLinks}
         type={openModalKey}
         setOpenNav={setOpenNav}
+      />
+      <BasketItems
+        open={checkKeyModal("basket")}
+        onClose={() => setOpenModalKey("")}
       />
     </div>
   );

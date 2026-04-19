@@ -1,6 +1,6 @@
 "use client";
 import { ItemT, ProductItemsT } from "@/types/product";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import TypesProductHeader from "./TypesProductHeader";
 import ProductItem from "./ProductItem";
 import ProductItemsError from "./ProductItemsError";
@@ -43,48 +43,59 @@ export default function ProductItems({
       }
     }
   };
-
-  const getData = useCallback(async (Name?: string, reset: boolean = false) => {
-    try {
-      const sender = pathName?.includes("/female") ? 1 : 0;
-      const res = await GetProductREQ({
-        Limit,
-        Name: Name || (name as string),
-        Page: reset ? 0 : page,
-        TypeIds: TypeId ? [TypeId] : types.map((e) => +e),
-        CategoriesIds: categorys.map((e) => +e),
-        SizeIds: sizes.map((e) => +e),
-        SortType: sorts || "",
-        Gender: sender,
-      });
-      if (res && res.data) {
-        if (reset) {
-          setData(res.data);
-          setPage(0);
-        } else setData((prev) => [...prev, ...res.data]);
-      }
-    } catch (e) {
-      setData([]);
-      console.log(e);
-    } finally {
-      setFetching(false);
-    }
-  }, [Limit, TypeId, categorys, name, page, pathName, sizes, sorts, types]);
   const typesKey = types.join(",");
   const categorysKey = categorys.join(",");
   const sizesKey = sizes.join(",");
 
+  const typeIds = useMemo(
+    () => (TypeId ? [TypeId] : types.map((e) => +e)),
+    [TypeId, typesKey, types]
+  );
+  const categoryIds = useMemo(
+    () => categorys.map((e) => +e),
+    [categorysKey, categorys]
+  );
+  const sizeIds = useMemo(() => sizes.map((e) => +e), [sizesKey, sizes]);
+
+  const getData = useCallback(
+    async (Name?: string, reset: boolean = false, pageNum: number = 0) => {
+      try {
+        const sender = pathName?.includes("/female") ? 1 : 0;
+        const res = await GetProductREQ({
+          Limit,
+          Name: Name || (name as string),
+          Page: pageNum,
+          TypeIds: typeIds,
+          CategoriesIds: categoryIds,
+          SizeIds: sizeIds,
+          SortType: sorts || "",
+          Gender: sender,
+        });
+        if (res && res.data) {
+          if (reset) {
+            setData(res.data);
+            setPage(0);
+          } else setData((prev) => [...prev, ...res.data]);
+        }
+      } catch (e) {
+        setData([]);
+        console.log(e);
+      } finally {
+        setFetching(false);
+      }
+    },
+    [Limit, categoryIds, name, pathName, sizeIds, sorts, typeIds],
+  );
+
   useEffect(() => {
-    getData(undefined, true);
-  }, [
-    typesKey,
-    categorysKey,
-    sizesKey,
-    sorts,
-    name,
-    pathName,
-    getData
-  ]);
+    getData(undefined, true, 0);
+  }, [typesKey, categorysKey, sizesKey, sorts, name, pathName, getData]);
+
+  useEffect(() => {
+    if (page > 0) {
+      getData(undefined, false, page);
+    }
+  }, [page, getData]);
 
   return (
     <div className="product-items max-width">

@@ -21,5 +21,5 @@ export const optionTypes = [
 ];
 export const optionSort = [
   { label: "По возрастанию цены", value: "asc" },
-  { label: "По убыванию цены", value: "desс" },
+  { label: "По убыванию цены", value: "desc" },
 ];

@@ -4,6 +4,7 @@ import BasketItem from "./BasketItem";
 import { useGlobalState } from "@/store/globalState";
 import { sizeT } from "@/types/product";
 import shoppingBasket from "@/../public/icons/shoppingBasket.svg";
+import closeIcon from "@/../public/icons/XBlack.svg";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -74,8 +75,6 @@ export default function BasketItems({
     if (setSkitka) setSkitka(skitka);
   }, [basketItems, setSkitka, setTotalPrice]);
 
-  if (!open) return;
-
   // basketItems.filter(
   //   (e, i) => e.id === ArrDefData?.[i]?.id && ArrDefData?.[i]
   // );
@@ -90,7 +89,22 @@ export default function BasketItems({
   return (
     <>
       {/* <span className="bg-basket"></span> */}
-      <div className={`${order ? "basket-order" : "basket"}`}>
+      <div
+        className={`${order ? "basket-order " : "basket "} ${open ? "active" : ""}`}
+      >
+        {!order && (
+          <div className="basket-header">
+            <h1>Корзина</h1>
+            <Image
+              src={closeIcon}
+              alt="close"
+              onClick={onClose}
+              width={24}
+              height={24}
+              style={{ cursor: "pointer" }}
+            />
+          </div>
+        )}
         <div className="basket-items">
           {basketItems?.length ? (
             basketItems?.map((prev, i) => (

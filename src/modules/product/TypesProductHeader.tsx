@@ -10,6 +10,8 @@ import arrow1Icon from "@/../public/icons/arrow-1.svg";
 import { GetSizeREQ } from "@/api/product/size";
 import { GetTypeREQ } from "@/api/type/type";
 import { GetCategoryREQ } from "@/api/product/category";
+import MobileFilters from "./MobileFilters";
+import burgerIcon from "@/../public/icons/burger.svg";
 
 export default function TypesProductHeader({ type }: TypesProductHeaderT) {
   const pathName = usePathname();
@@ -19,6 +21,7 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
   const [size, setSize] = useState<sizeT[] | []>([]);
   const [types, setTypes] = useState<sizeT[] | []>([]);
   const [category, setCategory] = useState<sizeT[] | []>([]);
+  const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
 
   const selectedTypes = searchParams.getAll("types");
   const activeTypeId =
@@ -81,37 +84,55 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
   if (type === "filter") {
     return (
       <div className="types-product-header filter">
-        <SelectType
-          options={types.map((e) => ({ label: e.name, value: String(e.id) }))}
-          placeholder="Тип"
-          style={{}}
-          className="types-select"
-          id="type-filter"
+        <div className="desktop-filters">
+          <SelectType
+            options={types.map((e) => ({ label: e.name, value: String(e.id) }))}
+            placeholder="Тип"
+            style={{}}
+            className="types-select"
+            id="type-filter"
+          />
+          <SelectType
+            id="category-filter"
+            options={category.map((e) => ({
+              label: e.name,
+              value: String(e.id),
+            }))}
+            placeholder="Категория"
+            className="categorys-select"
+          />
+          <SelectType
+            id="size-filter"
+            options={size.map((e) => ({ label: e.name, value: String(e.id) }))}
+            placeholder="Размер"
+            className="sizes-select"
+          />
+          <SelectType
+            id="sort-filter"
+            checkBox={false}
+            options={optionSort}
+            placeholder="Сортировать по"
+            className="sorts-select"
+            toggle={false}
+          />
+          <p onClick={() => setClearSearch()}>Сбросить фильтры</p>
+        </div>
+
+        <button 
+          className="mobile-filters-trigger"
+          onClick={() => setIsMobileFiltersOpen(true)}
+        >
+          <Image src={burgerIcon} alt="filters" width={20} height={20} />
+          ФИЛЬТРЫ И СОРТИРОВКА
+        </button>
+
+        <MobileFilters 
+          isOpen={isMobileFiltersOpen}
+          onClose={() => setIsMobileFiltersOpen(false)}
+          category={category}
+          size={size}
+          optionSort={optionSort}
         />
-        <SelectType
-          id="category-filter"
-          options={category.map((e) => ({
-            label: e.name,
-            value: String(e.id),
-          }))}
-          placeholder="Категория"
-          className="categorys-select"
-        />
-        <SelectType
-          id="size-filter"
-          options={size.map((e) => ({ label: e.name, value: String(e.id) }))}
-          placeholder="Размер"
-          className="sizes-select"
-        />
-        <SelectType
-          id="sort-filter"
-          checkBox={false}
-          options={optionSort}
-          placeholder="Сортировать по"
-          className="sorts-select"
-          toggle={false}
-        />
-        <p onClick={() => setClearSearch()}>Сбросить фильтры</p>
       </div>
     );
   } else if (type === "showAll") {

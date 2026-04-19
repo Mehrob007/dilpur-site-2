@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import PropertyOff from "../../../public/icons/PropertyOff.svg";
 import PropertyOn from "../../../public/icons/PropertyOn.svg";
 
@@ -32,7 +32,7 @@ export default function FavoritesItem({ id }: { id: number }) {
   //   id: id,
   // });
 
-  const getDataById = async () => {
+  const getDataById = useCallback(async () => {
     try {
       const res = await GetProductByIdREQ({ id });
       if (res && res.data) {
@@ -44,10 +44,11 @@ export default function FavoritesItem({ id }: { id: number }) {
     } catch (e) {
       console.error(e);
     }
-  };
+  }, [id]);
+
   useEffect(() => {
     getDataById();
-  }, []);
+  }, [getDataById]);
 
   return (
     <div className="product-item">
