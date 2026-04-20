@@ -4,8 +4,11 @@ import Image from "next/image";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import closeIcon from "@/../public/icons/XBlack.svg";
 import arrowIcon from "@/../public/icons/arrowBottomBlack.svg";
+import checkbox from "@/../public/icons/checkbox.svg";
+import checkboxActive from "@/../public/icons/checkboxActive.svg";
 
 import { sizeT } from "@/types/product";
+import { useGlobalState } from "@/store/globalState";
 
 interface MobileFiltersProps {
   isOpen: boolean;
@@ -22,6 +25,7 @@ export default function MobileFilters({
   size,
   optionSort,
 }: MobileFiltersProps) {
+  const { setClearSearch, setSearchArr, searchArr } = useGlobalState();
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -42,7 +46,7 @@ export default function MobileFilters({
       setLocalTypes(searchParams.getAll("types"));
       setLocalCategorys(searchParams.getAll("categorys"));
       setLocalSizes(searchParams.getAll("sizes"));
-      setLocalSort(searchParams.get("sort") || "");
+      setLocalSort(searchParams.get("sorts") || "");
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
@@ -81,10 +85,18 @@ export default function MobileFilters({
     localSizes.forEach(s => params.append("sizes", s));
     
     if (localSort) {
-      params.set("sort", localSort);
+      params.set("sorts", localSort);
     } else {
-      params.delete("sort");
+      params.delete("sorts");
     }
+
+    // Synchronize global searchArr
+    setClearSearch(); // Clear all and URL (but we push new URL after)
+    
+    localTypes.forEach(t => setSearchArr({ key: "types", value: t }));
+    localCategorys.forEach(c => setSearchArr({ key: "categorys", value: c }));
+    localSizes.forEach(s => setSearchArr({ key: "sizes", value: s }));
+    if (localSort) setSearchArr({ key: "sorts", value: localSort });
 
     router.push(`${pathname}?${params.toString()}`);
     onClose();
@@ -129,7 +141,10 @@ export default function MobileFilters({
                     className="filter-item"
                     onClick={() => setLocalSort(opt.value)}
                   >
-                    <span className={`radio-indicator ${localSort === opt.value ? "active" : ""}`}></span>
+                    <Image 
+                      src={localSort === opt.value ? checkboxActive : checkbox} 
+                      alt="checkbox" 
+                    />
                     <span className="label">{opt.label}</span>
                   </div>
                 ))}
@@ -155,7 +170,10 @@ export default function MobileFilters({
                     className="filter-item"
                     onClick={() => handleToggle(String(cat.id), localCategorys, setLocalCategorys)}
                   >
-                    <span className={`checkbox-indicator ${localCategorys.includes(String(cat.id)) ? "active" : ""}`}></span>
+                    <Image 
+                      src={localCategorys.includes(String(cat.id)) ? checkboxActive : checkbox} 
+                      alt="checkbox" 
+                    />
                     <span className="label">{cat.name}</span>
                   </div>
                 ))}

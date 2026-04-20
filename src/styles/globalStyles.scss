@@ -872,6 +872,10 @@ $desktop: 1024px;
         }
       }
       .header-nav-search-products {
+        @media (max-width: $tablet) {
+          margin-top: 30px;
+          width: calc(100% - 30px);
+        }
         .product-items {
           gap: 25px;
         }
@@ -1028,13 +1032,32 @@ $desktop: 1024px;
     }
   }
 }
+@media (min-width: $tablet) {
+  .basket-mobail {
+    display: none !important;
+  }
+  .basket-desktop {
+    display: block;
+  }
+}
+
+@media (max-width: $tablet) {
+  .basket-mobail {
+    display: block;
+  }
+  .basket-desktop {
+    display: none;
+  }
+}
+
 .basket {
   position: absolute;
-  z-index: 2;
+  z-index: 1000;
   background-color: $white-color;
   padding: 20px;
   width: 400px;
-  top: -600%;
+  // top: calc(-100vh - 200px);
+  display: none;
   right: 0;
   max-height: calc(100vh - 200px);
   transition: all 0.4s ease-in-out;
@@ -1048,6 +1071,7 @@ $desktop: 1024px;
   @media (min-width: $tablet) {
     &.active {
       top: 100% !important;
+      display: block;
     }
   }
 
@@ -1056,13 +1080,16 @@ $desktop: 1024px;
   }
   @media (max-width: $tablet) {
     position: fixed !important;
-    padding-top: 60px;
+    padding-top: 20px;
+    margin-top: 60px;
     top: 0 !important;
+    // z-index: 2;
     right: -100%;
     width: calc(100% - 40px) !important;
     height: 100vh !important;
-    max-height: 100vh !important;
-    z-index: 1000 !important;
+    max-height: calc(100vh - 60px) !important;
+    overflow: auto;
+    z-index: 2 !important;
     transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
@@ -1072,7 +1099,10 @@ $desktop: 1024px;
     &.active {
       right: 0% !important;
     }
-
+    & > button {
+      min-height: 50px;
+      margin-bottom: 10px;
+    }
     .basket-header {
       display: flex;
       justify-content: space-between;
@@ -1670,7 +1700,7 @@ $desktop: 1024px;
           left: 20px;
           background: $white-color-60;
           backdrop-filter: blur(10px);
-          
+
           @media (max-width: $tablet) {
             height: 48px;
             bottom: 10px;
@@ -2338,46 +2368,10 @@ $desktop: 1024px;
             font-size: 14px;
           }
 
-          .radio-indicator {
+          img {
             width: 20px;
             height: 20px;
-            border: 1px solid #d9d9d9;
-            border-radius: 50%;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            &.active {
-              border-color: black;
-              &::after {
-                content: "";
-                width: 10px;
-                height: 10px;
-                background: black;
-                border-radius: 50%;
-              }
-            }
-          }
-
-          .checkbox-indicator {
-            width: 20px;
-            height: 20px;
-            border: 1px solid #d9d9d9;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            &.active {
-              background: black;
-              border-color: black;
-              &::after {
-                content: "✓";
-                color: white;
-                font-size: 12px;
-              }
-            }
+            object-fit: contain;
           }
         }
 

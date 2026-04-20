@@ -15,6 +15,7 @@ export default function BasketItems({
   setTotalPrice,
   totalPrice,
   setSkitka,
+  className,
 }: {
   open: boolean;
   onClose: () => void;
@@ -22,6 +23,7 @@ export default function BasketItems({
   totalPrice?: number;
   setTotalPrice?: (price: number) => void;
   setSkitka?: (price: number) => void;
+  className?: string;
 }) {
   const { basketItems, setBasketItems } = useGlobalState();
   const route = useRouter();
@@ -93,7 +95,7 @@ export default function BasketItems({
     <>
       {/* <span className="bg-basket"></span> */}
       <div
-        className={`${order ? "basket-order " : "basket "} ${open ? "active" : ""}`}
+        className={`${order ? "basket-order " : "basket "} ${open ? "active" : ""} ${className}`}
       >
         {!order && (
           <div className="basket-header">
