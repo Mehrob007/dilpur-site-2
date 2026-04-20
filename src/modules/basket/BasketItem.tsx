@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import trash from "../../../public/icons/Trash.svg";
+import giftCord2 from "../../../public/images/giftCord2.svg";
 import { BasketItemT } from "@/types/basket";
 import { getFileURL } from "@/utils/getFileURL";
 import { ProductItemT, sizeT } from "@/types/product";
@@ -12,9 +13,10 @@ export default function BasketItem({
   size,
   count,
   order = false,
-}: // getPrice,
-// setSkitka,
-BasketItemT) {
+  isGiftCard,
+  nominal,
+  shopName,
+}: BasketItemT) {
   const [data, setData] = useState<ProductItemT>();
   const { setBasketItems } = useGlobalState();
 
@@ -25,6 +27,9 @@ BasketItemT) {
       count: number;
       cost: number;
       preCost?: number;
+      isGiftCard?: boolean;
+      nominal?: string;
+      shopName?: string;
     }[] = JSON.parse(localStorage.getItem("basketIds") || "[]");
     if (basketIds?.find((e) => e.id === id)) {
       localStorage.setItem(
@@ -57,6 +62,9 @@ BasketItemT) {
       count: number;
       cost: number;
       preCost?: number;
+      isGiftCard?: boolean;
+      nominal?: string;
+      shopName?: string;
     }[] = JSON.parse(localStorage.getItem("basketIds") || "[]");
     if (
       basketIds?.find((e) => e.id === id) &&
@@ -115,8 +123,68 @@ BasketItemT) {
   // }, [data?.discount, data?.price, count]);
 
   useEffect(() => {
-    getDataBasket(id, size);
-  }, [getDataBasket, id, size]);
+    if (!isGiftCard) {
+      getDataBasket(id, size);
+    }
+  }, [getDataBasket, id, size, isGiftCard]);
+
+  if (isGiftCard) {
+    const cost = Number(nominal?.replace(/[^0-9]/g, "")) || 0;
+    
+    return (
+      <div className="basket-item gift-card-item">
+        <Image
+          src={giftCord2}
+          alt="gift-card"
+          width={130}
+          height={180}
+          style={{ objectFit: "contain", background: "#f8f8f8", borderRadius: "8px" }}
+        />
+        <div>
+          <div>
+            <h1>Подарочная карта</h1>
+            <p>{shopName}</p>
+          </div>
+          <div>
+            <h2>
+              <label>{nominal}</label> | <label>{count} шт.</label>
+            </h2>
+          </div>
+          {!order && (
+            <nav>
+              <button onClick={() => minuseCount({ id })}>-</button>
+              <h2>{count}</h2>
+              <button onClick={() => plusCount({ id })}>+</button>
+            </nav>
+          )}
+          <div>
+            <div>
+              <div className="product-item-price">
+                <div className="price">
+                  {cost * count} c.
+                </div>
+              </div>
+              {order && (
+                <nav>
+                  <button onClick={() => minuseCount({ id })}>-</button>
+                  <h4>{count}</h4>
+                  <button onClick={() => plusCount({ id })}>+</button>
+                </nav>
+              )}
+              <Image
+                onClick={() => deleteBasketItem(id)}
+                src={trash}
+                alt="delete"
+                width={24}
+                height={24}
+                style={{ cursor: "pointer" }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="basket-item">

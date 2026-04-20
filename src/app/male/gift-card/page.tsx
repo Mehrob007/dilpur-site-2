@@ -7,13 +7,14 @@ import PartnerStores from "@/components/ui/PartnerStores";
 import Select from "@/components/element/Select";
 import { optionsNaminal } from "@/constants/select";
 import { useFormStore } from "@/hooks/useFormStore";
-import apiClient from "@/utils/apiClient";
 import { GetShopREQ } from "@/api/shop/shop";
 import { shopT } from "@/types/shop";
+import { useGlobalState } from "@/store/globalState";
 
 export default function Page() {
   const { data, errors, setData, validate } = useFormStore();
   const [shops, setShops] = useState<shopT[]>([]);
+  const { setBasketItems } = useGlobalState();
 
   const getShops = async () => {
     try {
@@ -35,9 +36,37 @@ export default function Page() {
     });
     if (isValid) {
       try {
-        await apiClient.post("/cadets/add", data).then(() => {});
+        const nominalMap: Record<string, number> = {
+          "1": 1000,
+          "2": 3000,
+          "3": 5000,
+        };
+
+        const cost = nominalMap[data.nominal as string] || 0;
+        const selectedShop = shops.find((s) => String(s.id) === String(data.shop));
+        const shopName = selectedShop ? selectedShop.name : "Магазин";
+
+        const giftCardItem = {
+          id: Date.now(),
+          size: { id: 0, name: "GIFT" },
+          count: 1,
+          cost: cost,
+          isGiftCard: true,
+          nominal:
+            optionsNaminal.find((o) => o.value === data.nominal)?.label ||
+            `${cost} сомони`,
+          shopName: shopName,
+        };
+
+        const basketIds = JSON.parse(localStorage.getItem("basketIds") || "[]");
+        const newBasket = [...basketIds, giftCardItem];
+
+        localStorage.setItem("basketIds", JSON.stringify(newBasket));
+        setBasketItems(newBasket);
+
+        alert("Подарочная карта добавлена в корзину");
       } catch (e) {
-        console.error("Error sending data:", e);
+        console.error("Error adding gift card:", e);
       }
     } else {
       console.log("Form validation failed:", errors);

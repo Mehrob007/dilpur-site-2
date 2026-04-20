@@ -50,6 +50,9 @@ export default function BasketItems({
           count: number;
           cost: number;
           preCost?: number;
+          isGiftCard?: boolean;
+          nominal?: string;
+          shopName?: string;
         }[])
       : [];
     setBasketItems(newBasketIds);
@@ -116,6 +119,9 @@ export default function BasketItems({
                 size={prev.size}
                 count={prev.count}
                 deleteBasketItem={deleteBasketItem}
+                isGiftCard={prev.isGiftCard}
+                nominal={prev.nominal}
+                shopName={prev.shopName}
                 key={i}
               />
             ))

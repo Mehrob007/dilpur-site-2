@@ -1,6 +1,6 @@
 "use client";
 import { options, SelectT } from "@/types/select";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import arrowBottom from "../../../public/icons/arrowBottom.svg";
 import Image from "next/image";
 import { useGlobalState } from "@/store/globalState";
@@ -14,10 +14,6 @@ export default function Select({
 }: SelectT) {
   const [value, setValue] = useState<options | null>(null);
   const { setOpenModalKey, checkKeyModal } = useGlobalState();
-
-  useEffect(() => {
-    if (value && onChange) onChange(value.value);
-  }, [value, onChange]);
 
   return (
     <div className="select" style={style}>
@@ -45,6 +41,7 @@ export default function Select({
             key={i}
             onClick={() => {
               setValue(e);
+              if (onChange) onChange(e.value);
               setOpenModalKey("");
             }}
           >

@@ -7,9 +7,9 @@ import PartnerStores from "@/components/ui/PartnerStores";
 import Select from "@/components/element/Select";
 import { optionsNaminal } from "@/constants/select";
 import { useFormStore } from "@/hooks/useFormStore";
-import apiClient from "@/utils/apiClient";
 import { GetShopREQ } from "@/api/shop/shop";
 import { shopT } from "@/types/shop";
+import { useGlobalState } from "@/store/globalState";
 
 export default function Page() {
   const { data, errors, setData, validate } = useFormStore();
@@ -28,6 +28,8 @@ export default function Page() {
     getShops();
   }, []);
 
+  const { setBasketItems } = useGlobalState();
+
   const onSend = async () => {
     const isValid = validate({
       shop: { required: true },
@@ -35,7 +37,38 @@ export default function Page() {
     });
     if (isValid) {
       try {
-        await apiClient.post("/cadets/add", data).then(() => {});
+        // Mapping nominal values to real costs
+        const nominalMap: Record<string, number> = {
+          "1": 1000,
+          "2": 3000,
+          "3": 5000,
+        };
+
+        const cost = nominalMap[data.nominal as string] || 0;
+        const selectedShop = shops.find((s) => String(s.id) === String(data.shop));
+        const shopName = selectedShop ? selectedShop.name : "Магазин";
+
+        const giftCardItem = {
+          id: Date.now(), // Unique ID for the gift card
+          size: { id: 0, name: "GIFT" }, // Placeholder for size
+          count: 1,
+          cost: cost,
+          isGiftCard: true,
+          nominal: optionsNaminal.find((o) => o.value === data.nominal)?.label || `${cost} сомони`,
+          shopName: shopName,
+        };
+
+        const basketIds = JSON.parse(localStorage.getItem("basketIds") || "[]");
+        const newBasket = [...basketIds, giftCardItem];
+        
+        localStorage.setItem("basketIds", JSON.stringify(newBasket));
+        setBasketItems(newBasket);
+        
+        // feedback or redirect optionally
+        alert("Подарочная карта добавлена в корзину");
+
+        // Optionally still send to API if required
+        // await apiClient.post("/cadets/add", data).then(() => {});
       } catch (e) {
         console.error("Error sending data:", e);
       }

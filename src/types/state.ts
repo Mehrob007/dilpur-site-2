@@ -40,6 +40,9 @@ export interface globalStateT {
     count: number;
     cost: number;
     preCost?: number;
+    isGiftCard?: boolean;
+    nominal?: string;
+    shopName?: string;
   }[];
   setBasketItems: (
     obj: {
@@ -48,6 +51,9 @@ export interface globalStateT {
       count: number;
       cost: number;
       preCost?: number;
+      isGiftCard?: boolean;
+      nominal?: string;
+      shopName?: string;
     }[]
   ) => void;
 

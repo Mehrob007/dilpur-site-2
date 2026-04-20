@@ -89,7 +89,7 @@ export default function ProductItems({
 
   useEffect(() => {
     getData(undefined, true, 0);
-  }, [typesKey, categorysKey, sizesKey, sorts, name, pathName, getData]);
+  }, [typesKey, categorysKey, sizesKey, sorts, name, pathName]);
 
   useEffect(() => {
     if (page > 0) {

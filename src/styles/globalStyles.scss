@@ -1029,7 +1029,7 @@ $desktop: 1024px;
   background-color: $white-color;
   padding: 20px;
   width: 400px;
-  top: -500%;
+  top: -600%;
   right: 0;
   max-height: calc(100vh - 200px);
   transition: all 0.4s ease-in-out;
@@ -1757,10 +1757,15 @@ $desktop: 1024px;
     padding-top: 7px;
     padding-bottom: 5px;
   }
+  @media (max-width: $tablet) {
+    gap: 5px;
+    max-width: 70%;
+  }
 }
 .product-item-img-new,
 .product-item-img-hit,
-.product-item-img-action {
+.product-item-img-action,
+.product-item-img-discount {
   font-family: Gilroy;
   font-weight: 500;
   font-style: Medium;
@@ -1768,6 +1773,9 @@ $desktop: 1024px;
   line-height: 80%;
   letter-spacing: 0%;
   color: $white-color;
+  @media (max-width: $tablet) {
+    font-size: 10px;
+  }
 }
 .product-item-img-new {
   background-color: $bg-color-new;
@@ -1830,6 +1838,10 @@ $desktop: 1024px;
   letter-spacing: 0%;
   background-color: $red-color;
   color: $white-color;
+  @media (max-width: $tablet) {
+    font-size: 9px;
+    width: auto;
+  }
 }
 .product-page {
   padding-top: 80px;
@@ -2745,7 +2757,7 @@ $desktop: 1024px;
     display: flex;
     align-items: center;
     gap: 40px;
-    
+
     position: relative;
     > img {
       position: absolute;
@@ -2852,7 +2864,9 @@ $desktop: 1024px;
             height: auto;
             line-height: 1.2;
           }
-          > p, > h2, > span {
+          > p,
+          > h2,
+          > span {
             font-size: 16px;
             height: auto;
             line-height: normal;
@@ -3265,6 +3279,9 @@ $desktop: 1024px;
         align-items: center;
         gap: 30px;
         width: 100%;
+        > img {
+          width: 100%;
+        }
 
         .main-gift-card-img {
           width: 100% !important;
@@ -3437,7 +3454,7 @@ hr {
     width: calc(44%);
     @media (max-width: $tablet) {
       width: 100%;
-      order: -1; // Specific for mobile: show order summary first or second? 
+      order: -1; // Specific for mobile: show order summary first or second?
       // User might prefer it at the bottom, but often seeing what you buy is good.
       // Actually, usually on checkout, form is first.
     }
@@ -3740,6 +3757,6 @@ hr {
 
     &:hover {
       background-color: $grey-color-select;
-    }
+    }   
   }
 }

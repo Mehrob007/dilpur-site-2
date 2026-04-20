@@ -6,6 +6,9 @@ export interface BasketItemT {
   deleteBasketItem: (id: number) => void;
   count: number;
   order?: boolean;
-  getPrice: (priceItme: number) => void;
-  setSkitka: (price: number) => void;
+  getPrice?: (priceItme: number) => void;
+  setSkitka?: (price: number) => void;
+  isGiftCard?: boolean;
+  nominal?: string;
+  shopName?: string;
 }
