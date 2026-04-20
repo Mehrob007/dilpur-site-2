@@ -477,6 +477,11 @@
     display: flex !important;
     align-items: center;
   }
+  .header .header-main .header-content > div .burger-menu-wrapper > .burger-icon {
+    height: 30px;
+    width: 30px;
+    margin-top: -3px;
+  }
 }
 .header .header-main .header-content > div .header-desktop-link {
   color: #505050;
