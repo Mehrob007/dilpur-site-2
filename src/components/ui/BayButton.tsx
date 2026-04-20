@@ -48,8 +48,8 @@ export default function BayButton({
             } else {
               return e;
             }
-          })
-        )
+          }),
+        ),
       );
       setBasketItems(
         basketIds.map((e) => {
@@ -58,12 +58,12 @@ export default function BayButton({
           } else {
             return e;
           }
-        })
+        }),
       );
     } else {
       localStorage.setItem(
         "basketIds",
-        JSON.stringify([...basketIds, { id, size, count: 1, cost, preCost }])
+        JSON.stringify([...basketIds, { id, size, count: 1, cost, preCost }]),
       );
       setBasketItems([...basketIds, { id, size, count: 1, cost, preCost }]);
     }
