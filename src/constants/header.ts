@@ -5,10 +5,10 @@ export const navLinks: linkT[] = [
   { label: "Одежда", href: "#clothing" },
   { label: "Обувь", href: "#footwear" },
   { label: "Аксессуары", href: "#accessories" },
-  { label: "Подарочные карты", href: "#gift-cards" },
+  // { label: "Подарочные карты", href: "#gift-cards" },
   { label: "О нас", href: "/about-us" },
-  { label: "Вакансии", href: "/vacancies" },
-  { label: "Акции", href: "#promotions" },
+  // { label: "Вакансии", href: "/vacancies" },
+  // { label: "Акции", href: "#promotions" },
 ];
 
 export const links: linkT[] = [
