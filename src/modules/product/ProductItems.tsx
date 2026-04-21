@@ -6,6 +6,7 @@ import ProductItem from "./ProductItem";
 import ProductItemsError from "./ProductItemsError";
 import { usePathname, useSearchParams } from "next/navigation";
 import { GetProductREQ } from "@/api/product/product";
+import { useGlobalState } from "@/store/globalState";
 
 export default function ProductItems({
   title,
@@ -18,6 +19,7 @@ export default function ProductItems({
   const [error] = useState<boolean>(false);
   // const { propertys } = useStore();
   const pathName = usePathname();
+  const { gender } = useGlobalState();
   const searchParams = useSearchParams();
   const types = searchParams.getAll("types");
   const categorys = searchParams.getAll("categorys");
@@ -60,7 +62,7 @@ export default function ProductItems({
   const getData = useCallback(
     async (Name?: string, reset: boolean = false, pageNum: number = 0) => {
       try {
-        const sender = pathName?.includes("/female") ? 1 : 0;
+        const sender = gender === "female" ? 1 : 0;
         const res = await GetProductREQ({
           Limit,
           Name: Name || (name as string),
@@ -84,12 +86,12 @@ export default function ProductItems({
         setFetching(false);
       }
     },
-    [Limit, categoryIds, name, pathName, sizeIds, sorts, typeIds],
+    [Limit, categoryIds, name, gender, sizeIds, sorts, typeIds],
   );
 
   useEffect(() => {
     getData(undefined, true, 0);
-  }, [typesKey, categorysKey, sizesKey, sorts, name, pathName]);
+  }, [typesKey, categorysKey, sizesKey, sorts, name, gender]);
 
   useEffect(() => {
     if (page > 0) {

@@ -65,6 +65,8 @@ export interface globalStateT {
 
   setRemuveSearch: (item: string) => void;
   setClearSearch: () => void;
+  gender: "male" | "female";
+  setGender: (gender: "male" | "female") => void;
   openModalKey: string;
   setOpenModalKey: (key: string) => void;
   checkKeyModal: (key: string) => boolean;

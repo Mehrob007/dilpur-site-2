@@ -50,6 +50,14 @@ export const useGlobalState = create<globalStateT>((set, get) => ({
     const newPath = `${window.location.pathname}?${params.toString()}`;
     window.history.replaceState({}, "", newPath);
   },
+  gender:
+    typeof window !== "undefined"
+      ? (localStorage.getItem("gender") as "male" | "female") || "male"
+      : "male",
+  setGender: (gender) => {
+    set({ gender });
+    localStorage.setItem("gender", gender);
+  },
   openModalKey: "",
   setOpenModalKey: (key) =>
     set((state) => {

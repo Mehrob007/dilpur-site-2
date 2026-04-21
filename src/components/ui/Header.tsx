@@ -9,7 +9,7 @@ import basket from "../../../public/icons/basket.svg";
 import profile from "../../../public/icons/profile.svg";
 import closeNav from "../../../public/icons/closeNav.svg";
 import Link from "next/link";
-import { redirect, usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { defaultSubHeader, links, navLinks } from "@/constants/header";
 import BasketItems from "@/modules/basket/BasketItems";
 import SubHeader from "./SubHeader";
@@ -18,8 +18,15 @@ import { useGlobalState, useStore } from "@/store/globalState";
 import { GetTypeREQ } from "@/api/type/type";
 
 export default function Header() {
-  const { setOpenModalKey, checkKeyModal, openModalKey, setType, basketItems } =
-    useGlobalState();
+  const {
+    setOpenModalKey,
+    checkKeyModal,
+    openModalKey,
+    setType,
+    basketItems,
+    gender,
+    setGender,
+  } = useGlobalState();
   const [openNav, setOpenNav] = useState<defaultSubHeaderT>(defaultSubHeader);
   const [isHovered, setIsHovered] = useState<number>(0);
   const { propertys, updatePropertys } = useStore();
@@ -28,7 +35,7 @@ export default function Header() {
 
   const getType = React.useCallback(async () => {
     try {
-      const sender = pathName?.includes("/female") ? 1 : 0;
+      const sender = gender === "female" ? 1 : 0;
       const res = await GetTypeREQ({ Gender: sender });
 
       if (res && res.data) {
@@ -37,7 +44,7 @@ export default function Header() {
     } catch (e) {
       console.error(e);
     }
-  }, [pathName, setType]);
+  }, [gender, setType]);
 
   useEffect(() => {
     setOpenNav({ open: false, type: "navigation" });
@@ -61,6 +68,14 @@ export default function Header() {
     if (!prop) return;
     updatePropertys(JSON.parse(prop));
   }, [updatePropertys]);
+
+  useEffect(() => {
+    if (pathName?.includes("/female")) {
+      setGender("female");
+    } else if (pathName?.includes("/male")) {
+      setGender("male");
+    }
+  }, [pathName, setGender]);
 
   useEffect(() => {
     // const favorites = localStorage.getItem("favorites");

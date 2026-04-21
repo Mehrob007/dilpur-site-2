@@ -16,7 +16,7 @@ import burgerIcon from "@/../public/icons/burger.svg";
 export default function TypesProductHeader({ type }: TypesProductHeaderT) {
   const pathName = usePathname();
   const searchParams = useSearchParams();
-  const { setClearSearch } = useGlobalState();
+  const { setClearSearch, gender } = useGlobalState();
   const router = useRouter();
   const [size, setSize] = useState<sizeT[] | []>([]);
   const [types, setTypes] = useState<sizeT[] | []>([]);
@@ -45,7 +45,7 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
 
   const getDataType = useCallback(async () => {
     try {
-      const sender = pathName?.includes("/female") ? 1 : 0;
+      const sender = gender === "female" ? 1 : 0;
       const res = await GetTypeREQ({ Gender: sender });
       if (res && res.data) {
         setTypes(res.data);

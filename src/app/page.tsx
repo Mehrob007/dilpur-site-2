@@ -4,7 +4,8 @@ import React, { useEffect } from "react";
 
 export default function Page() {
   useEffect(() => {
-    redirect("./male");
+    const gender = localStorage.getItem("gender") || "male";
+    redirect("./" + gender);
   }, []);
   return <div>page</div>;
 }

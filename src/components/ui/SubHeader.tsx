@@ -19,7 +19,7 @@ import locationIcon from "@/../public/icons/locationIcon.svg";
 
 export default function SubHeader({ navLinks }: SubHeaderT) {
   const [searchValue, setSearchValue] = useState<string>("");
-  const { setOpenModalKey, checkKeyModal, setShopItem } = useGlobalState();
+  const { setOpenModalKey, checkKeyModal, setShopItem, gender, setGender } = useGlobalState();
   const pathName = usePathname();
   const router = useRouter();
 
@@ -44,7 +44,6 @@ export default function SubHeader({ navLinks }: SubHeaderT) {
     setSearchValue("");
   }, [pathName]);
 
-  const currentGender = pathName?.includes("/female") ? "female" : "male";
 
   return (
     <>
@@ -63,7 +62,7 @@ export default function SubHeader({ navLinks }: SubHeaderT) {
                 onClick={() => {
                   router.push(
                     "/" +
-                      pathName?.split("/")?.[1] +
+                      gender +
                       "/catalog?name=" +
                       searchValue,
                   );
@@ -95,7 +94,7 @@ export default function SubHeader({ navLinks }: SubHeaderT) {
                 onClick={() => {
                   router.push(
                     "/" +
-                      pathName?.split("/")?.[1] +
+                      gender +
                       "/catalog?name=" +
                       searchValue,
                   );
@@ -134,14 +133,20 @@ export default function SubHeader({ navLinks }: SubHeaderT) {
         <div className="header-nav-content">
           <div className="mobile-menu-header">
             <div
-              className={`gender-tab ${currentGender === "male" ? "active" : ""}`}
-              onClick={() => router.push("/male")}
+              className={`gender-tab ${gender === "male" ? "active" : ""}`}
+              onClick={() => {
+                router.push("/male");
+                setGender("male");
+              }}
             >
               Мужчинам
             </div>
             <div
-              className={`gender-tab ${currentGender === "female" ? "active" : ""}`}
-              onClick={() => router.push("/female")}
+              className={`gender-tab ${gender === "female" ? "active" : ""}`}
+              onClick={() => {
+                router.push("/female");
+                setGender("female");
+              }}
             >
               Женщинам
             </div>
@@ -151,7 +156,7 @@ export default function SubHeader({ navLinks }: SubHeaderT) {
               const isActive = pathName.includes(e.href);
               return (
                 <Link
-                  href={`/${pathName.split("/")[1]}${e.href}`}
+                  href={`/${gender}${e.href}`}
                   key={i}
                   className={`${isActive ? "active-link" : ""}`}
                 >
@@ -193,7 +198,7 @@ export default function SubHeader({ navLinks }: SubHeaderT) {
               const isActive = pathName.includes(e.href);
               return (
                 <Link
-                  href={`/${pathName.split("/")[1]}${e.href}`}
+                  href={`/${gender}${e.href}`}
                   key={i}
                   className={`${isActive ? "active-link" : ""}`}
                 >
