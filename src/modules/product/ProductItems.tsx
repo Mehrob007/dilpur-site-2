@@ -109,7 +109,11 @@ export default function ProductItems({
       </div>
       <div
         onScroll={(e) => scrollHandler(e.currentTarget)}
-        className={error || !data?.length ? "product-items-error" : "product-items-content"}
+        className={
+          error || !data?.length
+            ? "product-items-error"
+            : "product-items-content"
+        }
       >
         {error || !data?.length ? (
           <ProductItemsError />
@@ -132,9 +136,11 @@ export default function ProductItems({
           ))
         )}
       </div>
-      <div className="product-items-header mobile">
-        <TypesProductHeader type={type} />
-      </div>
+      {type !== "filter" && (
+        <div className="product-items-header mobile">
+          <TypesProductHeader type={type} />
+        </div>
+      )}
     </div>
   );
 }

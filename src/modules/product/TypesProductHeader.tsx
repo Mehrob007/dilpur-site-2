@@ -86,7 +86,7 @@ export default function TypesProductHeader({
 
   if (type === "filter") {
     return (
-      <div className={`types-product-header filter ${className}`}>
+      <div className={`types-product-header filter`}>
         <div className="desktop-filters">
           <SelectType
             options={types.map((e) => ({ label: e.name, value: String(e.id) }))}

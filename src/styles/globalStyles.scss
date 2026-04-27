@@ -888,23 +888,25 @@ $desktop: 1024px;
 
             @media (max-width: $tablet) {
               width: 80px;
-              height: 44px;
+              height: 100%;
               border: 1px solid $crossed-color;
               border-radius: 4px;
               font-size: 14px;
               color: $white-color;
               background-color: $black-color;
             }
-
+            &:first-child {
+              @media (max-width: $tablet) {
+                display: none;
+              }
+            }
             &:first-child:hover {
               background-color: $white-color;
+              color: $black-color;
             }
             &:last-child {
               background-color: transparent;
               color: $white-color;
-              @media (max-width: $tablet) {
-                display: none;
-              }
             }
           }
         }
@@ -3301,6 +3303,9 @@ $desktop: 1024px;
   width: 100%;
   margin-top: 40px;
   margin-bottom: 20px;
+  @media (max-width: $tablet) {
+    display: none;
+  }
 
   > label {
     display: flex;
@@ -3658,6 +3663,7 @@ hr {
 
           @media (max-width: $tablet) {
             grid-column: 1;
+            gap: 0;
           }
 
           > h1 {
