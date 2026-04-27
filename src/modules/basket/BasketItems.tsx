@@ -104,9 +104,9 @@ export default function BasketItems({
               src={closeIcon}
               alt="close"
               onClick={onClose}
-              width={24}
-              height={24}
-              style={{ cursor: "pointer" }}
+              width={32}
+              height={32}
+              className="basket-close-icon"
             />
           </div>
         )}
