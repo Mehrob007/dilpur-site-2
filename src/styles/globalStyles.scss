@@ -69,6 +69,18 @@ $desktop: 1024px;
   scrollbar-width: thin !important;
   scrollbar-color: #888 #f5f5f5 !important;
 }
+.mobile {
+  display: none;
+}
+
+@media (max-width: $tablet) {
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+}
 .max-width {
   max-width: calc(1920px - 80px);
   width: calc(100% - 80px) !important;
@@ -499,8 +511,8 @@ $desktop: 1024px;
             display: flex !important;
             align-items: center;
             > .burger-icon {
-              height: 30px;
-              width: 30px;
+              height: 27px;
+              width: 27px;
               margin-top: -3px;
             }
           }
@@ -631,13 +643,14 @@ $desktop: 1024px;
       width: 100%;
       max-width: 1840px;
       padding: 0 40px;
+      // padding-top: 0px;
 
       @media (max-width: $tablet) {
         flex-direction: column !important;
         gap: 0 !important;
         padding: 0 !important;
         margin: 0 !important;
-        margin-top: 40px !important;
+        margin-top: 0px !important;
         width: calc(100% - 0px) !important;
         align-items: flex-start !important;
         justify-content: flex-start !important;
@@ -686,12 +699,12 @@ $desktop: 1024px;
           width: calc(100% - 40px);
           gap: 15px;
           margin: 0 auto;
-          margin-bottom: 40px;
+          margin-bottom: 20px;
 
           a {
-            font-size: 24px !important;
+            font-size: 20px !important;
             color: $white-color !important;
-            padding: 10px 0;
+            padding: 5px 0;
             // border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             justify-content: space-between;
@@ -714,7 +727,7 @@ $desktop: 1024px;
           gap: 30px;
           padding: 0 20px;
           margin-top: auto;
-          padding-top: 40px;
+          padding-top: 20px;
           border-top: 1px solid rgba(255, 255, 255, 0.1);
 
           .mobile-menu-secondary-links {
@@ -723,7 +736,7 @@ $desktop: 1024px;
             gap: 20px;
             a {
               font-size: 16px !important;
-              color: $link-color !important;
+              color: $white-color !important;
             }
           }
 
@@ -741,7 +754,7 @@ $desktop: 1024px;
                 display: flex;
                 align-items: center;
                 gap: 10px;
-                color: $link-color;
+                color: $white-color;
                 font-size: 14px;
                 cursor: pointer;
                 &:hover {
@@ -775,11 +788,11 @@ $desktop: 1024px;
           color: $white-color;
           text-decoration: underline;
         }
-        &:last-child {
-          margin-right: 0;
-          color: $red-color;
-          text-transform: uppercase;
-        }
+        // &:last-child {
+        //   margin-right: 0;
+        //   color: $red-color;
+        //   text-transform: uppercase;
+        // }
 
         @media (max-width: $tablet) {
           font-size: 16px;
@@ -887,6 +900,7 @@ $desktop: 1024px;
           line-height: 100%;
           letter-spacing: 0%;
         }
+
         h1,
         p,
         .crossed,
@@ -959,6 +973,7 @@ $desktop: 1024px;
     }
   }
 }
+
 .input-search {
   width: calc(100% - 240px);
   max-height: 50px;
@@ -1554,7 +1569,7 @@ $desktop: 1024px;
   align-items: center;
   gap: 6px;
   @media (max-width: $tablet) {
-    bottom: 14px ;
+    bottom: 14px;
   }
 
   > span {
@@ -1571,7 +1586,7 @@ $desktop: 1024px;
 .product-items {
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 40px;
   width: 100%;
   .product-items-header {
     display: flex;
@@ -1586,9 +1601,9 @@ $desktop: 1024px;
       font-family: Gilroy;
       font-weight: 400;
       font-style: Regular;
-      font-size: 50px;
-      line-height: 80%;
-      letter-spacing: 0%;
+      font-size: 48px;
+      line-height: 110%;
+      letter-spacing: -0.02em;
       text-transform: uppercase;
       display: flex;
       gap: 10px;
@@ -1596,10 +1611,11 @@ $desktop: 1024px;
       justify-content: center;
 
       @media (max-width: 768px) {
-        font-size: 30px;
+        font-size: 28px;
+        line-height: 120%;
         flex-direction: column;
         align-items: center;
-        gap: 15px;
+        gap: 8px;
         text-align: center;
       }
 
@@ -1645,12 +1661,12 @@ $desktop: 1024px;
 
   .product-items-content {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 60px 40px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 48px 32px;
 
     @media (max-width: 768px) {
-      grid-template-columns: 1fr 1fr !important;
-      gap: 30px 15px !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 24px 12px !important;
     }
   }
 }
@@ -1805,9 +1821,8 @@ $desktop: 1024px;
       h1 {
         font-family: Gilroy;
         font-weight: 500;
-        font-style: Mediusm;
-        font-size: 19px;
-        line-height: 80%;
+        font-size: 18px;
+        line-height: 120%;
         letter-spacing: 0%;
         color: $black-color;
 
@@ -1819,8 +1834,8 @@ $desktop: 1024px;
         font-family: Gilroy;
         font-weight: 500;
         font-style: Medium;
-        font-size: 17px;
-        line-height: 80%;
+        font-size: 15px;
+        line-height: 130%;
         letter-spacing: 0%;
         color: $bg-color-new;
 
@@ -1880,10 +1895,9 @@ $desktop: 1024px;
   gap: 7px;
   div {
     font-family: Gilroy;
-    font-weight: 500;
-    font-style: Medium;
-    font-size: 22px;
-    line-height: 80%;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
     letter-spacing: 0%;
 
     @media (max-width: $tablet) {
@@ -2446,6 +2460,9 @@ $desktop: 1024px;
     letter-spacing: 0%;
     text-align: center;
     transition: all 0.3s ease-in-out;
+    @media (max-width: $tablet) {
+      padding-top: 3px;
+    }
     &:hover {
       scale: 1.05;
     }

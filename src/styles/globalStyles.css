@@ -55,6 +55,18 @@
   scrollbar-color: #888 #f5f5f5 !important;
 }
 
+.mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+}
 .max-width {
   max-width: 1840px;
   width: calc(100% - 80px) !important;
@@ -478,8 +490,8 @@
     align-items: center;
   }
   .header .header-main .header-content > div .burger-menu-wrapper > .burger-icon {
-    height: 30px;
-    width: 30px;
+    height: 27px;
+    width: 27px;
     margin-top: -3px;
   }
 }
@@ -609,7 +621,7 @@
     gap: 0 !important;
     padding: 0 !important;
     margin: 0 !important;
-    margin-top: 40px !important;
+    margin-top: 0px !important;
     width: calc(100% - 0px) !important;
     align-items: flex-start !important;
     justify-content: flex-start !important;
@@ -659,12 +671,12 @@
     width: calc(100% - 40px);
     gap: 15px;
     margin: 0 auto;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
   .header .header-nav .header-nav-content .mobile-only-links a {
-    font-size: 24px !important;
+    font-size: 20px !important;
     color: #ffffff !important;
-    padding: 10px 0;
+    padding: 5px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -681,7 +693,7 @@
     gap: 30px;
     padding: 0 20px;
     margin-top: auto;
-    padding-top: 40px;
+    padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
   .header .header-nav .header-nav-content .mobile-menu-footer .mobile-menu-secondary-links {
@@ -691,7 +703,7 @@
   }
   .header .header-nav .header-nav-content .mobile-menu-footer .mobile-menu-secondary-links a {
     font-size: 16px !important;
-    color: #505050 !important;
+    color: #ffffff !important;
   }
   .header .header-nav .header-nav-content .mobile-menu-footer .mobile-menu-shops h1 {
     font-size: 18px;
@@ -707,7 +719,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #505050;
+    color: #ffffff;
     font-size: 14px;
     cursor: pointer;
   }
@@ -738,11 +750,6 @@
 .header .header-nav .header-nav-content a:hover {
   color: #ffffff;
   text-decoration: underline;
-}
-.header .header-nav .header-nav-content a:last-child {
-  margin-right: 0;
-  color: #d32a2a;
-  text-transform: uppercase;
 }
 @media (max-width: 768px) {
   .header .header-nav .header-nav-content a {
@@ -1487,6 +1494,11 @@
   align-items: center;
   gap: 6px;
 }
+@media (max-width: 768px) {
+  .navigate-slide {
+    bottom: 14px;
+  }
+}
 .navigate-slide > span {
   width: 6px;
   height: 6px;
@@ -1513,7 +1525,7 @@
   .product-items .product-items-header {
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
   }
 }
 .product-items .product-items-header > h1 {
@@ -2351,6 +2363,11 @@
   letter-spacing: 0%;
   text-align: center;
   transition: all 0.3s ease-in-out;
+}
+@media (max-width: 768px) {
+  .types-product-header > button {
+    padding-top: 3px;
+  }
 }
 .types-product-header > button:hover {
   scale: 1.05;
