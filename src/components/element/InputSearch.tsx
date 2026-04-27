@@ -7,7 +7,7 @@ export default function InputSearch({ placeholder, value, onChange,  }: InputSea
   return (
     <label className='input-search'>
         <Image src={searchIcon} alt='searchIcon' width={24} height={24} />
-        <input placeholder={placeholder} value={value} onChange={(e) => onChange(e.target.value)} />
+        <input type="search" placeholder={placeholder} value={value} onChange={(e) => onChange(e.target.value)} />
     </label>
   )
 }
