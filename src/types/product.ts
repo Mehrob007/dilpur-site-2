@@ -3,6 +3,7 @@ import React from "react";
 
 export interface TypesProductHeaderT {
   type: null | "filter" | "showAll" | "goBack";
+  className?: string;
 }
 
 export interface ProductItemsT extends TypesProductHeaderT {

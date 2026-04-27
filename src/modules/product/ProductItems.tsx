@@ -103,15 +103,13 @@ export default function ProductItems({
     <div className="product-items max-width">
       <div className="product-items-header">
         <h1>{title}</h1>
-        {error ||
-          !data?.length ||
-          (type === "goBack" && (
-            <TypesProductHeader type={type} className="desktop" />
-          ))}
+        {(type === "goBack" || type === "filter") && (
+          <TypesProductHeader type={type} className="desktop" />
+        )}
       </div>
       <div
         onScroll={(e) => scrollHandler(e.currentTarget)}
-        className={error || !data?.length ? "" : "product-items-content"}
+        className={error || !data?.length ? "product-items-error" : "product-items-content"}
       >
         {error || !data?.length ? (
           <ProductItemsError />
