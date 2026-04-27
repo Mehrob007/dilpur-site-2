@@ -78,7 +78,7 @@ $desktop: 1024px;
     display: none;
   }
   .mobile {
-    display: block;
+    display: flex;
   }
 }
 .max-width {
@@ -97,7 +97,7 @@ $desktop: 1024px;
 
   @media (max-width: 480px) {
     width: 100% !important;
-    padding: 0 15px !important;
+    padding: 0 20px !important;
     box-sizing: border-box !important;
   }
 }
@@ -445,11 +445,11 @@ $desktop: 1024px;
   gap: 120px;
 
   @media (max-width: 768px) {
-    gap: 80px !important;
+    gap: 60px !important;
   }
 
   @media (max-width: 480px) {
-    gap: 60px !important;
+    gap: 40px !important;
   }
 }
 .layout {
@@ -561,6 +561,11 @@ $desktop: 1024px;
             font-size: 10px;
             line-height: 100%;
             letter-spacing: 0%;
+            @media (max-width: $tablet) {
+              padding-top: 2px;
+              width: 14px;
+              height: 12px;
+            }
           }
         }
       }
@@ -579,7 +584,7 @@ $desktop: 1024px;
           display: flex;
           align-items: center;
           justify-content: flex-start;
-          margin-left: 40px;
+          margin-left: 42px;
 
           img {
             width: 120px;
@@ -827,7 +832,7 @@ $desktop: 1024px;
       padding: 20px !important;
 
       &.isOpen {
-        top: 0% !important;
+        top: 5% !important;
       }
     }
     .header-nav-content {
@@ -838,48 +843,68 @@ $desktop: 1024px;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 20px;
+        gap: 0;
         height: 50px;
         width: 100%;
 
         @media (max-width: $tablet) {
-          flex-direction: column !important;
+          flex-direction: row !important;
           height: auto !important;
-          gap: 15px !important;
-          width: calc(100% - 40px) !important;
-          margin-top: 30px;
+          gap: 8px !important;
+          width: 92% !important;
+          margin-top: 15px;
+          box-sizing: border-box;
         }
+
+        .input-search {
+          width: calc(100% - 280px);
+
+          @media (max-width: $tablet) {
+            width: calc(100% - 280px);
+            flex: 1;
+            border-radius: 4px;
+          }
+        }
+
         nav {
           display: flex;
           align-items: center;
+          height: 100%;
           @media (max-width: $tablet) {
-            width: 100%;
+            width: auto !important;
           }
           button {
             width: 120px;
             height: 50px;
             color: $black-color;
             background-color: $bg-color-new;
+            border: none;
             font-family: Gilroy;
             font-weight: 500;
-            font-style: Medium;
             font-size: 17px;
             line-height: 100%;
-            letter-spacing: 0%;
-            border: none;
             transition: all 0.3s ease-in-out;
             cursor: pointer;
+
             @media (max-width: $tablet) {
-              flex: 1;
-              width: auto;
+              width: 80px;
+              height: 44px;
+              border: 1px solid $crossed-color;
+              border-radius: 4px;
+              font-size: 14px;
+              color: $white-color;
+              background-color: $black-color;
             }
+
             &:first-child:hover {
               background-color: $white-color;
-              // color: ;
             }
             &:last-child {
               background-color: transparent;
               color: $white-color;
+              @media (max-width: $tablet) {
+                display: none;
+              }
             }
           }
         }
@@ -975,11 +1000,11 @@ $desktop: 1024px;
 }
 
 .input-search {
-  width: calc(100% - 240px);
+  width: 100%;
   max-height: 50px;
 
   @media (max-width: $tablet) {
-    width: calc(100% - 20px) !important;
+    padding: 8px 10px;
   }
   border: 1px solid $crossed-color;
   display: flex;
@@ -1001,6 +1026,9 @@ $desktop: 1024px;
     color: $white-color;
     &::placeholder {
       color: $crossed-color;
+    }
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: none;
     }
   }
 }
@@ -1122,14 +1150,23 @@ $desktop: 1024px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
-      padding-top: 10px;
+      margin-bottom: 30px;
+      padding: 10px 20px 0 20px;
 
       h1 {
         font-family: Gilroy;
         font-size: 38px;
         font-weight: 500;
         color: $black-color;
+      }
+
+      .basket-close-icon {
+        cursor: pointer;
+        padding: 4px;
+        transition: transform 0.2s ease;
+        &:hover {
+          transform: scale(1.1);
+        }
       }
     }
   }
@@ -1586,63 +1623,52 @@ $desktop: 1024px;
 .product-items {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 24px;
   width: 100%;
+  padding-top: 40px;
+
+  @media (max-width: 768px) {
+    padding-top: 20px;
+    gap: 16px;
+    & .mobile {
+      justify-content: center;
+      display: flex;
+      margin-top: 20px;
+      > div {
+        margin: 0 auto;
+      }
+    }
+  }
+
   .product-items-header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+
     @media (max-width: 768px) {
       flex-direction: column;
-      align-items: center;
-      gap: 20px;
+      align-items: flex-start;
+      gap: 12px;
     }
+
     & > h1 {
       font-family: Gilroy;
-      font-weight: 400;
-      font-style: Regular;
-      font-size: 48px;
+      font-weight: 500;
+      font-size: 40px;
       line-height: 110%;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
       text-transform: uppercase;
-      display: flex;
-      gap: 10px;
-      align-items: flex-end;
-      justify-content: center;
+      margin: 0;
+      color: $black-color;
+      text-align: left;
 
       @media (max-width: 768px) {
-        font-size: 28px;
+        font-size: 24px;
         line-height: 120%;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        text-align: center;
-      }
-
-      & > span {
-        background-color: $black-color;
-        color: $white-color;
-        font-family: Gilroy;
-        font-weight: 500;
-        font-style: Medium;
-        font-size: 19px;
-        line-height: 100%;
-        letter-spacing: 0%;
-        text-transform: lowercase;
-        border-radius: 100px;
-        min-width: 131px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        @media (max-width: 768px) {
-          font-size: 16px;
-          min-width: 110px;
-          height: 26px;
-        }
       }
     }
+
     & > span {
       background-color: $black-color;
       color: $white-color;
@@ -1652,9 +1678,18 @@ $desktop: 1024px;
       font-size: 19px;
       line-height: 100%;
       letter-spacing: 0%;
+      text-transform: lowercase;
+      border-radius: 100px;
+      min-width: 131px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       @media (max-width: 768px) {
         font-size: 16px;
+        min-width: 110px;
+        height: 26px;
       }
     }
   }
@@ -1686,15 +1721,14 @@ $desktop: 1024px;
       position: relative;
       overflow: hidden;
       &:hover {
-        // .img-product1 {
-        //   display: flex;
-        // }
-        // .img-product {
-        //   display: none;
-        // }
+        .img-product {
+          transform: scale(1.05);
+        }
         .bay-button {
           > div {
-            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
           }
         }
       }
@@ -1703,6 +1737,7 @@ $desktop: 1024px;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       }
       .img-product1 {
         display: none;
@@ -1712,24 +1747,32 @@ $desktop: 1024px;
           width: calc(100% - 40px);
           height: 60px;
           cursor: pointer;
-          display: none;
+          display: flex;
+          opacity: 0;
+          transform: translateY(10px);
+          pointer-events: none;
           align-items: center;
           justify-content: center;
           position: absolute;
           bottom: 20px;
           left: 20px;
-          background: $white-color-60;
+          background: rgba($white-color, 0.7);
           backdrop-filter: blur(10px);
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
           @media (max-width: $tablet) {
             height: 48px;
             bottom: 10px;
             left: 10px;
             width: calc(100% - 20px);
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            background: rgba($white-color, 0.9);
           }
 
           &:hover {
-            background: $white-color-90;
+            background: rgba($white-color, 0.95);
           }
           gap: 10px;
 
@@ -1933,6 +1976,9 @@ $desktop: 1024px;
       background-color: $crossed-color;
       top: 45%;
       left: 0;
+      @media (max-width: $tablet) {
+        top: 40%;
+      }
     }
   }
   .price {
@@ -3249,34 +3295,52 @@ $desktop: 1024px;
 }
 
 .types-product-header-go-back {
-  align-items: center;
-  font-family: Gilroy;
-  font-weight: 700;
-  font-style: Bold;
-  font-size: 17px;
-  leading-trim: CAP_HEIGHT;
-  line-height: 100%;
-  letter-spacing: 0%;
-  text-align: center;
-  color: $black-color;
   display: flex;
-  height: 40px;
-
-  @media (max-width: $tablet) {
-    font-size: 14px;
-    height: auto;
-    justify-content: center;
-    width: 100%;
-  }
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 40px;
+  margin-bottom: 20px;
 
   > label {
-    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 10px;
-    > img {
-      margin-top: -2.09px;
-      // margin-right: -1px;
+    justify-content: center;
+    gap: 12px;
+    padding: 0 30px;
+    height: 48px;
+    border: 1px solid $black-color;
+    border-radius: 100px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all 0.3s ease-in-out;
+
+    font-family: Gilroy;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    color: $black-color;
+    text-transform: uppercase;
+
+    @media (max-width: 768px) {
+      height: 42px;
+      padding: 0 20px;
+      font-size: 14px;
+      width: fit-content;
+    }
+
+    &:hover {
+      background-color: $black-color;
+      color: $white-color;
+      img {
+        filter: invert(1);
+      }
+    }
+
+    img {
+      width: 18px;
+      height: auto;
+      transition: filter 0.3s ease;
     }
   }
 }
@@ -3468,6 +3532,9 @@ $desktop: 1024px;
     line-height: 80%;
     letter-spacing: 0%;
     height: 10px;
+    @media (max-width: $tablet) {
+      margin-top: 3px;
+    }
   }
 }
 
@@ -3580,7 +3647,7 @@ hr {
 
         @media (max-width: $tablet) {
           grid-template-columns: 1fr;
-          gap: 15px;
+          gap: 0px;
         }
 
         > nav {
