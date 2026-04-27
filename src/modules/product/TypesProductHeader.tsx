@@ -13,7 +13,10 @@ import { GetCategoryREQ } from "@/api/product/category";
 import MobileFilters from "./MobileFilters";
 import burgerIcon from "@/../public/icons/burger.svg";
 
-export default function TypesProductHeader({ type }: TypesProductHeaderT) {
+export default function TypesProductHeader({
+  type,
+  className,
+}: TypesProductHeaderT) {
   const pathName = usePathname();
   const searchParams = useSearchParams();
   const { setClearSearch, gender } = useGlobalState();
@@ -83,7 +86,7 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
 
   if (type === "filter") {
     return (
-      <div className="types-product-header filter">
+      <div className={`types-product-header filter ${className}`}>
         <div className="desktop-filters">
           <SelectType
             options={types.map((e) => ({ label: e.name, value: String(e.id) }))}
@@ -118,7 +121,7 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
           <p onClick={() => setClearSearch()}>Сбросить фильтры</p>
         </div>
 
-        <button 
+        <button
           className="mobile-filters-trigger"
           onClick={() => setIsMobileFiltersOpen(true)}
         >
@@ -126,7 +129,7 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
           ФИЛЬТРЫ И СОРТИРОВКА
         </button>
 
-        <MobileFilters 
+        <MobileFilters
           isOpen={isMobileFiltersOpen}
           onClose={() => setIsMobileFiltersOpen(false)}
           category={category}
@@ -137,7 +140,7 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
     );
   } else if (type === "showAll") {
     return (
-      <div className="types-product-header">
+      <div className={`types-product-header ${className}`}>
         <button
           onClick={() =>
             router.push("/" + pathName?.split("/")[1] + "/catalog")
@@ -149,7 +152,7 @@ export default function TypesProductHeader({ type }: TypesProductHeaderT) {
     );
   } else if (type === "goBack") {
     return (
-      <div className="types-product-header-go-back">
+      <div className={`types-product-header-go-back ${className}`}>
         <label onClick={() => router.push("/" + pathName?.split("/")[1])}>
           <Image src={arrow1Icon} alt="arrow1Icon" />
           ВЕРНУТЬСЯ В МАГАЗИН
