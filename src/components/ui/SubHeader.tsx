@@ -19,7 +19,8 @@ import locationIcon from "@/../public/icons/locationIcon.svg";
 
 export default function SubHeader({ navLinks }: SubHeaderT) {
   const [searchValue, setSearchValue] = useState<string>("");
-  const { setOpenModalKey, checkKeyModal, setShopItem, gender, setGender } = useGlobalState();
+  const { setOpenModalKey, checkKeyModal, setShopItem, gender, setGender } =
+    useGlobalState();
   const pathName = usePathname();
   const router = useRouter();
 
@@ -44,35 +45,32 @@ export default function SubHeader({ navLinks }: SubHeaderT) {
     setSearchValue("");
   }, [pathName]);
 
-
   return (
     <>
       <div
         className={`header-nav header-nav-search ${checkKeyModal("filter") ? "isOpen" : ""}`}
       >
         <div className="header-nav-content max-width">
-          <div className="header-nav-search-input">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (searchValue.trim()) {
+                router.push("/" + gender + "/catalog?name=" + searchValue);
+                setOpenModalKey("");
+                setSearchValue("");
+              }
+            }}
+            className="header-nav-search-input"
+          >
             <InputSearch
               placeholder="Введите запрос"
               value={searchValue}
               onChange={(e) => setSearchValue(e)}
             />
             <nav>
+              <button type="submit">Найти</button>
               <button
-                onClick={() => {
-                  router.push(
-                    "/" +
-                      gender +
-                      "/catalog?name=" +
-                      searchValue,
-                  );
-                  setOpenModalKey("");
-                  setSearchValue("");
-                }}
-              >
-                Найти
-              </button>
-              <button
+                type="button"
                 onClick={() => {
                   setOpenModalKey("");
                   setSearchValue("");
@@ -81,7 +79,7 @@ export default function SubHeader({ navLinks }: SubHeaderT) {
                 Закрыть
               </button>
             </nav>
-          </div>
+          </form>
           {searchValue.length ? (
             <div className="header-nav-search-products">
               <ProductItems
@@ -92,12 +90,7 @@ export default function SubHeader({ navLinks }: SubHeaderT) {
               />
               <button
                 onClick={() => {
-                  router.push(
-                    "/" +
-                      gender +
-                      "/catalog?name=" +
-                      searchValue,
-                  );
+                  router.push("/" + gender + "/catalog?name=" + searchValue);
                   setOpenModalKey("");
                   setSearchValue("");
                 }}
@@ -185,14 +178,19 @@ export default function SubHeader({ navLinks }: SubHeaderT) {
                       setShopItem(e);
                     }}
                   >
-                    <Image src={locationIcon} alt="location" width={16} height={16} />
+                    <Image
+                      src={locationIcon}
+                      alt="location"
+                      width={16}
+                      height={16}
+                    />
                     <span>{e.name}</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-          
+
           <div className="desktop-links">
             {navLinks.map((e, i) => {
               const isActive = pathName.includes(e.href);
