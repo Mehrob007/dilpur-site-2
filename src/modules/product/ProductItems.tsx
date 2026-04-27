@@ -51,11 +51,11 @@ export default function ProductItems({
 
   const typeIds = useMemo(
     () => (TypeId ? [TypeId] : types.map((e) => +e)),
-    [TypeId, typesKey, types]
+    [TypeId, typesKey, types],
   );
   const categoryIds = useMemo(
     () => categorys.map((e) => +e),
-    [categorysKey, categorys]
+    [categorysKey, categorys],
   );
   const sizeIds = useMemo(() => sizes.map((e) => +e), [sizesKey, sizes]);
 
@@ -103,8 +103,11 @@ export default function ProductItems({
     <div className="product-items max-width">
       <div className="product-items-header">
         <h1>{title}</h1>
-
-        <TypesProductHeader type={type} />
+        {error ||
+          !data?.length ||
+          (type === "goBack" && (
+            <TypesProductHeader type={type} className="desktop" />
+          ))}
       </div>
       <div
         onScroll={(e) => scrollHandler(e.currentTarget)}
@@ -130,6 +133,9 @@ export default function ProductItems({
             />
           ))
         )}
+      </div>
+      <div className="product-items-header mobile">
+        <TypesProductHeader type={type} />
       </div>
     </div>
   );
