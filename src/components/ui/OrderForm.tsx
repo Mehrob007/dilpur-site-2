@@ -77,6 +77,9 @@ export default function OrderForm() {
       setShowErrorModal(true);
     }
   };
+
+
+  console.log("basketItems", basketItems)
   return (
     <div className="form-order-main">
       <div className="left-com">
