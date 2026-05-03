@@ -1153,7 +1153,7 @@ $desktop: 1024px;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 30px;
-      padding: 10px 20px 0 20px;
+      padding: 10px 0 0 0;
 
       h1 {
         font-family: Gilroy;
@@ -3610,9 +3610,8 @@ hr {
     width: calc(44%);
     @media (max-width: $tablet) {
       width: 100%;
-      order: -1; // Specific for mobile: show order summary first or second?
-      // User might prefer it at the bottom, but often seeing what you buy is good.
-      // Actually, usually on checkout, form is first.
+      order: -1; 
+      display: none;
     }
   }
 
@@ -3877,7 +3876,7 @@ hr {
     opacity: 0;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
-    z-index: 100;
+    z-index: -1;
 
     &::after {
       content: "";
@@ -3892,6 +3891,7 @@ hr {
   }
 
   .select-content-open {
+    z-index: 100;
     opacity: 1;
     max-height: 190px;
     overflow: auto;

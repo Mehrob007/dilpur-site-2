@@ -75,7 +75,7 @@ export default function Autocomplete({
         className={`select-content ${
           isOpen && filteredOptions.length > 0 ? "select-content-open" : ""
         }`}
-        style={{ width: "100%", zIndex: 100 }}
+        style={{ width: "100%" }}
       >
         {filteredOptions.map((option, index) => (
           <div
