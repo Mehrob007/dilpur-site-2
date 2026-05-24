@@ -1,51 +1,23 @@
-# ─── Stage 1: deps ───────────────────────────────────────────────────────────
-FROM node:20-alpine AS deps
-RUN apk add --no-cache libc6-compat
+FROM node:20-alpine
 WORKDIR /app
 
+# Копируем зависимости
 COPY package.json package-lock.json ./
-RUN npm ci --ignore-scripts
+RUN npm install
 
-# ─── Stage 2: builder ────────────────────────────────────────────────────────
-FROM node:20-alpine AS builder
-WORKDIR /app
-
-COPY --from=deps /app/node_modules ./node_modules
+# Копируем остальной код
 COPY . .
 
-# Build-time env vars (можно переопределить через --build-arg)
+# Прокидываем переменные (если нужны при сборке)
 ARG NEXT_PUBLIC_API_URL=http://188.127.227.168:5000/
 ARG NEXT_PUBLIC_GET_FILE=https://files.dilpur.tj/
-
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 ENV NEXT_PUBLIC_GET_FILE=$NEXT_PUBLIC_GET_FILE
 
-# Отключаем телеметрию Next.js при сборке
-ENV NEXT_TELEMETRY_DISABLED=1
-
+# Собираем проект
 RUN npm run build
-
-# ─── Stage 3: runner ─────────────────────────────────────────────────────────
-FROM node:20-alpine AS runner
-WORKDIR /app
-
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-
-# Создаём непривилегированного пользователя
-RUN addgroup --system --gid 1001 nodejs \
- && adduser  --system --uid 1001 nextjs
-
-# Копируем только необходимые артефакты из standalone-сборки
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
 
 EXPOSE 3000
 
-ENV PORT=3000
-ENV HOSTNAME="0.0.0.0"
-
-CMD ["node", "server.js"]
+# Запускаем сервер
+CMD ["npm", "start"]
