@@ -6,15 +6,6 @@ import Header from "@/components/ui/Header";
 import Footer from "@/components/ui/Footer";
 import PageTransition from "@/components/ui/PageTransition";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Дилпур",
@@ -38,7 +29,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body>
         <NextTopLoader color="#181818" showSpinner={false} />
         <Header />
         <main className="layout">
